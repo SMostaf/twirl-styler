@@ -1,0 +1,7 @@
+{
+  "name": "Élan - Luxury Fashion Discovery",
+  "description": "A high-end ecommerce experience that personalizes your style journey using AI, analyzing your Pinterest boards and budget to curate the ultimate wardrobe.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
