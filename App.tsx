@@ -1,86 +1,77 @@
-
-import React, { useState, useEffect, useCallback } from 'react';
-import { AppView, UserProfile, FashionItem, StyleOption } from './types';
-import OnboardingStyle from './views/OnboardingStyle';
-import OnboardingBudget from './views/OnboardingBudget';
+import React, { useState } from 'react';
+import { AppView, UserProfile } from './types';
+import OnboardingSymptoms from './views/OnboardingSymptoms';
+import OnboardingDevices from './views/OnboardingDevices';
 import OnboardingProfile from './views/OnboardingProfile';
-import DiscoveryFeed from './views/DiscoveryFeed';
-import { curateFashionItems } from './geminiService';
-
-const STYLE_OPTIONS: StyleOption[] = [
-  { id: 'streetwear', name: 'Streetwear', image: 'https://picsum.photos/seed/fashion1/600/800' },
-  { id: 'minimalist', name: 'Minimalist', image: 'https://picsum.photos/seed/fashion2/600/800' },
-  { id: 'luxury', name: 'Luxury', image: 'https://picsum.photos/seed/fashion3/600/800' },
-  { id: 'vintage', name: 'Vintage', image: 'https://picsum.photos/seed/fashion4/600/800' },
-  { id: 'avant-garde', name: 'Avant-Garde', image: 'https://picsum.photos/seed/fashion5/600/800' },
-  { id: 'athleisure', name: 'Athleisure', image: 'https://picsum.photos/seed/fashion6/600/800' },
-];
+import Dashboard from './views/Dashboard';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<AppView>('ONBOARDING_STYLE');
+  const [view, setView] = useState<AppView>('ONBOARDING_SYMPTOMS');
   const [user, setUser] = useState<UserProfile>({
     name: '',
-    icon: '',
-    location: '',
+    icon: '🧠',
+    baselineState: 'VENTRAL_VAGAL',
     bio: '',
-    budgetRange: '$500 — $2,000',
-    selectedStyles: [],
-    pinterestBoard: '',
+    symptoms: [],
+    devices: [],
+    goals: [],
   });
-  const [curatedItems, setCuratedItems] = useState<FashionItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchCuration = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const items = await curateFashionItems(user);
-      setCuratedItems(items);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (view === 'DISCOVERY' && curatedItems.length === 0) {
-      fetchCuration();
-    }
-  }, [view, curatedItems.length, fetchCuration]);
 
   const updateProfile = (updates: Partial<UserProfile>) => {
     setUser(prev => ({ ...prev, ...updates }));
   };
 
   const handleNext = () => {
-    if (view === 'ONBOARDING_STYLE') setView('ONBOARDING_BUDGET');
-    else if (view === 'ONBOARDING_BUDGET') setView('ONBOARDING_PROFILE');
-    else if (view === 'ONBOARDING_PROFILE') setView('DISCOVERY');
+    if (view === 'ONBOARDING_SYMPTOMS') setView('ONBOARDING_DEVICES');
+    else if (view === 'ONBOARDING_DEVICES') setView('ONBOARDING_PROFILE');
+    else if (view === 'ONBOARDING_PROFILE') setView('DASHBOARD');
+  };
+
+  const handleBack = () => {
+    if (view === 'ONBOARDING_DEVICES') setView('ONBOARDING_SYMPTOMS');
+    else if (view === 'ONBOARDING_PROFILE') setView('ONBOARDING_DEVICES');
+  };
+
+  const handleReset = () => {
+    setView('ONBOARDING_SYMPTOMS');
+    setUser({
+      name: '',
+      icon: '🧠',
+      baselineState: 'VENTRAL_VAGAL',
+      bio: '',
+      symptoms: [],
+      devices: [],
+      goals: [],
+    });
   };
 
   const renderView = () => {
     switch (view) {
-      case 'ONBOARDING_STYLE':
+      case 'ONBOARDING_SYMPTOMS':
         return (
-          <OnboardingStyle 
-            options={STYLE_OPTIONS}
-            selected={user.selectedStyles}
+          <OnboardingSymptoms 
+            selected={user.symptoms}
             onToggle={(id) => {
-              const next = user.selectedStyles.includes(id) 
-                ? user.selectedStyles.filter(s => s !== id)
-                : [...user.selectedStyles, id];
-              updateProfile({ selectedStyles: next });
+              const next = user.symptoms.includes(id) 
+                ? user.symptoms.filter(s => s !== id)
+                : [...user.symptoms, id];
+              updateProfile({ symptoms: next });
             }}
             onNext={handleNext}
           />
         );
-      case 'ONBOARDING_BUDGET':
+      case 'ONBOARDING_DEVICES':
         return (
-          <OnboardingBudget 
-            value={user.budgetRange}
-            onChange={(val) => updateProfile({ budgetRange: val })}
+          <OnboardingDevices 
+            selected={user.devices}
+            onToggle={(id) => {
+              const next = user.devices.includes(id) 
+                ? user.devices.filter(d => d !== id)
+                : [...user.devices, id];
+              updateProfile({ devices: next });
+            }}
             onNext={handleNext}
-            onBack={() => setView('ONBOARDING_STYLE')}
+            onBack={handleBack}
           />
         );
       case 'ONBOARDING_PROFILE':
@@ -89,16 +80,14 @@ const App: React.FC = () => {
             user={user}
             onChange={updateProfile}
             onNext={handleNext}
-            onBack={() => setView('ONBOARDING_BUDGET')}
+            onBack={handleBack}
           />
         );
-      case 'DISCOVERY':
+      case 'DASHBOARD':
         return (
-          <DiscoveryFeed 
+          <Dashboard 
             user={user}
-            items={curatedItems}
-            isLoading={isLoading}
-            onRefresh={fetchCuration}
+            onReset={handleReset}
           />
         );
       default:
