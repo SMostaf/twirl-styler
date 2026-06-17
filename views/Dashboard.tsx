@@ -174,6 +174,25 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
     }
   };
 
+  // Apple HealthKit Concordric Rings calculation
+  // Outer Ring: HRV (SDNN) - Target 100 ms
+  const outerRadius = 36;
+  const outerCircumference = 2 * Math.PI * outerRadius;
+  const hrvPercent = Math.min(100, (log.hrv / 100) * 100);
+  const outerStrokeDashoffset = outerCircumference - (hrvPercent / 100) * outerCircumference;
+
+  // Middle Ring: Coherence Score (target resonant respiration rate ~12 bpm)
+  const middleRadius = 26;
+  const middleCircumference = 2 * Math.PI * middleRadius;
+  const coherenceScore = Math.max(10, 100 - Math.abs(log.respiration - 12) * 12);
+  const middleStrokeDashoffset = middleCircumference - (coherenceScore / 100) * middleCircumference;
+
+  // Inner Ring: Calm Index (lower HR towards resting 60bpm is calmer)
+  const innerRadius = 16;
+  const innerCircumference = 2 * Math.PI * innerRadius;
+  const calmScore = Math.max(10, 100 - Math.max(0, log.hr - 60) * 1.8);
+  const innerStrokeDashoffset = innerCircumference - (calmScore / 100) * innerCircumference;
+
   return (
     <div className="flex flex-col min-h-screen bg-black text-white px-5 py-6">
       {/* Top Header info */}
@@ -187,6 +206,13 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
             <h1 className="text-sm font-bold text-white tracking-wide">{user.name || 'User'}</h1>
           </div>
         </div>
+        
+        {/* Apple Watch Pairing Status Badge */}
+        <div className="flex items-center gap-1.5 bg-zinc-900 border border-zinc-800/80 px-2.5 py-1 rounded-full text-[9px] text-white/60 font-medium">
+          <span className="material-symbols-outlined text-rose-500 text-[10px] animate-pulse">watch_button_press</span>
+          Watch Sync: Active
+        </div>
+
         <button 
           onClick={onReset}
           className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white/40 hover:text-white transition-colors"
@@ -272,7 +298,7 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
             <div className="text-center w-full">
               <h2 className={`text-base font-bold uppercase tracking-wider mb-1 ${
                 activeState === 'VENTRAL_VAGAL' ? 'text-emerald-400' :
-                activeState === 'SYMPATHETIC' ? 'text-rose-400' : 'text-cyan-300'
+                activeState === 'SYMPAPA' ? 'text-rose-400' : 'text-cyan-300'
               }`}>
                 {activeState === 'VENTRAL_VAGAL' ? 'VENTRAL VAGAL SAFETY' :
                  activeState === 'SYMPATHETIC' ? 'SYMPATHETIC HYPERAROUSAL' : 'DORSAL VAGAL SHUTDOWN'}
@@ -302,6 +328,79 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
                   </button>
                 ))}
               </div>
+            </div>
+          </div>
+
+          {/* APPLE HEALTHKIT RECOVERY RINGS WIDGET */}
+          <div className="p-4 rounded-xl border bg-zinc-950/40 border-zinc-900 flex items-center justify-between">
+            <div className="space-y-2">
+              <h3 className="text-[10px] font-bold tracking-widest text-violet-400 uppercase">HealthKit Balance rings</h3>
+              <p className="text-[11px] text-white/60 leading-tight">Your three nervous system recovery vectors. Syncing with watch metrics.</p>
+              
+              <div className="flex flex-col gap-1 pt-1.5 font-mono text-[9px] text-white/50">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
+                  <span>HRV Recovery (SDNN): {log.hrv}ms</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                  <span>Resonant Coherence: {coherenceScore}%</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span>System Calm Index: {calmScore}%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Apple Activity concentric rings */}
+            <div className="w-24 h-24 relative flex items-center justify-center flex-shrink-0">
+              <svg className="w-20 h-24 transform -rotate-90">
+                {/* Background tracks */}
+                <circle cx="48" cy="48" r={outerRadius} fill="transparent" stroke="#8b5cf6" strokeWidth="6" className="opacity-10" />
+                <circle cx="48" cy="48" r={middleRadius} fill="transparent" stroke="#06b6d4" strokeWidth="6" className="opacity-10" />
+                <circle cx="48" cy="48" r={innerRadius} fill="transparent" stroke="#10b981" strokeWidth="6" className="opacity-10" />
+
+                {/* Concentric Progress loops */}
+                <circle
+                  cx="48"
+                  cy="48"
+                  r={outerRadius}
+                  fill="transparent"
+                  stroke="#8b5cf6"
+                  strokeWidth="6"
+                  strokeDasharray={outerCircumference}
+                  strokeDashoffset={outerStrokeDashoffset}
+                  strokeLinecap="round"
+                  className="transition-all duration-700 ease-in-out"
+                />
+                <circle
+                  cx="48"
+                  cy="48"
+                  r={middleRadius}
+                  fill="transparent"
+                  stroke="#06b6d4"
+                  strokeWidth="6"
+                  strokeDasharray={middleCircumference}
+                  strokeDashoffset={middleStrokeDashoffset}
+                  strokeLinecap="round"
+                  className="transition-all duration-700 ease-in-out"
+                />
+                <circle
+                  cx="48"
+                  cy="48"
+                  r={innerRadius}
+                  fill="transparent"
+                  stroke="#10b981"
+                  strokeWidth="6"
+                  strokeDasharray={innerCircumference}
+                  strokeDashoffset={innerStrokeDashoffset}
+                  strokeLinecap="round"
+                  className="transition-all duration-700 ease-in-out"
+                />
+              </svg>
+              {/* Center apple icon */}
+              <span className="absolute material-symbols-outlined text-[14px] text-white/30">watch</span>
             </div>
           </div>
 
