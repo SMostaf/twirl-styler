@@ -1,29 +1,30 @@
+export type AppView = 'ONBOARDING_SYMPTOMS' | 'ONBOARDING_DEVICES' | 'ONBOARDING_PROFILE' | 'DASHBOARD';
 
-export type AppView = 'ONBOARDING_STYLE' | 'ONBOARDING_BUDGET' | 'ONBOARDING_PROFILE' | 'DISCOVERY' | 'ITEM_DETAIL';
+export type NervousSystemState = 'VENTRAL_VAGAL' | 'SYMPATHETIC' | 'DORSAL_VAGAL';
 
 export interface UserProfile {
   name: string;
-  icon: string;
-  location: string;
+  symptoms: string[];
+  devices: string[];
+  goals: string[];
+  baselineState: NervousSystemState;
   bio: string;
-  budgetRange: string;
-  selectedStyles: string[];
-  pinterestBoard?: string;
 }
 
-export interface FashionItem {
+export interface BiometricLog {
+  timestamp: string;
+  hrv: number;
+  hr: number;
+  respiration: number;
+  stressScore: number;
+}
+
+export interface Intervention {
   id: string;
-  name: string;
-  brand: string;
-  price: number;
-  imageUrl: string;
-  category: string;
-  tags: string[];
+  title: string;
+  type: 'breathwork' | 'somatic' | 'cognitive' | 'sleep';
+  duration: string;
   description: string;
-}
-
-export interface StyleOption {
-  id: string;
-  name: string;
-  image: string;
+  steps: string[];
+  scienceDescription: string;
 }
