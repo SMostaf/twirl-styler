@@ -1,0 +1,124 @@
+[
+  {
+    "id": "coherent-breathing",
+    "title": "Resonant Coherent Breathing",
+    "type": "breathwork",
+    "duration": "10 min",
+    "description": "Breathe at a rate of 5.5 to 6 breaths per minute to maximize heart rate variability and optimize autonomic nervous system balance.",
+    "steps": [
+      "Sit in an upright, relaxed posture with your spine straight and feet flat on the floor.",
+      "Inhale gently through your nose for 5.0 seconds, letting your abdomen expand naturally.",
+      "Without pausing, exhale slowly and smoothly through your mouth or nose for 5.0 seconds.",
+      "Maintain this continuous, rhythmic cycle for the duration of the practice.",
+      "Focus your attention on the smooth transitions between the inhalation and exhalation."
+    ],
+    "scienceDescription": "Engages respiratory sinus arrhythmia (RSA) and baroreflex loops to maximize HRV amplitude. Promotes high parasympathetic vagal tone and restores prefrontal connectivity."
+  },
+  {
+    "id": "physiological-sigh",
+    "title": "The Physiological Sigh",
+    "type": "breathwork",
+    "duration": "2 min",
+    "description": "A rapid autonomic reset to discharge accumulated carbon dioxide, slow heart rate, and deactivate acute sympathetic stress responses.",
+    "steps": [
+      "Inhale deeply through your nose, expanding your chest.",
+      "At the very peak of the inhalation, take a sharp, quick secondary sip of air to fully expand your lungs' alveoli.",
+      "Exhale fully through your mouth with a slow, relaxed, long sighing sound ('ahhh').",
+      "Repeat this cycle of double-inhale followed by an extended sigh 3 to 5 times.",
+      "Pause and observe the immediate reduction in physical muscle tension."
+    ],
+    "scienceDescription": "Double inhalation opens collapsed alveoli, increasing surface area for rapid CO2 removal. The subsequent extended exhale activates the vagal brake, triggering immediate parasympathetic dominance."
+  },
+  {
+    "id": "box-breathing",
+    "title": "Tactical Box Breathing",
+    "type": "breathwork",
+    "duration": "5 min",
+    "description": "An equal-ratio breathing technique used by elite practitioners to stabilize arousal, reduce hypervigilance, and restore cognitive clarity.",
+    "steps": [
+      "Exhale all air from your lungs.",
+      "Inhale slowly through your nose for a count of 4.",
+      "Hold your breath at the top for a count of 4, keeping your airway and throat relaxed.",
+      "Exhale smoothly through your mouth for a count of 4.",
+      "Hold your lungs empty at the bottom for a count of 4.",
+      "Repeat the complete cycle for 4-5 rounds or until your system feels grounded."
+    ],
+    "scienceDescription": "The balanced ratios of inhale, hold, exhale, hold act as an autonomic modulator, preventing runaway sympathetic hyperarousal while maintaining active, focused arousal."
+  },
+  {
+    "id": "grounding-54321",
+    "title": "Trauma-Informed 5-4-3-2-1 Sensory Grounding",
+    "type": "somatic",
+    "duration": "5 min",
+    "description": "Reorient your system to the safety of the current environment and present moment when experiencing hyperarousal, flashbacks, or panic.",
+    "steps": [
+      "Pause and take one slow, grounding breath.",
+      "Look around you and name 5 distinct things you can see (e.g., a pen, a spot on the wall, a tree outside).",
+      "Notice your physical body and touch 4 things you can feel (e.g., the texture of your pants, the cold table, the chair under you).",
+      "Listen closely and identify 3 sounds you can hear (e.g., a distant car, hum of a fan, birds chirping).",
+      "Focus on your senses and identify 2 things you can smell or recall smelling.",
+      "Bring awareness to your mouth and name 1 thing you can taste, or notice the current neutral state of your palate."
+    ],
+    "scienceDescription": "Recruits cortical processing and sensory thalamic pathways to redirect neural resources away from the hyperactive amygdala. Signals environmental safety to the brainstem to break hypervigilant threat loops."
+  },
+  {
+    "id": "dorsal-mobilization",
+    "title": "Somatic Orienting & Freeze Mobilization",
+    "type": "somatic",
+    "duration": "4 min",
+    "description": "Gently cue safety to your brainstem to lift your system out of a shut-down, flatlined, or dissociated Dorsal Vagal state without triggering anxiety.",
+    "steps": [
+      "Slowly let your eyes scan the room. Notice and name out loud 3 objects that are blue, then 3 objects that are green.",
+      "Gently rub your hands together, generating physical heat and friction. Press your warm palms to your cheeks.",
+      "Wrap your arms around your torso, squeezing firmly to feel your body's physical boundaries in space.",
+      "Slowly press your feet flat into the floor, feeling the physical support and resistance of the ground beneath you.",
+      "Gently roll your shoulders back and take a shallow, comfortable breath, letting out a soft hum on the exhale."
+    ],
+    "scienceDescription": "Engages visual and somatosensory orienting networks to communicate current ambient safety. Activates gentle sympathetic mobilization to lift the system out of the metabolic conservation mode of Dorsal freeze."
+  },
+  {
+    "id": "progressive-muscle-relaxation",
+    "title": "Jacobson Progressive Muscle Relaxation (PMR)",
+    "type": "somatic",
+    "duration": "12 min",
+    "description": "A systematic somatic exercise of tensing and releasing key muscle groups to cultivate deep interoceptive awareness and somatic calm.",
+    "steps": [
+      "Lie down flat or sit comfortably, closing your eyes if it feels safe to do so.",
+      "Focus on your feet. Inhale, curl your toes down, and squeeze them tightly for 5 seconds.",
+      "Exhale and release all tension instantly, letting your feet relax and feel heavy. Pause for 10 seconds.",
+      "Move up to your calves, thighs, glutes, abdomen, chest, shoulders, hands, and facial muscles.",
+      "At each muscle group, tense for 5 seconds, then release completely for 10 seconds, feeling the deep contrast of relaxation."
+    ],
+    "scienceDescription": "Physically tensing muscles triggers a reflex relaxation response upon release. Exercises somatic interoceptive pathways, decreasing allostatic muscle shielding and lowering resting heart rate."
+  },
+  {
+    "id": "sleep-consolidation",
+    "title": "Circadian Sleep Consolidation",
+    "type": "sleep",
+    "duration": "Consistent Daily Practice",
+    "description": "Align your bedtime routine to improve sleep efficiency and consolidate deep sleep architecture, crucial for traumatic memory integration.",
+    "steps": [
+      "Maintain a strictly fixed wake time every morning, regardless of how much you slept the night before.",
+      "Calculate your actual sleep duration from your Apple Watch. Limit your time in bed to that duration plus 30 minutes.",
+      "Avoid blue light exposure from screens for at least 60 minutes before bedtime.",
+      "Keep the bedroom cool (optimal: 18°C / 65°F) to mimic and support the natural nocturnal core temperature drop.",
+      "If you are unable to fall asleep after 20 minutes in bed, get up, go to another dimly lit room, and do a calm somatic grounding exercise until tired."
+    ],
+    "scienceDescription": "Restores circadian amplitude and maximizes homeostatic sleep drive. Consolidates sleep stages, ensuring optimal deep sleep (Slow Wave Sleep / N3) for glymphatic clearance and REM sleep for fear extinction."
+  },
+  {
+    "id": "nighttime-hrv-biofeedback",
+    "title": "Pre-Bed HRV Resonance Biofeedback",
+    "type": "sleep",
+    "duration": "10 min",
+    "description": "A deliberate pre-bed biofeedback breathing protocol to trigger a strong parasympathetic surge and reduce nocturnal hyperarousal.",
+    "steps": [
+      "Sit on the edge of your bed in a comfortable, relaxed upright position.",
+      "Begin slow, paced breathing at 6 breaths per minute (5-second inhale, 5-second exhale).",
+      "Imagine the breath flowing directly into and out of your heart center, feeling the physical warmth of each breath.",
+      "Continue for 10 minutes, letting go of any cognitive planning or analytical thinking.",
+      "Lie down immediately after completion, carrying the physical sense of heavy, warm calm into your sleep."
+    ],
+    "scienceDescription": "Maximizes respiratory sinus arrhythmia and overnight HRV recovery (SDNN delta), down-regulating sympathetic tone to reduce sleep onset latency and minimize nighttime awakenings."
+  }
+]

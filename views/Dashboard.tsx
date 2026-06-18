@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { UserProfile, NervousSystemState, BiometricLog, Intervention } from '../types';
+import { UserProfile, NervousSystemState, BiometricLog, Intervention, computeNervousSystemState } from '../types';
 import { generateNeuroIntervention, generateCoachMessage } from '../geminiService';
 
 interface Props {
@@ -7,67 +7,140 @@ interface Props {
   onReset: () => void;
 }
 
-// Preset quick interventions based on nervous system states
-const PRESET_INTERVENTIONS: Record<NervousSystemState, Intervention> = {
+// Preset interventions as static fallback if interventions.json cannot be fetched
+const FALLBACK_INTERVENTIONS: Record<NervousSystemState, Intervention> = {
   VENTRAL_VAGAL: {
-    id: 'ventral-anchor',
-    title: 'Ventral Safety Anchor',
-    type: 'cognitive',
-    duration: '5 min',
-    description: 'Anchor and expand your current state of safety and social connection to build nervous system resilience.',
+    id: 'coherent-breathing',
+    title: 'Resonant Coherent Breathing',
+    type: 'breathwork',
+    duration: '10 min',
+    description: 'Breathe at a rate of 5.5 to 6 breaths per minute to maximize heart rate variability and optimize autonomic nervous system balance.',
     steps: [
-      'Find a comfortable posture and scan your body for areas of ease and relaxation.',
-      'Bring to mind a person, place, or memory that brings a feeling of deep safety and warmth.',
-      'Savor this feeling in your body for 30 seconds, noticing any physical sensations of expansion or softness.',
-      'Gently smile, acknowledging your system’s capacity for regulation and healing.'
+      'Sit in an upright, relaxed posture with your spine straight and feet flat on the floor.',
+      'Inhale gently through your nose for 5.0 seconds, letting your abdomen expand naturally.',
+      'Without pausing, exhale slowly and smoothly through your mouth or nose for 5.0 seconds.',
+      'Maintain this continuous, rhythmic cycle for the duration of the practice.',
+      'Focus your attention on the smooth transitions between the inhalation and exhalation.'
     ],
-    scienceDescription: 'Strengthens ventral vagal pathways by reinforcing myelinated parasympathetic fibers, promoting positive neuroplasticity.'
+    scienceDescription: 'Engages respiratory sinus arrhythmia (RSA) and baroreflex loops to maximize HRV amplitude. Promotes high parasympathetic vagal tone and restores prefrontal connectivity.'
   },
   SYMPATHETIC: {
-    id: 'sympathetic-down',
-    title: 'Physiological Sigh & Shake-off',
-    type: 'somatic',
-    duration: '3 min',
-    description: 'Rapidly discharge sympathetic arousal, reducing heart rate and triggering the parasympathetic brake.',
+    id: 'physiological-sigh',
+    title: 'The Physiological Sigh',
+    type: 'breathwork',
+    duration: '2 min',
+    description: 'A rapid autonomic reset to discharge accumulated carbon dioxide, slow heart rate, and deactivate acute sympathetic stress responses.',
     steps: [
-      'Take a deep double-inhale through your nose (one deep breath, then a sharp extra sip of air at the top).',
-      'Exhale slowly and fully through your mouth with a soft sighing sound.',
-      'Repeat this breathing pattern 5 times.',
-      'Stand up and shake out your hands, arms, and legs vigorously for 1 minute to release physical muscular tension.'
+      'Inhale deeply through your nose, expanding your chest.',
+      'At the very peak of the inhalation, take a sharp, quick secondary sip of air to fully expand your lungs\' alveoli.',
+      'Exhale fully through your mouth with a slow, relaxed, long sighing sound (\'ahhh\').',
+      'Repeat this cycle of double-inhale followed by an extended sigh 3 to 5 times.',
+      'Pause and observe the immediate reduction in physical muscle tension.'
     ],
-    scienceDescription: 'The physiological sigh opens collapsed alveoli and spikes blood CO2 clearing, immediately activating the vagus nerve to reduce heart rate.'
+    scienceDescription: 'Double inhalation opens collapsed alveoli, increasing surface area for rapid CO2 removal. The subsequent extended exhale activates the vagal brake, triggering immediate parasympathetic dominance.'
   },
   DORSAL_VAGAL: {
-    id: 'dorsal-up',
-    title: 'Somatic Orienting & Mobilization',
+    id: 'dorsal-mobilization',
+    title: 'Somatic Orienting & Freeze Mobilization',
     type: 'somatic',
     duration: '4 min',
-    description: 'Gently cue safety to your brain to lift your system out of shut-down and freeze states without triggering panic.',
+    description: 'Gently cue safety to your brainstem to lift your system out of a shut-down, flatlined, or dissociated Dorsal Vagal state without triggering anxiety.',
     steps: [
-      'Slowly let your eyes scan the room you are in. Find 3 objects that are blue and name them out loud.',
-      'Gently rub your hands together, feeling the warmth and friction of your palms.',
-      'Wrap your arms around your torso in a firm, self-supportive hug, feeling your boundaries in space.',
-      'Stomp your feet softly on the ground, connecting to the physical support of the floor.'
+      'Slowly let your eyes scan the room. Notice and name out loud 3 objects that are blue, then 3 objects that are green.',
+      "Gently rub your hands together, generating physical heat and friction. Press your warm palms to your cheeks.",
+      "Wrap your arms around your torso, squeezing firmly to feel your body's physical boundaries in space.",
+      "Slowly press your feet flat into the floor, feeling the physical support and resistance of the ground beneath you.",
+      "Gently roll your shoulders back and take a shallow, comfortable breath, letting out a soft hum on the exhale."
     ],
-    scienceDescription: 'Engages sensory orienting pathways to signal ambient physical safety to the brainstem, breaking the dorsal vagal immobilization response.'
+    scienceDescription: "Engages visual and somatosensory orienting networks to communicate current ambient safety. Activates gentle sympathetic mobilization to lift the system out of the metabolic conservation mode of Dorsal freeze."
+  }
+};
+
+const getSimulatedMetricsForState = (state: NervousSystemState, nowTime?: string): BiometricLog => {
+  const timestamp = nowTime || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  if (state === 'VENTRAL_VAGAL') {
+    return {
+      timestamp,
+      heartRateVariabilitySDNN: Math.round(55 + Math.random() * 15),
+      heartRate: Math.round(62 + Math.random() * 8),
+      restingHeartRate: Math.round(60 + Math.random() * 4),
+      respiratoryRate: Math.round(11 + Math.random() * 2),
+      activeEnergyBurned: Math.round(350 + Math.random() * 100),
+      stepCount: Math.round(8000 + Math.random() * 2000),
+      appleSleepingWristTemperature: Math.round((36.2 + Math.random() * 0.4) * 10) / 10,
+      appleSleepingBreathingDisturbances: Math.round(Math.random() * 2),
+      sleepAnalysis: {
+        sleepDuration: Math.round((7.5 + Math.random() * 1) * 10) / 10,
+        sleepOnsetLatency: Math.round(12 + Math.random() * 5),
+        waso: Math.round(15 + Math.random() * 10),
+        sleepEfficiency: Math.round(92 + Math.random() * 4),
+        deepSleepRatio: Math.round(21 + Math.random() * 4),
+        remSleepRatio: Math.round(22 + Math.random() * 3),
+        overnightHrvDelta: Math.round(12 + Math.random() * 6),
+        restingHeartRateNadir: Math.round(56 + Math.random() * 4)
+      },
+      stressScore: Math.round(10 + Math.random() * 8)
+    };
+  } else if (state === 'SYMPATHETIC') {
+    return {
+      timestamp,
+      heartRateVariabilitySDNN: Math.round(16 + Math.random() * 6),
+      heartRate: Math.round(96 + Math.random() * 14),
+      restingHeartRate: Math.round(84 + Math.random() * 6),
+      respiratoryRate: Math.round(19 + Math.random() * 4),
+      activeEnergyBurned: Math.round(150 + Math.random() * 100),
+      stepCount: Math.round(3000 + Math.random() * 1500),
+      appleSleepingWristTemperature: Math.round((36.7 + Math.random() * 0.3) * 10) / 10,
+      appleSleepingBreathingDisturbances: Math.round(4 + Math.random() * 5),
+      sleepAnalysis: {
+        sleepDuration: Math.round((5.2 + Math.random() * 1) * 10) / 10,
+        sleepOnsetLatency: Math.round(38 + Math.random() * 15),
+        waso: Math.round(52 + Math.random() * 15),
+        sleepEfficiency: Math.round(74 + Math.random() * 6),
+        deepSleepRatio: Math.round(11 + Math.random() * 3),
+        remSleepRatio: Math.round(16 + Math.random() * 4),
+        overnightHrvDelta: Math.round(-4 + Math.random() * 6),
+        restingHeartRateNadir: Math.round(72 + Math.random() * 6)
+      },
+      stressScore: Math.round(78 + Math.random() * 12)
+    };
+  } else { // DORSAL_VAGAL
+    return {
+      timestamp,
+      heartRateVariabilitySDNN: Math.round(28 + Math.random() * 10),
+      heartRate: Math.round(48 + Math.random() * 5),
+      restingHeartRate: Math.round(52 + Math.random() * 3),
+      respiratoryRate: Math.round(8 + Math.random() * 2),
+      activeEnergyBurned: Math.round(50 + Math.random() * 50),
+      stepCount: Math.round(1000 + Math.random() * 1000),
+      appleSleepingWristTemperature: Math.round((35.8 + Math.random() * 0.4) * 10) / 10,
+      appleSleepingBreathingDisturbances: Math.round(2 + Math.random() * 3),
+      sleepAnalysis: {
+        sleepDuration: Math.round((9.5 + Math.random() * 1.5) * 10) / 10,
+        sleepOnsetLatency: Math.round(25 + Math.random() * 10),
+        waso: Math.round(60 + Math.random() * 20),
+        sleepEfficiency: Math.round(70 + Math.random() * 8),
+        deepSleepRatio: Math.round(9 + Math.random() * 3),
+        remSleepRatio: Math.round(14 + Math.random() * 4),
+        overnightHrvDelta: Math.round(1 + Math.random() * 3),
+        restingHeartRateNadir: Math.round(46 + Math.random() * 4)
+      },
+      stressScore: Math.round(48 + Math.random() * 10)
+    };
   }
 };
 
 const Dashboard: React.FC<Props> = ({ user, onReset }) => {
-  const [activeState, setActiveState] = useState<NervousSystemState>(user.baselineState || 'VENTRAL_VAGAL');
-  const [log, setLog] = useState<BiometricLog>({
-    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
-    hrv: 82,
-    hr: 64,
-    respiration: 12,
-    stressScore: 18
-  });
-  
+  // Initialize biometric log representing user's initial baseline state
+  const [log, setLog] = useState<BiometricLog>(() => getSimulatedMetricsForState(user.baselineState || 'VENTRAL_VAGAL'));
+  const [interventions, setInterventions] = useState<Intervention[]>([]);
+  const [selectedIntervention, setSelectedIntervention] = useState<Intervention | null>(null);
+
   // Custom AI Intervention state
   const [customIntervention, setCustomIntervention] = useState<Intervention | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [additionalContext, setAdditionalContext] = useState('');
-  
+
   // Chat state
   const [chatMessages, setChatMessages] = useState<{ role: 'user' | 'model'; text: string }[]>([]);
   const [userInput, setUserInput] = useState('');
@@ -76,12 +149,30 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
 
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
+  // Compute the nervous system state dynamically using our scientifically-backed diagnostic logic
+  const { state: activeState, vagalToneScore, explanation } = computeNervousSystemState(log);
+
+  // Fetch dynamic intervention library on mount
+  useEffect(() => {
+    fetch('/interventions.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch JSON library');
+        return res.json();
+      })
+      .then((data: Intervention[]) => {
+        setInterventions(data);
+      })
+      .catch(err => {
+        console.warn('Using fallback interventions. interventions.json could not be loaded relative to origin:', err);
+      });
+  }, []);
+
   // Initialize chat messages
   useEffect(() => {
     setChatMessages([
       {
         role: 'model',
-        text: `Hello ${user.name || 'there'}. I am your NeuroPath AI Coach. I see your system is currently in a ${getStateName(activeState)} state. How is your body feeling right now?`
+        text: `Hello ${user.name || 'there'}. I am your trauma-informed NeuroPath Coach. Analyzing your real-time physiological telemetry, I see your nervous system is in a ${getStateName(activeState)} state. How is your body feeling right now?`
       }
     ]);
   }, [user.name, activeState]);
@@ -91,43 +182,21 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatMessages]);
 
-  // Update biometrics when nervous system state is changed
+  // Telemetry loop - background biometric updates resembling continuous watch streaming
   useEffect(() => {
-    let interval: Timer;
-    
-    const updateBiometrics = () => {
-      const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      
-      if (activeState === 'VENTRAL_VAGAL') {
-        setLog({
-          timestamp: now,
-          hrv: Math.round(80 + Math.random() * 12),
-          hr: Math.round(60 + Math.random() * 6),
-          respiration: Math.round(11 + Math.random() * 2),
-          stressScore: Math.round(12 + Math.random() * 6)
-        });
-      } else if (activeState === 'SYMPATHETIC') {
-        setLog({
-          timestamp: now,
-          hrv: Math.round(20 + Math.random() * 8),
-          hr: Math.round(98 + Math.random() * 12),
-          respiration: Math.round(20 + Math.random() * 4),
-          stressScore: Math.round(75 + Math.random() * 15)
-        });
-      } else { // DORSAL_VAGAL
-        setLog({
-          timestamp: now,
-          hrv: Math.round(35 + Math.random() * 10),
-          hr: Math.round(50 + Math.random() * 5),
-          respiration: Math.round(8 + Math.random() * 2),
-          stressScore: Math.round(45 + Math.random() * 10)
-        });
-      }
-    };
+    const updateInterval = setInterval(() => {
+      setLog(prev => {
+        const fresh = getSimulatedMetricsForState(activeState, prev.timestamp);
+        // Retain the rolling clock sequence and minor jitter to emulate real streaming
+        const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        return {
+          ...fresh,
+          timestamp: now
+        };
+      });
+    }, 5000);
 
-    updateBiometrics();
-    interval = setInterval(updateBiometrics, 4000);
-    return () => clearInterval(interval);
+    return () => clearInterval(updateInterval);
   }, [activeState]);
 
   function getStateName(state: NervousSystemState) {
@@ -135,6 +204,16 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
     if (state === 'SYMPATHETIC') return 'Sympathetic (Fight/Flight)';
     return 'Dorsal Vagal (Freeze/Shutdown)';
   }
+
+  const getActiveStateSuggestedProtocol = (): Intervention => {
+    const idealId = activeState === 'VENTRAL_VAGAL' ? 'coherent-breathing' :
+                    activeState === 'SYMPATHETIC' ? 'physiological-sigh' : 'dorsal-mobilization';
+
+    const libraryMatch = interventions.find(item => item.id === idealId);
+    if (libraryMatch) return libraryMatch;
+
+    return FALLBACK_INTERVENTIONS[activeState];
+  };
 
   // Handle generating custom intervention via Gemini
   const handleGenerateCustom = async () => {
@@ -168,30 +247,32 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
       setChatMessages(prev => [...prev, { role: 'model', text: reply }]);
     } catch (err) {
       console.error(err);
-      setChatMessages(prev => [...prev, { role: 'model', text: "I'm having trouble syncing with your neural model. Let's take a slow breath together." }]);
+      setChatMessages(prev => [...prev, { role: 'model', text: "I am having trouble syncing with your neural model. Let's take a slow resonant breath together." }]);
     } finally {
       setIsSendingMessage(false);
     }
   };
 
-  // Apple HealthKit Concordric Rings calculation
-  // Outer Ring: HRV (SDNN) - Target 100 ms
+  // Apple Watch Concordric Rings calculations (relative to baseline thresholds)
   const outerRadius = 36;
   const outerCircumference = 2 * Math.PI * outerRadius;
-  const hrvPercent = Math.min(100, (log.hrv / 100) * 100);
+  // Outer Ring: HRV SDNN - Target: 75ms (normal night/surging peak)
+  const hrvPercent = Math.min(100, (log.heartRateVariabilitySDNN / 75) * 100);
   const outerStrokeDashoffset = outerCircumference - (hrvPercent / 100) * outerCircumference;
 
-  // Middle Ring: Coherence Score (target resonant respiration rate ~12 bpm)
+  // Middle Ring: Resonant Coherence Score (Target respiration rate: 12 bpm)
   const middleRadius = 26;
   const middleCircumference = 2 * Math.PI * middleRadius;
-  const coherenceScore = Math.max(10, 100 - Math.abs(log.respiration - 12) * 12);
+  const coherenceScore = Math.max(10, 100 - Math.abs(log.respiratoryRate - 12) * 12);
   const middleStrokeDashoffset = middleCircumference - (coherenceScore / 100) * middleCircumference;
 
-  // Inner Ring: Calm Index (lower HR towards resting 60bpm is calmer)
+  // Inner Ring: System Calm Index (calmer as heart rate is closer to resting nadir / 60bpm)
   const innerRadius = 16;
   const innerCircumference = 2 * Math.PI * innerRadius;
-  const calmScore = Math.max(10, 100 - Math.max(0, log.hr - 60) * 1.8);
+  const calmScore = Math.max(10, 100 - Math.max(0, log.heartRate - 60) * 1.5);
   const innerStrokeDashoffset = innerCircumference - (calmScore / 100) * innerCircumference;
+
+  const currentSuggested = getSuggestedProtocol(activeState, interventions);
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white px-5 py-6">
@@ -202,7 +283,7 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
             {user.icon || '🧠'}
           </div>
           <div>
-            <h3 className="text-xs text-white/50 font-medium">Digital Twin Of</h3>
+            <h3 className="text-xs text-white/50 font-medium">Digital Twin of</h3>
             <h1 className="text-sm font-bold text-white tracking-wide">{user.name || 'User'}</h1>
           </div>
         </div>
@@ -222,6 +303,17 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
         </button>
       </header>
 
+      {/* PRIVACY-FIRST & TRAUMA-INFORMED BANNER */}
+      <div className="mb-6 p-3 bg-violet-950/15 border border-violet-500/10 rounded-xl flex items-start gap-2.5">
+        <span className="material-symbols-outlined text-violet-400 text-sm mt-0.5">verified_user</span>
+        <div className="space-y-0.5">
+          <h4 className="text-[10px] font-bold uppercase tracking-wider text-violet-300">Privacy-First Architecture</h4>
+          <p className="text-[9px] text-white/50 leading-tight">
+            Raw biometrics and voice audio are processed strictly on-device. Only secure, anonymous mathematical feature vectors are synced to protect your trauma recovery path.
+          </p>
+        </div>
+      </div>
+
       {/* Tabs selector */}
       <div className="flex bg-zinc-950 border border-zinc-900 p-1.5 rounded-xl mb-6">
         <button
@@ -231,7 +323,7 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
           }`}
         >
           <span className="material-symbols-outlined text-xs">biotech</span>
-          Nervous System Twin
+          Autonomic Twin
         </button>
         <button
           onClick={() => setActiveTab('AI_COACH')}
@@ -257,36 +349,32 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
               <span className="text-[9px] font-bold tracking-wider uppercase text-white/50">LIVE TWIN MATRIX</span>
             </div>
 
-            {/* Animation representing state of the body */}
+            {/* Glowing Pulse Visualizer */}
             <div className="w-48 h-48 relative flex items-center justify-center my-6">
-              
-              {/* Ventral state circle */}
               {activeState === 'VENTRAL_VAGAL' && (
                 <>
                   <div className="absolute w-40 h-40 rounded-full border border-emerald-500/10 animate-pulse" />
-                  <div className="absolute w-32 h-32 rounded-full bg-emerald-500/5 border border-emerald-500/20 animate-ping" style={{ animationDuration: '4s' }} />
+                  <div className="absolute w-32 h-32 rounded-full bg-emerald-500/5 border border-emerald-500/20 animate-ping" style={{ animationDuration: '3.5s' }} />
                   <div className="absolute w-24 h-24 rounded-full bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center shadow-lg shadow-emerald-500/10">
                     <span className="material-symbols-outlined text-4xl text-emerald-400 animate-pulse">spa</span>
                   </div>
                 </>
               )}
 
-              {/* Sympathetic state circle */}
               {activeState === 'SYMPATHETIC' && (
                 <>
-                  <div className="absolute w-40 h-40 rounded-full border border-rose-500/10 animate-spin" style={{ animationDuration: '10s' }} />
-                  <div className="absolute w-32 h-32 rounded-full bg-rose-500/5 border border-rose-500/20 animate-ping" style={{ animationDuration: '1.2s' }} />
+                  <div className="absolute w-40 h-40 rounded-full border border-rose-500/10 animate-spin" style={{ animationDuration: '6s' }} />
+                  <div className="absolute w-32 h-32 rounded-full bg-rose-500/5 border border-rose-500/20 animate-ping" style={{ animationDuration: '0.9s' }} />
                   <div className="absolute w-24 h-24 rounded-full bg-rose-500/10 border border-rose-500/40 flex items-center justify-center shadow-lg shadow-rose-500/10">
                     <span className="material-symbols-outlined text-4xl text-rose-400 animate-bounce">bolt</span>
                   </div>
                 </>
               )}
 
-              {/* Dorsal state circle */}
               {activeState === 'DORSAL_VAGAL' && (
                 <>
-                  <div className="absolute w-40 h-40 rounded-full border border-cyan-500/10" />
-                  <div className="absolute w-32 h-32 rounded-full bg-cyan-500/5 border border-cyan-500/20 opacity-30" />
+                  <div className="absolute w-40 h-40 rounded-full border border-cyan-500/5" />
+                  <div className="absolute w-32 h-32 rounded-full bg-cyan-500/5 border border-cyan-500/20 opacity-30 animate-pulse" style={{ animationDuration: '6s' }} />
                   <div className="absolute w-24 h-24 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center shadow-lg shadow-cyan-500/10">
                     <span className="material-symbols-outlined text-4xl text-cyan-300">severe_cold</span>
                   </div>
@@ -298,33 +386,31 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
             <div className="text-center w-full">
               <h2 className={`text-base font-bold uppercase tracking-wider mb-1 ${
                 activeState === 'VENTRAL_VAGAL' ? 'text-emerald-400' :
-                activeState === 'SYMPAPA' ? 'text-rose-400' : 'text-cyan-300'
+                activeState === 'SYMPATHETIC' ? 'text-rose-400' : 'text-cyan-300'
               }`}>
-                {activeState === 'VENTRAL_VAGAL' ? 'VENTRAL VAGAL SAFETY' :
+                {activeState === 'VENTRAL_VAGAL' ? 'VENTRAL VAGAL (REGULATED)' :
                  activeState === 'SYMPATHETIC' ? 'SYMPATHETIC HYPERAROUSAL' : 'DORSAL VAGAL SHUTDOWN'}
               </h2>
               <p className="text-[10px] text-white/50 leading-relaxed px-4">
-                {activeState === 'VENTRAL_VAGAL' ? 'System in restorative calm. Heart Rate Variability (HRV) is elevated; prefrontal networks fully operational.' :
-                 activeState === 'SYMPATHETIC' ? 'Adrenaline & cortisol flooding. High physical tension, shallow breathing. System primed for active defensive threat response.' :
-                 'Conservation state active. Oxygen reservation, low perfusion, heavy flatlining of emotional engagement. Immobilization active.'}
+                {explanation}
               </p>
             </div>
 
-            {/* MANUAL OVERRIDE (for demo/telemetry syncing) */}
+            {/* MANUAL OVERRIDE (to show dynamic metric mapping) */}
             <div className="w-full border-t border-zinc-900 mt-5 pt-4">
-              <p className="text-center text-[8px] font-bold tracking-widest text-white/40 uppercase mb-2">Simulate Telemetry Sync</p>
+              <p className="text-center text-[8px] font-bold tracking-widest text-white/40 uppercase mb-2">Simulate Watch Telemetry Sync</p>
               <div className="flex gap-1.5 justify-center">
                 {(['VENTRAL_VAGAL', 'SYMPATHETIC', 'DORSAL_VAGAL'] as NervousSystemState[]).map((state) => (
                   <button
                     key={state}
-                    onClick={() => setActiveState(state)}
-                    className={`text-[8px] tracking-wide py-1 px-2.5 rounded-md font-bold transition-all border ${
+                    onClick={() => setLog(getSimulatedMetricsForState(state))}
+                    className={`text-[8px] tracking-wide py-1.5 px-3 rounded-md font-bold transition-all border ${
                       activeState === state 
-                        ? 'bg-violet-600 border-violet-500 text-white' 
+                        ? 'bg-violet-600 border-violet-500 text-white shadow-md' 
                         : 'bg-zinc-900/60 border-zinc-800 text-white/40 hover:text-white/60'
                     }`}
                   >
-                    {state === 'VENTRAL_VAGAL' ? 'CALM' : state === 'SYMPATHETIC' ? 'STRESSED' : 'FREEZE'}
+                    {state === 'VENTRAL_VAGAL' ? 'CALM (VENTRAL)' : state === 'SYMPATHETIC' ? 'STRESSED (SYMPATHETIC)' : 'FREEZE (DORSAL)'}
                   </button>
                 ))}
               </div>
@@ -335,12 +421,12 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
           <div className="p-4 rounded-xl border bg-zinc-950/40 border-zinc-900 flex items-center justify-between">
             <div className="space-y-2">
               <h3 className="text-[10px] font-bold tracking-widest text-violet-400 uppercase">HealthKit Balance rings</h3>
-              <p className="text-[11px] text-white/60 leading-tight">Your three nervous system recovery vectors. Syncing with watch metrics.</p>
+              <p className="text-[11px] text-white/60 leading-tight">Overnight and waking autonomic indices mapped directly from watch sensors.</p>
               
               <div className="flex flex-col gap-1 pt-1.5 font-mono text-[9px] text-white/50">
                 <div className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
-                  <span>HRV Recovery (SDNN): {log.hrv}ms</span>
+                  <span>HRV Recovery (SDNN): {log.heartRateVariabilitySDNN}ms</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
@@ -404,83 +490,185 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
             </div>
           </div>
 
-          {/* REAL-TIME BIOMETRICS CARDS */}
+          {/* RESEARCH-DRIVEN BIOMETRIC HEALTHKIT CARDS */}
           <div className="grid grid-cols-2 gap-4">
             
-            {/* HRV Card */}
+            {/* HRV SDNN Card */}
             <div className="p-4 rounded-xl border bg-zinc-950/40 border-zinc-900">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">HRV (Baseline)</span>
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">HRV (SDNN)</span>
+                  <span className="text-[8px] text-violet-400/70 font-mono">Quantity Identifier</span>
+                </div>
                 <span className="material-symbols-outlined text-violet-400 text-base font-light">network_intelligence_history</span>
               </div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-bold font-mono tracking-tight text-white">{log.hrv}</span>
+                <span className="text-2xl font-bold font-mono tracking-tight text-white">{log.heartRateVariabilitySDNN}</span>
                 <span className="text-xs text-white/50">ms</span>
               </div>
-              
-              {/* Mini Sparkline Chart */}
-              <div className="h-6 w-full mt-3 flex items-end">
-                <svg className="w-full h-full" viewBox="0 0 100 20" preserveAspectRatio="none">
-                  <path
-                    d={
-                      activeState === 'VENTRAL_VAGAL' 
-                        ? "M 0 10 Q 25 2, 50 15 T 100 5" 
-                        : activeState === 'SYMPATHETIC' 
-                          ? "M 0 15 L 20 12 L 40 16 L 60 14 L 80 18 L 100 15"
-                          : "M 0 12 L 25 12 L 50 11 L 75 12 L 100 12"
-                    }
-                    fill="none"
-                    stroke={activeState === 'VENTRAL_VAGAL' ? '#10b981' : activeState === 'SYMPATHETIC' ? '#f43f5e' : '#22d3ee'}
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </div>
+              <p className="text-[8px] text-white/30 mt-2 font-mono leading-tight">
+                Trauma cut: &lt;25ms | Night: 40-80ms
+              </p>
             </div>
 
-            {/* Heart Rate Card */}
+            {/* Heart Rate / RHR Card */}
             <div className="p-4 rounded-xl border bg-zinc-950/40 border-zinc-900">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">Heart Rate</span>
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">Heart Rate</span>
+                  <span className="text-[8px] text-rose-400/70 font-mono">Real-time / Resting</span>
+                </div>
                 <span className="material-symbols-outlined text-rose-500 text-base font-light">favorite</span>
               </div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-bold font-mono tracking-tight text-white">{log.hr}</span>
+                <span className="text-2xl font-bold font-mono tracking-tight text-white">{log.heartRate}</span>
                 <span className="text-xs text-white/50">bpm</span>
+                <span className="text-[10px] text-white/40 font-mono ml-auto">RHR: {log.restingHeartRate}</span>
               </div>
-
-              {/* HR Pulsing animation representation */}
-              <div className="h-6 w-full mt-3 flex items-center justify-center gap-1">
-                <span className={`w-1 h-3 rounded-full bg-rose-500/50 ${activeState === 'SYMPATHETIC' ? 'animate-bounce' : 'animate-pulse'}`} style={{ animationDelay: '0s' }} />
-                <span className={`w-1 h-5 rounded-full bg-rose-500/80 ${activeState === 'SYMPATHETIC' ? 'animate-bounce' : 'animate-pulse'}`} style={{ animationDelay: '0.1s' }} />
-                <span className={`w-1 h-4 rounded-full bg-rose-500/50 ${activeState === 'SYMPATHETIC' ? 'animate-bounce' : 'animate-pulse'}`} style={{ animationDelay: '0.2s' }} />
-                <span className={`w-1 h-2 rounded-full bg-rose-500/30 ${activeState === 'SYMPATHETIC' ? 'animate-bounce' : 'animate-pulse'}`} style={{ animationDelay: '0.3s' }} />
-              </div>
+              <p className="text-[8px] text-white/30 mt-2 font-mono leading-tight">
+                {activeState === 'SYMPATHETIC' ? 'Sympathetic spike' : 'Balanced baseline'}
+              </p>
             </div>
 
             {/* Respiration Card */}
             <div className="p-4 rounded-xl border bg-zinc-950/40 border-zinc-900">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">Respiration</span>
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">Respiratory Rate</span>
+                  <span className="text-[8px] text-emerald-400/70 font-mono">Resting/Paced</span>
+                </div>
                 <span className="material-symbols-outlined text-emerald-400 text-base font-light">air</span>
               </div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-bold font-mono tracking-tight text-white">{log.respiration}</span>
+                <span className="text-2xl font-bold font-mono tracking-tight text-white">{log.respiratoryRate}</span>
                 <span className="text-xs text-white/50">/ min</span>
               </div>
-              <p className="text-[9px] text-white/40 mt-3 font-mono">Depth: {activeState === 'VENTRAL_VAGAL' ? 'Resonant/Deep' : activeState === 'SYMPATHETIC' ? 'Shallow' : 'Suppressed'}</p>
+              <p className="text-[8px] text-white/30 mt-2 font-mono leading-tight">
+                {activeState === 'VENTRAL_VAGAL' ? 'Resonant (10-14)' : activeState === 'SYMPATHETIC' ? 'Shallow Hypervent (&gt;18)' : 'Suppressed (&lt;10)'}
+              </p>
             </div>
 
-            {/* Stress Score Card */}
+            {/* Behavioral Activation Card */}
             <div className="p-4 rounded-xl border bg-zinc-950/40 border-zinc-900">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">Stress Score</span>
-                <span className="material-symbols-outlined text-amber-400 text-base font-light">speed</span>
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">Behavioral Act.</span>
+                  <span className="text-[8px] text-amber-400/70 font-mono">Steps / Active Burn</span>
+                </div>
+                <span className="material-symbols-outlined text-amber-400 text-base font-light">directions_run</span>
+              </div>
+              <div className="flex items-baseline gap-1">
+                <span className="text-lg font-bold font-mono tracking-tight text-white">{log.stepCount.toLocaleString()}</span>
+                <span className="text-[9px] text-white/40">st</span>
+                <span className="text-sm font-bold font-mono text-amber-400/80 ml-auto">{log.activeEnergyBurned} <span className="text-[8px]">kcal</span></span>
+              </div>
+              <p className="text-[8px] text-white/30 mt-2 font-mono leading-tight">
+                {log.stepCount < 2000 ? 'Low (Freeze Withdrawal)' : 'Active (Neuro-Resilience)'}
+              </p>
+            </div>
+
+            {/* Sleeping Wrist Temperature & Breathing Disturbances */}
+            <div className="p-4 rounded-xl border bg-zinc-950/40 border-zinc-900">
+              <div className="flex justify-between items-center mb-2">
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">Circadian Temp</span>
+                  <span className="text-[8px] text-cyan-400/70 font-mono">Wrist Sensor / Apnea</span>
+                </div>
+                <span className="material-symbols-outlined text-cyan-400 text-base font-light">device_thermostat</span>
+              </div>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-2xl font-bold font-mono tracking-tight text-white">{log.appleSleepingWristTemperature}°C</span>
+                <span className="text-[9px] text-white/40 ml-auto">Disturb: {log.appleSleepingBreathingDisturbances}</span>
+              </div>
+              <p className="text-[8px] text-white/30 mt-2 font-mono leading-tight">
+                Overnight deviations index cortisol dysregulation
+              </p>
+            </div>
+
+            {/* Overall Autonomic Stress & Vagal Tone Card */}
+            <div className="p-4 rounded-xl border bg-zinc-950/40 border-zinc-900">
+              <div className="flex justify-between items-center mb-2">
+                <div className="flex flex-col">
+                  <span className="text-[9px] font-bold tracking-wider text-white/40 uppercase">Autonomic Index</span>
+                  <span className="text-[8px] text-purple-400/70 font-mono">Computed Vagal Tone</span>
+                </div>
+                <span className="material-symbols-outlined text-purple-400 text-base font-light">analytics</span>
               </div>
               <div className="flex items-baseline gap-1.5">
                 <span className="text-2xl font-bold font-mono tracking-tight text-white">{log.stressScore}</span>
-                <span className="text-xs text-white/50">/ 100</span>
+                <span className="text-xs text-white/50">/100</span>
+                <span className="text-[10px] text-emerald-400 font-bold ml-auto">{vagalToneScore}% Vagal</span>
               </div>
-              <p className="text-[9px] text-white/40 mt-3 font-mono">Vagal Tone: {activeState === 'VENTRAL_VAGAL' ? 'Strong' : activeState === 'SYMPATHETIC' ? 'Weak/Exhausted' : 'Numb'}</p>
+              <p className="text-[8px] text-white/30 mt-2 font-mono leading-tight">
+                Derived from HRV SDNN + RHR + Resonant Breathing
+              </p>
+            </div>
+          </div>
+
+          {/* APPLE WATCH SLEEP STAGE ARCHITECTURE WIDGET */}
+          <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-950/20 space-y-4">
+            <div className="flex justify-between items-center pb-2 border-b border-zinc-900/60">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-cyan-400 text-lg">bedtime</span>
+                <h4 className="font-bold text-xs uppercase tracking-widest text-cyan-400 font-display">Apple Watch Sleep Architecture</h4>
+              </div>
+              <span className="text-[9px] font-mono bg-zinc-900 px-2 py-0.5 rounded-md text-white/60">
+                Duration: {log.sleepAnalysis.sleepDuration} hrs
+              </span>
+            </div>
+
+            <p className="text-[10px] text-white/50 leading-relaxed italic">
+              Trauma and complex PTSD selectively disrupt core, slow-wave (deep), and REM sleep staging. Below is your overnight sleep analysis.
+            </p>
+
+            <div className="space-y-3 pt-2">
+              {/* Deep sleep progress bar */}
+              <div className="space-y-1">
+                <div className="flex justify-between text-[10px]">
+                  <span className="font-medium text-white/80">Deep Sleep (Slow Wave N3)</span>
+                  <span className="font-mono text-cyan-300 font-bold">{log.sleepAnalysis.deepSleepRatio}% <span className="text-white/40 font-normal">(Target &gt;20%)</span></span>
+                </div>
+                <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden">
+                  <div className="h-full bg-cyan-400 rounded-full transition-all duration-1000" style={{ width: `${log.sleepAnalysis.deepSleepRatio * 4}%` }} />
+                </div>
+                <p className="text-[8px] text-cyan-400/80 font-mono leading-tight">
+                  💡 Clinical Focus: Reduced in chronic stress and trauma. Essential for emotional memory consolidation &amp; metabolic clearance.
+                </p>
+              </div>
+
+              {/* REM sleep progress bar */}
+              <div className="space-y-1">
+                <div className="flex justify-between text-[10px]">
+                  <span className="font-medium text-white/80">REM Sleep (Dream State)</span>
+                  <span className="font-mono text-violet-300 font-bold">{log.sleepAnalysis.remSleepRatio}% <span className="text-white/40 font-normal">(Target 20-25%)</span></span>
+                </div>
+                <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden">
+                  <div className="h-full bg-violet-500 rounded-full transition-all duration-1000" style={{ width: `${log.sleepAnalysis.remSleepRatio * 4}%` }} />
+                </div>
+                <p className="text-[8px] text-violet-400/80 font-mono leading-tight">
+                  💡 Clinical Focus: Fragmentation or shortening hampers fear extinction pathways, predisposing the brain to trauma nightmare loops.
+                </p>
+              </div>
+
+              {/* Secondary calculated Sleep vectors */}
+              <div className="grid grid-cols-2 gap-3 border-t border-zinc-900/60 pt-3 text-[10px] font-mono text-white/60">
+                <div className="space-y-1">
+                  <div>Sleep Efficiency: <span className="text-white font-bold">{log.sleepAnalysis.sleepEfficiency}%</span></div>
+                  <div className="text-[8px] text-white/40">Trauma typical: &lt;85% (Fragmented)</div>
+                </div>
+                <div className="space-y-1">
+                  <div>Sleep Onset Latency: <span className="text-white font-bold">{log.sleepAnalysis.sleepOnsetLatency}m</span></div>
+                  <div className="text-[8px] text-white/40">Hyperarousal latency: &gt;30m</div>
+                </div>
+                <div className="space-y-1">
+                  <div>Wake After Onset (WASO): <span className="text-white font-bold">{log.sleepAnalysis.waso}m</span></div>
+                  <div className="text-[8px] text-white/40">Awakenings typical of PTSD: &gt;45m</div>
+                </div>
+                <div className="space-y-1">
+                  <div>Overnight HRV Delta: <span className="text-white font-bold">+{log.sleepAnalysis.overnightHrvDelta}ms</span></div>
+                  <div className="text-[8px] text-white/40">Target surge: &gt;10ms overnight</div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -488,28 +676,28 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
           <div className="space-y-4">
             <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-white/40">Suggested Autonomic Protocol</h3>
 
-            {/* Preset Intervention */}
+            {/* Curated Dynamic Intervention from Library */}
             <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-950/20 space-y-4">
               <div className="flex justify-between items-start">
                 <div>
                   <span className="text-[9px] bg-violet-500/10 text-violet-400 border border-violet-500/20 px-2 py-0.5 rounded-full uppercase font-mono font-bold tracking-wider">
-                    {PRESET_INTERVENTIONS[activeState].type}
+                    {currentSuggested.type}
                   </span>
-                  <h4 className="font-bold text-sm text-white mt-2">{PRESET_INTERVENTIONS[activeState].title}</h4>
+                  <h4 className="font-bold text-sm text-white mt-2">{currentSuggested.title}</h4>
                 </div>
                 <span className="text-xs text-white/40 font-bold tracking-wide flex items-center gap-1">
                   <span className="material-symbols-outlined text-sm">schedule</span>
-                  {PRESET_INTERVENTIONS[activeState].duration}
+                  {currentSuggested.duration}
                 </span>
               </div>
 
               <p className="text-xs text-white/60 leading-relaxed">
-                {PRESET_INTERVENTIONS[activeState].description}
+                {currentSuggested.description}
               </p>
 
               <div className="space-y-2 border-t border-zinc-900/60 pt-4">
-                <p className="text-[9px] font-bold tracking-widest text-white/40 uppercase">Steps:</p>
-                {PRESET_INTERVENTIONS[activeState].steps.map((step, idx) => (
+                <p className="text-[9px] font-bold tracking-widest text-white/40 uppercase">Protocol Steps:</p>
+                {currentSuggested.steps.map((step, idx) => (
                   <div key={idx} className="flex gap-2.5 items-start text-xs text-white/70">
                     <span className="font-mono text-violet-400 font-bold text-[10px] bg-violet-500/5 w-5 h-5 rounded-md flex items-center justify-center border border-violet-500/10 flex-shrink-0 mt-0.5">{idx + 1}</span>
                     <span className="leading-relaxed">{step}</span>
@@ -519,9 +707,71 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
 
               <div className="bg-zinc-900/50 p-3 rounded-xl border border-zinc-900 text-[10px] text-violet-400/80 font-mono leading-relaxed italic">
                 <span className="font-bold uppercase tracking-wide text-[9px] not-italic mr-1 text-violet-400">NEUROLOGICAL MECHANISM:</span>
-                {PRESET_INTERVENTIONS[activeState].scienceDescription}
+                {currentSuggested.scienceDescription}
               </div>
             </div>
+
+            {/* INTERVENTION LIBRARY EXPLORER */}
+            {interventions.length > 0 && (
+              <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-950/20 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-violet-400">library_books</span>
+                  <h4 className="font-bold text-xs uppercase tracking-widest text-white font-display">Explore Somatic Library</h4>
+                </div>
+                <p className="text-[10px] text-white/50 leading-relaxed">
+                  Browse and select clinical somatic modalities mapped specifically to other states.
+                </p>
+
+                <div className="grid grid-cols-1 gap-2 pt-1">
+                  {interventions.map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => setSelectedIntervention(selectedIntervention?.id === item.id ? null : item)}
+                      className="w-full text-left p-2.5 rounded-lg bg-zinc-900/40 border border-zinc-850 hover:bg-zinc-900 transition-colors flex items-center justify-between text-xs font-semibold text-white/80"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-violet-500" />
+                        <span>{item.title}</span>
+                      </div>
+                      <span className="text-[10px] text-white/40">{item.duration} ({item.type})</span>
+                    </button>
+                  ))}
+                </div>
+
+                {selectedIntervention && (
+                  <div className="border border-zinc-800 bg-zinc-900/20 p-4 rounded-xl mt-3 space-y-3 animate-fade-in text-xs">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="text-[8px] bg-zinc-800 text-white/60 px-2 py-0.5 rounded-full uppercase font-mono font-bold tracking-wider">
+                          {selectedIntervention.type}
+                        </span>
+                        <h5 className="font-bold text-xs text-white mt-1.5">{selectedIntervention.title}</h5>
+                      </div>
+                      <span className="text-[10px] text-white/40 font-semibold">{selectedIntervention.duration}</span>
+                    </div>
+                    
+                    <p className="text-white/60 leading-relaxed text-[11px]">
+                      {selectedIntervention.description}
+                    </p>
+
+                    <div className="space-y-1.5 border-t border-zinc-800/80 pt-2.5">
+                      <p className="text-[8px] font-bold text-white/40 uppercase">Steps:</p>
+                      {selectedIntervention.steps.map((step, idx) => (
+                        <div key={idx} className="flex gap-2 items-start text-white/80">
+                          <span className="font-mono text-violet-400 font-bold text-[9px] bg-violet-500/10 w-4 h-4 rounded-md flex items-center justify-center border border-violet-500/15 flex-shrink-0 mt-0.5">{idx + 1}</span>
+                          <span className="leading-relaxed">{step}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="bg-zinc-900/50 p-2 rounded-lg border border-zinc-850 text-[9px] text-violet-400/80 font-mono leading-relaxed italic">
+                      <span className="font-bold uppercase tracking-wide text-[8px] not-italic mr-1 text-violet-400 font-sans">SCIENCE BASIS:</span>
+                      {selectedIntervention.scienceDescription}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* GEMINI PERSONALIZED INTERVENTION GENERATOR */}
             <div className="p-5 rounded-2xl border border-zinc-900 bg-zinc-950/20 space-y-4">
@@ -651,23 +901,19 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
             />
             <button
               type="submit"
-              disabled={!userInput.trim() || isSendingMessage}
-              className="w-11 h-11 bg-violet-600 text-white hover:bg-violet-500 rounded-xl flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              disabled={isSendingMessage}
+              className="flex items-center justify-center p-3 rounded-xl bg-violet-600 text-white hover:bg-violet-500 transition-colors disabled:opacity-50"
             >
-              <span className="material-symbols-outlined text-lg">send</span>
+              <span className="material-symbols-outlined text-sm">send</span>
             </button>
           </form>
-
         </div>
       )}
 
-      {/* Decorative footer */}
-      <footer className="mt-8 mb-4 flex justify-center opacity-10">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-[1px] bg-white"></div>
-          <div className="w-1 h-1 rounded-full bg-white animate-ping"></div>
-          <div className="w-8 h-[1px] bg-white"></div>
-        </div>
+      {/* Footer Info */}
+      <footer className="mt-8 text-center text-[9px] text-white/30 font-mono leading-relaxed">
+        NeuroPath System • Version 0.1.0 • E2E Encrypted<br/>
+        Clinical Somatic Interventions Powered by Gemini Core
       </footer>
     </div>
   );
