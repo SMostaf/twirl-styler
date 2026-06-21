@@ -5,6 +5,7 @@ import { generateNeuroIntervention, generateCoachMessage } from '../geminiServic
 interface Props {
   user: UserProfile;
   onReset: () => void;
+  onSwitchToClinician?: () => void;
 }
 
 // Preset interventions as static fallback if interventions.json cannot be fetched
@@ -294,13 +295,26 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
           Watch Sync: Active
         </div>
 
-        <button 
-          onClick={onReset}
-          className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white/40 hover:text-white transition-colors"
-          title="Recalibrate profile"
-        >
-          <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
-        </button>
+        <div className="flex items-center gap-1.5">
+          {onSwitchToClinician && (
+            <button 
+              onClick={onSwitchToClinician}
+              className="flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-[10px] text-violet-400 font-bold hover:bg-zinc-800 transition-colors"
+              title="Switch to Clinician Portal"
+            >
+              <span>🩺</span>
+              <span>Portal</span>
+            </button>
+          )}
+
+          <button 
+            onClick={onReset}
+            className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white/40 hover:text-white transition-colors"
+            title="Recalibrate profile"
+          >
+            <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
+          </button>
+        </div>
       </header>
 
       {/* PRIVACY-FIRST & TRAUMA-INFORMED BANNER */}

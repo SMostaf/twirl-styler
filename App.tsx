@@ -4,6 +4,7 @@ import OnboardingSymptoms from './views/OnboardingSymptoms';
 import OnboardingDevices from './views/OnboardingDevices';
 import OnboardingProfile from './views/OnboardingProfile';
 import Dashboard from './views/Dashboard';
+import ClinicianDashboard from './views/ClinicianDashboard';
 
 const App: React.FC = () => {
   const [view, setView] = useState<AppView>('ONBOARDING_SYMPTOMS');
@@ -88,6 +89,13 @@ const App: React.FC = () => {
           <Dashboard 
             user={user}
             onReset={handleReset}
+            onSwitchToClinician={() => setView('CLINICIAN_DASHBOARD')}
+          />
+        );
+      case 'CLINICIAN_DASHBOARD':
+        return (
+          <ClinicianDashboard 
+            onSwitchToPatient={() => setView('DASHBOARD')}
           />
         );
       default:
@@ -95,8 +103,10 @@ const App: React.FC = () => {
     }
   };
 
+  const isClinician = view === 'CLINICIAN_DASHBOARD';
+
   return (
-    <div className="min-h-screen max-w-md mx-auto bg-black text-white relative flex flex-col overflow-x-hidden border-x border-white/5">
+    <div className={`min-h-screen ${isClinician ? 'max-w-5xl' : 'max-w-md'} w-full mx-auto bg-black text-white relative flex flex-col overflow-x-hidden border-x border-white/5 transition-all duration-300`}>
       {renderView()}
     </div>
   );

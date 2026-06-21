@@ -1,4 +1,4 @@
-export type AppView = 'ONBOARDING_SYMPTOMS' | 'ONBOARDING_DEVICES' | 'ONBOARDING_PROFILE' | 'DASHBOARD';
+export type AppView = 'ONBOARDING_SYMPTOMS' | 'ONBOARDING_DEVICES' | 'ONBOARDING_PROFILE' | 'DASHBOARD' | 'CLINICIAN_DASHBOARD';
 
 export type NervousSystemState = 'VENTRAL_VAGAL' | 'SYMPATHETIC' | 'DORSAL_VAGAL';
 
@@ -10,6 +10,21 @@ export interface UserProfile {
   goals: string[];
   baselineState: NervousSystemState;
   bio: string;
+}
+
+export interface Patient {
+  id: string;
+  name: string;
+  icon: string;
+  currentState: NervousSystemState;
+  vagalToneScore: number;
+  biometrics: BiometricLog;
+  prescribedProtocolIds: string[];
+  historicalMetrics: {
+    sevenDays: { dates: string[]; hrv: number[]; sleepDuration: number[]; rhr: number[] };
+    thirtyDays: { dates: string[]; hrv: number[]; sleepDuration: number[]; rhr: number[] };
+    ninetyDays: { dates: string[]; hrv: number[]; sleepDuration: number[]; rhr: number[] };
+  };
 }
 
 export interface SleepMetrics {
