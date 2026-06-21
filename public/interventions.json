@@ -1,124 +1,894 @@
-[
-  {
-    "id": "coherent-breathing",
-    "title": "Resonant Coherent Breathing",
-    "type": "breathwork",
-    "duration": "10 min",
-    "description": "Breathe at a rate of 5.5 to 6 breaths per minute to maximize heart rate variability and optimize autonomic nervous system balance.",
-    "steps": [
-      "Sit in an upright, relaxed posture with your spine straight and feet flat on the floor.",
-      "Inhale gently through your nose for 5.0 seconds, letting your abdomen expand naturally.",
-      "Without pausing, exhale slowly and smoothly through your mouth or nose for 5.0 seconds.",
-      "Maintain this continuous, rhythmic cycle for the duration of the practice.",
-      "Focus your attention on the smooth transitions between the inhalation and exhalation."
-    ],
-    "scienceDescription": "Engages respiratory sinus arrhythmia (RSA) and baroreflex loops to maximize HRV amplitude. Promotes high parasympathetic vagal tone and restores prefrontal connectivity."
+{
+  "meta": {
+    "name": "NeuroPath Intervention Library",
+    "version": "1.0.0",
+    "description": "Curated evidence-based interventions for trauma recovery, mapped to biometric markers measurable via Apple Watch/HealthKit and voice analysis.",
+    "lastUpdated": "2026-06-17",
+    "sourceDocument": "/home/team/shared/RESEARCH.md",
+    "totalInterventions": 18
   },
-  {
-    "id": "physiological-sigh",
-    "title": "The Physiological Sigh",
-    "type": "breathwork",
-    "duration": "2 min",
-    "description": "A rapid autonomic reset to discharge accumulated carbon dioxide, slow heart rate, and deactivate acute sympathetic stress responses.",
-    "steps": [
-      "Inhale deeply through your nose, expanding your chest.",
-      "At the very peak of the inhalation, take a sharp, quick secondary sip of air to fully expand your lungs' alveoli.",
-      "Exhale fully through your mouth with a slow, relaxed, long sighing sound ('ahhh').",
-      "Repeat this cycle of double-inhale followed by an extended sigh 3 to 5 times.",
-      "Pause and observe the immediate reduction in physical muscle tension."
-    ],
-    "scienceDescription": "Double inhalation opens collapsed alveoli, increasing surface area for rapid CO2 removal. The subsequent extended exhale activates the vagal brake, triggering immediate parasympathetic dominance."
-  },
-  {
-    "id": "box-breathing",
-    "title": "Tactical Box Breathing",
-    "type": "breathwork",
-    "duration": "5 min",
-    "description": "An equal-ratio breathing technique used by elite practitioners to stabilize arousal, reduce hypervigilance, and restore cognitive clarity.",
-    "steps": [
-      "Exhale all air from your lungs.",
-      "Inhale slowly through your nose for a count of 4.",
-      "Hold your breath at the top for a count of 4, keeping your airway and throat relaxed.",
-      "Exhale smoothly through your mouth for a count of 4.",
-      "Hold your lungs empty at the bottom for a count of 4.",
-      "Repeat the complete cycle for 4-5 rounds or until your system feels grounded."
-    ],
-    "scienceDescription": "The balanced ratios of inhale, hold, exhale, hold act as an autonomic modulator, preventing runaway sympathetic hyperarousal while maintaining active, focused arousal."
-  },
-  {
-    "id": "grounding-54321",
-    "title": "Trauma-Informed 5-4-3-2-1 Sensory Grounding",
-    "type": "somatic",
-    "duration": "5 min",
-    "description": "Reorient your system to the safety of the current environment and present moment when experiencing hyperarousal, flashbacks, or panic.",
-    "steps": [
-      "Pause and take one slow, grounding breath.",
-      "Look around you and name 5 distinct things you can see (e.g., a pen, a spot on the wall, a tree outside).",
-      "Notice your physical body and touch 4 things you can feel (e.g., the texture of your pants, the cold table, the chair under you).",
-      "Listen closely and identify 3 sounds you can hear (e.g., a distant car, hum of a fan, birds chirping).",
-      "Focus on your senses and identify 2 things you can smell or recall smelling.",
-      "Bring awareness to your mouth and name 1 thing you can taste, or notice the current neutral state of your palate."
-    ],
-    "scienceDescription": "Recruits cortical processing and sensory thalamic pathways to redirect neural resources away from the hyperactive amygdala. Signals environmental safety to the brainstem to break hypervigilant threat loops."
-  },
-  {
-    "id": "dorsal-mobilization",
-    "title": "Somatic Orienting & Freeze Mobilization",
-    "type": "somatic",
-    "duration": "4 min",
-    "description": "Gently cue safety to your brainstem to lift your system out of a shut-down, flatlined, or dissociated Dorsal Vagal state without triggering anxiety.",
-    "steps": [
-      "Slowly let your eyes scan the room. Notice and name out loud 3 objects that are blue, then 3 objects that are green.",
-      "Gently rub your hands together, generating physical heat and friction. Press your warm palms to your cheeks.",
-      "Wrap your arms around your torso, squeezing firmly to feel your body's physical boundaries in space.",
-      "Slowly press your feet flat into the floor, feeling the physical support and resistance of the ground beneath you.",
-      "Gently roll your shoulders back and take a shallow, comfortable breath, letting out a soft hum on the exhale."
-    ],
-    "scienceDescription": "Engages visual and somatosensory orienting networks to communicate current ambient safety. Activates gentle sympathetic mobilization to lift the system out of the metabolic conservation mode of Dorsal freeze."
-  },
-  {
-    "id": "progressive-muscle-relaxation",
-    "title": "Jacobson Progressive Muscle Relaxation (PMR)",
-    "type": "somatic",
-    "duration": "12 min",
-    "description": "A systematic somatic exercise of tensing and releasing key muscle groups to cultivate deep interoceptive awareness and somatic calm.",
-    "steps": [
-      "Lie down flat or sit comfortably, closing your eyes if it feels safe to do so.",
-      "Focus on your feet. Inhale, curl your toes down, and squeeze them tightly for 5 seconds.",
-      "Exhale and release all tension instantly, letting your feet relax and feel heavy. Pause for 10 seconds.",
-      "Move up to your calves, thighs, glutes, abdomen, chest, shoulders, hands, and facial muscles.",
-      "At each muscle group, tense for 5 seconds, then release completely for 10 seconds, feeling the deep contrast of relaxation."
-    ],
-    "scienceDescription": "Physically tensing muscles triggers a reflex relaxation response upon release. Exercises somatic interoceptive pathways, decreasing allostatic muscle shielding and lowering resting heart rate."
-  },
-  {
-    "id": "sleep-consolidation",
-    "title": "Circadian Sleep Consolidation",
-    "type": "sleep",
-    "duration": "Consistent Daily Practice",
-    "description": "Align your bedtime routine to improve sleep efficiency and consolidate deep sleep architecture, crucial for traumatic memory integration.",
-    "steps": [
-      "Maintain a strictly fixed wake time every morning, regardless of how much you slept the night before.",
-      "Calculate your actual sleep duration from your Apple Watch. Limit your time in bed to that duration plus 30 minutes.",
-      "Avoid blue light exposure from screens for at least 60 minutes before bedtime.",
-      "Keep the bedroom cool (optimal: 18°C / 65°F) to mimic and support the natural nocturnal core temperature drop.",
-      "If you are unable to fall asleep after 20 minutes in bed, get up, go to another dimly lit room, and do a calm somatic grounding exercise until tired."
-    ],
-    "scienceDescription": "Restores circadian amplitude and maximizes homeostatic sleep drive. Consolidates sleep stages, ensuring optimal deep sleep (Slow Wave Sleep / N3) for glymphatic clearance and REM sleep for fear extinction."
-  },
-  {
-    "id": "nighttime-hrv-biofeedback",
-    "title": "Pre-Bed HRV Resonance Biofeedback",
-    "type": "sleep",
-    "duration": "10 min",
-    "description": "A deliberate pre-bed biofeedback breathing protocol to trigger a strong parasympathetic surge and reduce nocturnal hyperarousal.",
-    "steps": [
-      "Sit on the edge of your bed in a comfortable, relaxed upright position.",
-      "Begin slow, paced breathing at 6 breaths per minute (5-second inhale, 5-second exhale).",
-      "Imagine the breath flowing directly into and out of your heart center, feeling the physical warmth of each breath.",
-      "Continue for 10 minutes, letting go of any cognitive planning or analytical thinking.",
-      "Lie down immediately after completion, carrying the physical sense of heavy, warm calm into your sleep."
-    ],
-    "scienceDescription": "Maximizes respiratory sinus arrhythmia and overnight HRV recovery (SDNN delta), down-regulating sympathetic tone to reduce sleep onset latency and minimize nighttime awakenings."
-  }
-]
+  "categories": [
+    {
+      "id": "breathwork",
+      "name": "Breathwork Interventions",
+      "description": "Breathing techniques that modulate autonomic nervous system state via respiratory sinus arrhythmia and vagal nerve activation.",
+      "interventions": [
+        {
+          "id": "coherent-breathing",
+          "name": "Coherent Breathing",
+          "aliases": ["Resonance Breathing", "Heart Rate Variability Breathing", "0.1 Hz Breathing"],
+          "targetMarkers": ["heartRateVariabilitySDNN", "restingHeartRate", "respiratoryRate", "heartRate"],
+          "primaryMarker": "heartRateVariabilitySDNN",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Lehrer et al., 2020", "Gevirtz, 2013"],
+          "biologicalMechanism": "Paced breathing at ~0.1 Hz (6 breaths/min) aligns with the natural resonance frequency of the baroreflex system. This maximizes respiratory sinus arrhythmia amplitude, stimulating vagal afferents to the nucleus tractus solitarii, which increases parasympathetic outflow and raises HRV. Regular practice enhances baroreflex gain and resets autonomic balance toward parasympathetic dominance.",
+          "instructions": {
+            "setup": [
+              "Find a comfortable seated or lying position with your spine straight.",
+              "Rest your hands in your lap or at your sides.",
+              "If using Apple Watch, ensure heart rate monitoring is active for biofeedback."
+            ],
+            "steps": [
+              "Inhale slowly through your nose for 5 seconds.",
+              "Exhale slowly through your nose or mouth for 5 seconds.",
+              "Maintain this 5-in, 5-out cycle (6 breaths per minute) without pauses between breaths.",
+              "Focus on the sensation of air moving in and out of your lungs.",
+              "If your mind wanders, gently bring attention back to the breath rhythm."
+            ],
+            "duration": {
+              "minimum": "5 minutes per session",
+              "recommended": "10–20 minutes per session",
+              "frequency": "1–2 times daily",
+              "optimalTimes": ["Morning (upon waking)", "Evening (before bed)", "During acute stress episodes"]
+            }
+          },
+          "precautions": [
+            "If you feel lightheaded, reduce to 4 seconds in / 4 seconds out (7.5 breaths/min).",
+            "Not recommended during active dissociation — use grounding exercises first.",
+            "Consult a healthcare provider if you have cardiovascular conditions."
+          ],
+          "aiPersonalization": {
+            "resonanceFrequencyDetection": "Guide user through breathing at 6.5, 6.0, 5.5, 5.0, 4.5 bpm for 2 min each. Measure HRV amplitude at each rate. Set pacer to rate with maximum HRV amplitude.",
+            "adaptationRules": [
+              "If morning HRV < 25 ms: extend session to 20 min",
+              "If user reports lightheadedness: decrease inhale/exhale ratio to 4/4",
+              "If HRV trending upward over 7 days: reduce frequency to maintenance (1×/day, 5 min)"
+            ]
+          }
+        },
+        {
+          "id": "box-breathing",
+          "name": "Box Breathing",
+          "aliases": ["Square Breathing", "4-4-4-4 Breathing", "Tactical Breathing"],
+          "targetMarkers": ["heartRate", "speechRate", "respiratoryRate", "voiceF0"],
+          "primaryMarker": "heartRate",
+          "evidenceLevel": "moderate",
+          "evidenceSources": ["Used by US Navy SEALs and military trauma programs", "CBT-I protocols"],
+          "biologicalMechanism": "Equal-duration breath phases (inhale, hold, exhale, hold) create a predictable autonomic rhythm. The breath holds increase CO₂ concentration, which activates chemoreceptor-mediated vagal feedback. The extended exhale phase stimulates the baroreflex, reducing heart rate and sympathetic outflow. The structured pattern provides cognitive anchoring during hyperarousal.",
+          "instructions": {
+            "setup": [
+              "Sit upright in a comfortable position with both feet on the floor.",
+              "Close your eyes or maintain a soft gaze downward.",
+              "Set a timer for the desired session length."
+            ],
+            "steps": [
+              "Inhale slowly through your nose for 4 seconds.",
+              "Hold your breath for 4 seconds.",
+              "Exhale slowly through your mouth for 4 seconds.",
+              "Hold your breath (lungs empty) for 4 seconds.",
+              "Repeat this 4-count cycle continuously."
+            ],
+            "duration": {
+              "minimum": "2 minutes per session (8–10 cycles)",
+              "recommended": "5 minutes per session (20–25 cycles)",
+              "frequency": "As needed (up to 5× daily during acute stress)",
+              "optimalTimes": ["Before stressful events", "During panic/anxiety episodes", "Before sleep"]
+            }
+          },
+          "precautions": [
+            "If breath holds cause anxiety, eliminate the holds and use 4-4 breathing only.",
+            "Start with shorter holds (2-2-2-2) if 4 seconds feels too long.",
+            "Trauma-sensitive: offer option to keep eyes open."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "If user heart rate > 100 bpm: reduce inhale to 3 seconds, exhale to 5 seconds (3-1-5-1)",
+              "If user reports panic during holds: switch to coherent breathing",
+              "Progress: increase counts to 5-5-5-5 as tolerance builds"
+            ]
+          }
+        },
+        {
+          "id": "extended-exhale",
+          "name": "Extended Exhale Breathing",
+          "aliases": ["4-7-8 Breathing", "Relaxing Breath", "Vagal Breathing"],
+          "targetMarkers": ["heartRateVariabilitySDNN", "heartRate", "voiceF0", "voiceJitter"],
+          "primaryMarker": "heartRate",
+          "evidenceLevel": "moderate",
+          "evidenceSources": ["Dr. Andrew Weil protocols", "Polyvagal-informed breathwork"],
+          "biologicalMechanism": "Prolonged exhalation activates the vagus nerve via increased intrathoracic pressure and baroreceptor stimulation. The extended exhale phase (twice the inhale duration) maximizes parasympathetic outflow because heart rate deceleration occurs during exhalation (respiratory sinus arrhythmia). This triggers the ventral vagal ('social engagement') pathway, promoting a state of calm alertness.",
+          "instructions": {
+            "setup": [
+              "Sit or lie down in a comfortable position.",
+              "Place the tip of your tongue against the ridge behind your upper front teeth.",
+              "Exhale completely through your mouth, making a 'whoosh' sound."
+            ],
+            "steps": [
+              "Close your mouth and inhale quietly through your nose for 4 seconds.",
+              "Hold your breath for 7 seconds.",
+              "Exhale completely through your mouth, making a 'whoosh' sound, for 8 seconds.",
+              "This completes one cycle. Repeat for 4–8 cycles."
+            ]
+          },
+          "duration": {
+            "minimum": "2 minutes (4 cycles)",
+            "recommended": "5 minutes (8 cycles)",
+            "frequency": "2× daily, plus as needed for acute stress",
+            "optimalTimes": ["Before bed (ideal for sleep onset)", "Midday wind-down", "After triggering events"]
+          },
+          "precautions": [
+            "The 7-second hold may be too long for some — reduce to 4-5-6 pattern initially.",
+            "If you feel overstimulated, skip the hold and use 3-6 (inhale 3, exhale 6).",
+            "Not for use while driving or operating machinery."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "If sleep onset latency > 30 min: recommend 4-7-8 in bed, lights dimmed",
+              "If user has asthma or COPD: reduce exhale to 6 seconds, skip holds",
+              "Progress to 5-9-10 as tolerance builds"
+            ]
+          }
+        },
+        {
+          "id": "slow-paced-breathing",
+          "name": "Slow-Paced Breathing",
+          "aliases": ["Paced Breathing", "6 Breaths Per Minute"],
+          "targetMarkers": ["heartRateVariabilitySDNN", "restingHeartRate", "bloodPressure"],
+          "primaryMarker": "heartRateVariabilitySDNN",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Lehrer et al., 2014", "Gevirtz, 2013"],
+          "biologicalMechanism": "Breathing at 6 breaths per minute (~0.1 Hz) optimizes the baroreflex resonance frequency, causing heart rate and blood pressure oscillations to synchronize. This entrainment maximizes vagal afferent signal strength to the brainstem, increasing parasympathetic tone and improving autonomic flexibility. The effect is measurable within 2–5 minutes of onset.",
+          "instructions": {
+            "setup": [
+              "Find a quiet space where you won't be interrupted.",
+              "Sit comfortably with your back supported.",
+              "Open the NeuroPath breathing pacer (visual or haptic)."
+            ],
+            "steps": [
+              "Follow the pacer: inhale as the bar rises (5 seconds), exhale as it falls (5 seconds).",
+              "Breathe gently — do not force or overfill your lungs.",
+              "Let the exhale be passive; do not push air out.",
+              "If using HRV biofeedback, watch the real-time HRV waveform and try to maximize its amplitude.",
+              "Continue for the duration of the session."
+            ],
+            "duration": {
+              "minimum": "5 minutes per session",
+              "recommended": "20 minutes per session (optimal biofeedback effect)",
+              "frequency": "1× daily, preferably same time each day",
+              "optimalTimes": ["Morning (standardizes daily baseline)", "Pre-bed (improves overnight HRV recovery)"]
+            }
+          },
+          "precautions": [
+            "Users with hypertension should monitor blood pressure initially.",
+            "May cause mild lightheadedness in the first few sessions — this typically resolves.",
+            "Avoid within 30 minutes of heavy meals (digestion affects HRV)."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "If user can't follow 5-5 rhythm: start at 3-3 (10 bpm) and progress weekly",
+              "If HRV amplitude plateaus: introduce brief resistance (inhale through narrow straw)",
+              "Session time adjusted based on compliance data — minimum effective dose model"
+            ]
+          }
+        },
+        {
+          "id": "buteyko-breathing",
+          "name": "Buteyko Reduced-Volume Breathing",
+          "aliases": ["Buteyko Method", "Carbon Dioxide Tolerance Training"],
+          "targetMarkers": ["respiratoryRate", "heartRateVariabilitySDNN", "restingHeartRate"],
+          "primaryMarker": "respiratoryRate",
+          "evidenceLevel": "emerging",
+          "evidenceSources": ["Buteyko, 1950s", "Emerging research for trauma/anxiety"],
+          "biologicalMechanism": "Chronic over-breathing (hyperventilation) lowers CO₂ levels, causing cerebral vasoconstriction and maintaining sympathetic dominance. Buteyko breathing retrains the respiratory center to tolerate higher CO₂ levels by progressively reducing breath volume. This normalizes CO₂ chemoreceptor sensitivity, shifts autonomic balance toward parasympathetic, and reduces baseline respiratory rate.",
+          "instructions": {
+            "setup": [
+              "Sit upright in a chair with good posture.",
+              "Breathe normally for 1 minute to establish baseline.",
+              "Have a timer ready."
+            ],
+            "steps": [
+              "Take a small, gentle breath in through your nose.",
+              "Exhale gently through your nose — do not exhale fully.",
+              "Pinch your nose with your fingers to hold your breath.",
+              "Walk in place or hold still until you feel a moderate need to breathe (not discomfort).",
+              "Release your nose and breathe in through it gently.",
+              "Your next breath should be small and controlled — no gasping.",
+              "Rest for 30–60 seconds with normal nasal breathing.",
+              "Repeat for 5–10 rounds."
+            ],
+            "duration": {
+              "minimum": "5 minutes (5 rounds)",
+              "recommended": "10–15 minutes per session",
+              "frequency": "1–2× daily",
+              "optimalTimes": ["Morning before eating", "Afternoon energy slump"]
+            }
+          },
+          "precautions": [
+            "Contraindicated in pregnancy, epilepsy, and severe cardiovascular disease.",
+            "If you experience significant discomfort or panic, stop and return to normal breathing.",
+            "Start gently — the goal is a 'moderate air hunger,' not distress."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Control pause (CP) test: measure breath hold time after normal exhale",
+              "If CP < 20 seconds: start with very gentle reduction; focus on nose breathing first",
+              "If CP > 40 seconds: progress to advanced reduction techniques",
+              "Track CP improvement as objective biomarker"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "somatic",
+      "name": "Somatic Practices",
+      "description": "Body-based interventions that release trauma from the nervous system by building interoceptive awareness and completing truncated stress responses.",
+      "interventions": [
+        {
+          "id": "body-scan-meditation",
+          "name": "Body Scan Meditation",
+          "aliases": ["Mindfulness Body Scan", "Interoceptive Training"],
+          "targetMarkers": ["heartRateVariabilitySDNN", "voiceHNR", "sleepOnsetLatency", "heartRate"],
+          "primaryMarker": "heartRateVariabilitySDNN",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Kabat-Zinn, 1990", "van der Kolk et al., 2014"],
+          "biologicalMechanism": "Systematic attention to body sensations activates the insula and anterior cingulate cortex — key interoceptive networks. This builds the capacity to accurately perceive internal body states, which is impaired in trauma (alexithymia). Enhanced interoception improves vagal regulation by strengthening the neural feedback loop between body state perception and autonomic adjustment.",
+          "instructions": {
+            "setup": [
+              "Lie down on your back with arms at your sides, or sit comfortably.",
+              "Close your eyes or maintain a soft gaze.",
+              "Take 3 deep breaths to arrive in the present moment."
+            ],
+            "steps": [
+              "Bring attention to your feet — notice any sensations (warmth, tingling, pressure).",
+              "Slowly move attention up to your ankles, calves, and knees.",
+              "Continue scanning through thighs, hips, lower back, and abdomen.",
+              "Notice your belly rising and falling with each breath.",
+              "Move to chest, upper back, shoulders, and arms (down to fingertips).",
+              "Scan neck, jaw, face, and scalp — notice areas of tension.",
+              "Finally, take in the body as a whole space of sensation.",
+              "Rest here for 1–2 minutes before gently opening your eyes."
+            ],
+            "duration": {
+              "minimum": "5 minutes",
+              "recommended": "15–30 minutes",
+              "frequency": "1× daily",
+              "optimalTimes": ["Morning (gentle start to day)", "Evening (improves sleep onset)"]
+            }
+          },
+          "precautions": [
+            "If scanning triggers distress (common in trauma), keep eyes open and move attention to the room.",
+            "If body parts feel numb or 'not there' (dissociation), start with the body part that feels most present.",
+            "Trauma-sensitive: offer option to say 'noticing' silently instead of staying with difficult sensations."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "If user reports dissociation: shorten scan to 3-minute 'top-down' version (head to toes, faster pace)",
+              "If user has alexithymia: start with 2-point scan (belly + chest only), add regions weekly",
+              "Voice biomarker analysis post-session: improved HNR indicates relaxation response"
+            ]
+          }
+        },
+        {
+          "id": "grounding-5-4-3-2-1",
+          "name": "5-4-3-2-1 Grounding Exercise",
+          "aliases": ["Sensory Grounding", "Orienting Exercise", "Present-Moment Anchoring"],
+          "targetMarkers": ["heartRate", "speechRate", "voiceF0", "heartRateVariabilitySDNN"],
+          "primaryMarker": "heartRate",
+          "evidenceLevel": "moderate",
+          "evidenceSources": ["Trauma-informed therapy standards", "Polyvagal Theory (Porges, 2007)"],
+          "biologicalMechanism": "The 5-4-3-2-1 exercise engages the orienting response — an evolutionarily ancient circuit mediated by the superior colliculus and dorsal vagal system. Deliberately scanning the environment for sensory input shifts neural activity from the default mode network (rumination, threat simulation) to sensory processing networks. This activates the ventral vagal ('social engagement') pathway, reducing heart rate and breaking dissociative or hyperarousal cycles.",
+          "instructions": {
+            "setup": [
+              "Pause wherever you are — you can do this with eyes open or closed.",
+              "Take one slow breath to settle.",
+              "If possible, name what you notice out loud (uses voice → further vagal activation)."
+            ],
+            "steps": [
+              "ACKNOWLEDGE 5 things you SEE — scan the room and name them silently or aloud.",
+              "ACKNOWLEDGE 4 things you CAN TOUCH — feel their texture, temperature, weight.",
+              "ACKNOWLEDGE 3 things you HEAR — external sounds near and far.",
+              "ACKNOWLEDGE 2 things you CAN SMELL — or 2 things you like the smell of.",
+              "ACKNOWLEDGE 1 thing you CAN TASTE — or notice the sensation in your mouth.",
+              "Take one final breath and notice how your body feels now."
+            ],
+            "duration": {
+              "minimum": "1–2 minutes (one round)",
+              "recommended": "3–5 minutes (2–3 rounds)",
+              "frequency": "As needed (immediate stress reduction)",
+              "optimalTimes": ["During flashbacks or panic", "When dissociating", "Before difficult conversations"]
+            }
+          },
+          "precautions": [
+            "If one sense is triggering (e.g., sounds are overwhelming), skip that sense.",
+            "If speaking is difficult, do the exercise silently.",
+            "After grounding, use a centering breathwork practice to consolidate the regulated state."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "If HR > 100 bpm: recommend this exercise as first-line acute intervention",
+              "If voice F0 > 15% above baseline: prompt with 'Your voice sounds tense — try 5-4-3-2-1'",
+              "Log which senses are most effective for each user (personalized sense ordering)"
+            ]
+          }
+        },
+        {
+          "id": "progressive-muscle-relaxation",
+          "name": "Progressive Muscle Relaxation (PMR)",
+          "aliases": ["Jacobson Relaxation", "Systematic Muscle Relaxation"],
+          "targetMarkers": ["heartRate", "heartRateVariabilitySDNN", "sleepOnsetLatency", "voiceJitter"],
+          "primaryMarker": "heartRate",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Jacobson, 1938", "Multiple meta-analyses for anxiety"],
+          "biologicalMechanism": "Cyclic tension and release of muscle groups creates a predictable somatic signal that the brain interprets as 'safety.' The release phase triggers a parasympathetic rebound via muscle spindle afferents to the brainstem. This reduces gamma motor neuron activity (muscle tone), which in turn lowers hypothalamic-pituitary-adrenal (HPA) axis output. The contrast between tension and relaxation sharpens interoceptive discrimination.",
+          "instructions": {
+            "setup": [
+              "Lie down or sit in a comfortable chair.",
+              "Remove glasses, loosen tight clothing.",
+              "Take 3 slow breaths."
+            ],
+            "steps": [
+              "TENSE your feet and toes as hard as you can — hold for 5 seconds.",
+              "RELEASE suddenly — notice the wave of relaxation for 10–15 seconds.",
+              "TENSE your calves — hold 5 seconds, release, notice 10–15 seconds.",
+              "Continue through: thighs → glutes → lower back → abdomen → chest",
+              "TENSE hands (make fists) → arms → shoulders (shrug to ears) → neck",
+              "TENSE face (scrunch everything toward center) → release",
+              "Finish: scan body for residual tension, breathe into any remaining tight spots."
+            ],
+            "duration": {
+              "minimum": "5 minutes (abbreviated version: hands + face only)",
+              "recommended": "15–20 minutes (full body)",
+              "frequency": "1–2× daily",
+              "optimalTimes": ["Before bed (especially for sleep onset)", "Afternoon wind-down"]
+            }
+          },
+          "precautions": [
+            "If tension triggers trauma responses, use 'body noticing' without active tensing.",
+            "Avoid if you have severe muscle or joint injuries in the target area.",
+            "Some trauma survivors find PMR overstimulating — offer body scan as alternative."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "If user has chronic pain: skip affected areas, focus on safe zones (hands, face)",
+              "If sleep onset latency > 30 min: recommend PMR in bed with 5-min abbreviated version",
+              "Voice jitter improvement post-PMR correlates with relaxation depth"
+            ]
+          }
+        },
+        {
+          "id": "trauma-sensitive-yoga",
+          "name": "Trauma-Sensitive Gentle Yoga",
+          "aliases": ["TCTSY — Trauma Center Trauma-Sensitive Yoga", "Somatic Yoga"],
+          "targetMarkers": ["heartRateVariabilitySDNN", "sleepDeepPercent", "restingHeartRate", "stepCount"],
+          "primaryMarker": "heartRateVariabilitySDNN",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["van der Kolk et al., 2014", "Emerson & Hopper, 2011"],
+          "biologicalMechanism": "Trauma-sensitive yoga combines gentle movement, breath awareness, and interoceptive attention. Unlike conventional yoga, it emphasizes present-moment body awareness and choice-making (invitations, not commands). This rebuilds the capacity for agency and interoceptive safety that trauma erodes. The movement component stimulates the vagus nerve through gentle stretching of the neck and thoracic regions, while breath-movement coordination enhances RSA.",
+          "instructions": {
+            "setup": [
+              "Create a safe space: dim lights, soft surface (yoga mat or carpet).",
+              "Wear comfortable clothing that doesn't restrict breathing.",
+              "Remind yourself: 'I can stop at any time. This is an invitation, not a command.'"
+            ],
+            "steps": [
+              "SEATED CENTERING (2 min): Sit comfortably, eyes open or closed, hands on thighs.",
+              "CAT-COW (1–2 min): On hands and knees, alternate arching and rounding your spine with breath.",
+              "CHILD'S POSE (1 min): Knees wide, arms forward or alongside body, forehead resting on surface.",
+              "MOUNTAIN POSE (1 min): Standing, feet hip-width, feeling ground beneath you. Arms at sides or heart-center.",
+              "GENTLE SIDE STRETCH (30 sec each side): Standing or seated, reach one arm overhead and lean gently.",
+              "LEG POSE (2 min): Lying on back, knees bent, feet flat. Slowly lower knees side to side.",
+              "FINAL REST (3 min): Lie on back (Savasana), hands at sides, eyes closed or covered."
+            ],
+            "duration": {
+              "minimum": "10 minutes",
+              "recommended": "20–30 minutes",
+              "frequency": "3–5× per week",
+              "optimalTimes": ["Morning (gentle start)", "Afternoon (between work/obligations)"]
+            }
+          },
+          "precautions": [
+            "NEVER: physically adjust the user without explicit consent.",
+            "Offer invitational language: 'If it feels right, you might try...'",
+            "Allow eyes-open practice throughout — closing eyes can trigger flashbacks.",
+            "If a position reproduces trauma body memory, invite the user to stop or modify."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "If resting HR trending down + HRV trending up over 2 weeks: increase session duration",
+              "If step count < 3,000/day: prioritize gentler, floor-based poses",
+              "If user reports dissociation during practice: shorten to 5 min seated movement only"
+            ]
+          }
+        },
+        {
+          "id": "tension-trauma-releasing",
+          "name": "Tension & Trauma Releasing Exercises (TRE)",
+          "aliases": ["TRE", "Neurogenic Tremors", "Shaking Therapy"],
+          "targetMarkers": ["heartRateVariabilitySDNN", "restingHeartRate", "muscleTension"],
+          "primaryMarker": "heartRateVariabilitySDNN",
+          "evidenceLevel": "emerging",
+          "evidenceSources": ["Berceli, 2005", "Porges (Polyvagal reframing of tremor)"],
+          "biologicalMechanism": "TRE activates the natural mammalian self-regulating tremor mechanism. After an intense stress response, mammals (and humans) instinctively shake to discharge residual nervous system activation. TRE induces this tremor through gentle leg fatigue exercises, activating a reflexive neurogenic tremor in the psoas and surrounding muscles. This tremor is believed to reset the autonomic nervous system by completing the truncated motor program of 'fight/flight,' allowing the dorsal vagal system to return to baseline.",
+          "instructions": {
+            "setup": [
+              "Find a quiet, safe space with room to lie on the floor.",
+              "Have a mat, blanket, and pillow available.",
+              "Read through all steps before beginning."
+            ],
+            "steps": [
+              "WARM-UP (3 min): Stand and gently bounce your knees, keeping feet flat.",
+              "LEG FATIGUE (3–5 min): Lie on back, knees bent, feet flat. Lift hips slightly. Pump legs (heel lifts) until mild fatigue in thighs.",
+              "TREMOR INDUCTION: Lower hips to floor. Gently press knees together. Let your legs begin to shake/tremble naturally.",
+              "TREMOR PHASE (5–10 min): Let the tremor spread. Do NOT force it. If it stops, rest. If it returns, allow it.",
+              "INTEGRATION (5 min): When tremor subsides, place hands on belly. Breathe slowly. Gradually bring awareness back to the room."
+            ],
+            "duration": {
+              "minimum": "8 minutes (abbreviated)",
+              "recommended": "15–20 minutes",
+              "frequency": "2–3× per week (not daily — integration time needed)",
+              "optimalTimes": ["Afternoon or early evening (not close to bedtime initially)"]
+            }
+          },
+          "precautions": [
+            "DO NOT practice TRE if you have severe PTSD without professional support.",
+            "If tremor becomes distressing or feels uncontrollable, stop. Pause and ground yourself.",
+            "Some users experience emotional release — have a support person or therapist available.",
+            "Wait at least 48 hours between sessions for nervous system integration.",
+            "Not recommended during pregnancy, acute psychosis, or with seizure disorders."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "If HRV drops during/after TRE: reduce session intensity or skip for 2 weeks",
+              "If resting HR decreases + HRV increases over 1 month of TRE: continue at current frequency",
+              "Log post-TRE voice biomarkers: improved HNR and jitter indicate successful release"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sleep-optimization",
+      "name": "Sleep Optimization Interventions",
+      "description": "Evidence-based sleep hygiene and cognitive-behavioral techniques to repair trauma-related sleep disruption.",
+      "interventions": [
+        {
+          "id": "sleep-consolidation",
+          "name": "Sleep Consolidation (Restricted Time in Bed)",
+          "aliases": ["Sleep Restriction Therapy", "Bed Restriction"],
+          "targetMarkers": ["sleepDeepPercent", "sleepEfficiency", "wakeAfterSleepOnset", "totalSleepTime"],
+          "primaryMarker": "sleepEfficiency",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["CBT-I gold standard", "Edinger et al., 2001"],
+          "biologicalMechanism": "Chronic time in bed beyond sleep need fragments sleep and reduces homeostatic sleep drive. By temporarily restricting time in bed to match actual sleep duration, sleep pressure increases, deepening the early sleep cycles. This consolidates sleep, reduces WASO, and increases slow-wave sleep (deep sleep). The resulting sleep drive restoration improves the glymphatic clearance system, which is critical for trauma recovery.",
+          "instructions": {
+            "setup": [
+              "Track baseline: record actual sleep time for 1 week (use Apple Watch sleep stages).",
+              "Calculate average total sleep time (TST).",
+              "Set initial 'time in bed' window = average TST + 30 minutes (minimum 5.5 hours)."
+            ],
+            "steps": [
+              "Set FIXED WAKE TIME — wake at the same time every day (even weekends).",
+              "Set BEDTIME — count back from your wake time by your prescribed time-in-bed window.",
+              "GO TO BED only at your prescribed bedtime — no earlier, even if tired.",
+              "IF AWAKE in bed > 20 min: get up, do a quiet activity in dim light, return only when sleepy.",
+              "After 1 week, if sleep efficiency > 90%: increase time in bed by 15 minutes.",
+              "If sleep efficiency < 85%: decrease time in bed by 15 minutes."
+            ],
+            "duration": {
+              "recommended": "Continue for 4–8 weeks with weekly adjustments",
+              "frequency": "Nightly",
+              "goal": "Achieve > 90% sleep efficiency with 7–9 hours TST"
+            }
+          },
+          "precautions": [
+            "May cause increased daytime sleepiness initially — avoid driving if severely sleep-deprived.",
+            "Not suitable for bipolar disorder (sleep restriction can trigger mania).",
+            "Not for seizure disorders where sleep deprivation lowers threshold.",
+            "Monitor for excessive daytime sleepiness — adjust window if safety is compromised."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Apple Watch sleep data provides objective TST measurement for window adjustment",
+              "If deep sleep < 15% consistently: increase sleep pressure by reducing window further",
+              "If user compliance is low: start with a 15-min window reduction instead of full restriction",
+              "Automatic weekly titration based on rolling sleep efficiency calculation"
+            ]
+          }
+        },
+        {
+          "id": "stimulus-control",
+          "name": "Stimulus Control Therapy",
+          "aliases": ["Bed-Sleep Reconditioning"],
+          "targetMarkers": ["sleepOnsetLatency", "wakeAfterSleepOnset"],
+          "primaryMarker": "sleepOnsetLatency",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Bootzin, 1972", "CBT-I component"],
+          "biologicalMechanism": "Trauma survivors often associate their bed with hypervigilance, rumination, or nightmare anticipation rather than sleep. Stimulus control breaks this conditioned arousal by consistently pairing bed only with sleep. When the user leaves bed during wakefulness, they extinguish the bed- arousal association. Over 1–3 weeks, the bed becomes a conditioned stimulus for sleep onset, reducing sleep onset latency via classical extinction.",
+          "instructions": {
+            "setup": [
+              "Understand: 'The bed is for sleep and intimacy only — nothing else.'",
+              "Remove screens, work materials, and eating from the bedroom if possible."
+            ],
+            "steps": [
+              "GO TO BED only when you feel sleepy (not just tired).",
+              "IF UNABLE TO SLEEP for ~20 minutes: get out of bed.",
+              "Go to another room and do something quiet and relaxing in dim light (read, listen to calm music).",
+              "Return to bed ONLY when you feel sleepy again.",
+              "If you still can't sleep after returning, repeat the process.",
+              "WAKE UP at the same time every day, regardless of how much you slept.",
+              "NO NAPPING during the day (to maintain sleep drive)."
+            ],
+            "duration": {
+              "minimum": "2 weeks for initial conditioning",
+              "recommended": "4–6 weeks for full effect",
+              "frequency": "Nightly",
+              "goal": "Sleep onset latency < 20 minutes without nighttime wake periods > 20 min"
+            }
+          },
+          "precautions": [
+            "Can feel counterintuitive (leaving bed when you want to sleep) — explain the rationale.",
+            "If user has mobility issues, option to sit in a chair beside the bed instead of leaving the room.",
+            "Not recommended if there's nowhere safe to go in the home environment."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Apple Watch sleep stage data validates both compliance (out-of-bed events) and outcome (SOL change)",
+              "If user fails to leave bed during wakefulness 3×: switch to 'quiet sitting in bed' alternative",
+              "Reward milestones: SOL decreases of 5+ min → positive reinforcement notification"
+            ]
+          }
+        },
+        {
+          "id": "fixed-wake-time",
+          "name": "Fixed Wake Time Protocol",
+          "aliases": ["Circadian Entrainment", "Morning Anchor"],
+          "targetMarkers": ["sleepRegularityIndex", "heartRateVariabilitySDNN", "appleSleepingWristTemperature"],
+          "primaryMarker": "sleepRegularityIndex",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["CBT-I protocols", "Circadian neuroscience"],
+          "biologicalMechanism": "The suprachiasmatic nucleus (SCN) — the brain's master circadian clock — uses light exposure as its primary zeitgeber (time-giver). A fixed wake time with immediate light exposure entrains the SCN to a 24-hour cycle, synchronizing peripheral clocks in the heart, liver, and muscles. This stabilizes the cortisol awakening response, heart rate rhythm, and wrist temperature curve — all disrupted in trauma. Consistent wake time is the single most effective circadian intervention.",
+          "instructions": {
+            "setup": [
+              "Choose a wake time that fits your schedule and commit to it 7 days/week.",
+              "Set an alarm across the room (forcing you to get out of bed).",
+              "Prepare: have your phone or alarm in a different room if possible."
+            ],
+            "steps": [
+              "WAKE at your chosen time every single day — weekends included.",
+              "EXPOSE yourself to bright light within 5 minutes of waking (open curtains, go outside).",
+              "Do NOT hit snooze. Get out of bed immediately.",
+              "Do NOT look at phone/screens for the first 10 minutes (blue light is fine, but content can spike cortisol).",
+              "Consider a sunrise alarm clock for gradual light simulation in winter months.",
+              "Bedtime naturally adjusts after 1–2 weeks as sleep pressure builds consistently."
+            ],
+            "duration": {
+              "minimum": "2 weeks for initial circadian shift",
+              "recommended": "Ongoing (lifestyle change)",
+              "frequency": "Daily",
+              "goal": "Wake time within ±15 min of target, 7 days/week"
+            }
+          },
+          "precautions": [
+            "If user has delayed sleep phase (common in trauma): wake time may need to be set gradually (15 min earlier every 2–3 days).",
+            "If user works night shifts or rotating shifts: adapt protocol to maintain consistent wake time relative to sleep period."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Apple Watch sleep regularity index computed from sleep onset/offset variability over 7 days",
+              "If regularity index < 60%: recommend this as highest-priority intervention",
+              "Track wrist temperature minimum time — aligns wake time to temperature minimum + 2 hours"
+            ]
+          }
+        },
+        {
+          "id": "blue-light-management",
+          "name": "Blue Light & Screen Management",
+          "aliases": ["Digital Curfew", "Circadian Lighting"],
+          "targetMarkers": ["sleepOnsetLatency", "appleSleepingWristTemperature", "sleepDeepPercent"],
+          "primaryMarker": "sleepOnsetLatency",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Sleep medicine standards", "Circadian research"],
+          "biologicalMechanism": "Short-wavelength blue light (~480 nm) suppresses melatonin production by activating melanopsin-containing retinal ganglion cells that project to the SCN. Blue light exposure in the 2–3 hours before bed delays the circadian phase, reduces sleep drive, and lightens sleep architecture. Eliminating blue light before bed allows the natural evening melatonin rise, facilitating faster sleep onset and deeper early sleep cycles.",
+          "instructions": {
+            "setup": [
+              "Set a 'digital curfew' time — ideally 60–90 minutes before target bedtime.",
+              "Enable blue light filters on all devices (Night Shift on Apple, f.lux, etc.).",
+              "If using phone/bedroom screens after curfew: wear blue-blocking glasses (amber lenses)."
+            ],
+            "steps": [
+              "60 MIN BEFORE BED: dim house lights and switch to warm (amber) lighting.",
+              "45 MIN BEFORE BED: stop using all screens (phone, tablet, computer, TV).",
+              "30 MIN BEFORE BED: red or amber nightlight only — no overhead lights.",
+              "15 MIN BEFORE BED: prepare for sleep (brush teeth, change clothes, set room temp).",
+              "0–15 MIN BEFORE BED: wind-down activity (reading physical book, gentle stretches, breathing)."
+            ],
+            "duration": {
+              "recommended": "Ongoing (daily habit)",
+              "frequency": "Every night, 60–90 min before bed",
+              "goal": "Zero screen time in the 30 min before bed; dim lighting for 60 min before bed"
+            }
+          },
+          "precautions": [
+            "Complete screen removal may be unrealistic initially — start with 15 min and increase weekly.",
+            "Audiobooks or podcasts (no screen) are an acceptable alternative to reading.",
+            "Some users need screens for safety/connection — aim for ambient phone use (screen away, audio only)."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Environmental Audio Exposure (HealthKit): detect higher light levels from screen glow patterns?",
+              "If sleep onset latency > 30 min and wrist temperature curve shows delayed phase: prioritize this intervention",
+              "Track compliance via phone screen time API (iOS Screen Time)"
+            ]
+          }
+        },
+        {
+          "id": "nightmare-imagery-rehearsal",
+          "name": "Imagery Rehearsal Therapy (IRT) for Nightmares",
+          "aliases": ["Nightmare Rescripting", "IRT"],
+          "targetMarkers": ["asleepREM", "sleepOnsetLatency", "wakeAfterSleepOnset"],
+          "primaryMarker": "wakeAfterSleepOnset",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Krakow et al., 2001", "PTSD-specific recommendation", "VA/DoD Clinical Practice Guideline"],
+          "biologicalMechanism": "Chronic trauma nightmares represent a failure of fear extinction during REM sleep. The brain replays threat memory without updating it with safety information. IRT uses cognitive rehearsal to rescript the nightmare narrative, changing the outcome from threatening to neutral/empowering. This rehearsal during wakefulness creates a competing memory trace that weakens the original threat association, reducing nightmare frequency and REM fragmentation.",
+          "instructions": {
+            "setup": [
+              "Work with a therapist ideally — this can be distressing without support.",
+              "Choose ONE recurring nightmare to work with (the most distressing or most frequent).",
+              "Write down or voice-record the nightmare in present tense."
+            ],
+            "steps": [
+              "WRITE the nightmare down in detail (can be difficult — go at your own pace).",
+              "IDENTIFY ONE CHANGE: alter the ending, add a helper, give yourself a power, change the outcome.",
+              "RESCRIPT: write/record the new version of the dream with the change incorporated.",
+              "REHEARSE: Practice the new dream imagery for 10–20 minutes daily.",
+              "BEFORE BED: Do a final 5-minute rehearsal of the new dream ending.",
+              "IF NIGHTMARE OCCURS: In the morning, briefly note it, then re-rehearse the rescripted version."
+            ],
+            "duration": {
+              "minimum": "2 weeks for initial effect",
+              "recommended": "6–12 weeks",
+              "frequency": "Daily rehearsal (10–20 min) + pre-bed (5 min)",
+              "goal": "50% reduction in nightmare frequency (typically achieved in 4–8 weeks)"
+            }
+          },
+          "precautions": [
+            "May temporarily increase nightmare frequency or distress — ideal with therapist support.",
+            "Not recommended during acute trauma crisis or active substance withdrawal.",
+            "If nightmares are of recent trauma (<3 months), wait before starting IRT.",
+            "Discontinue if distress exceeds benefit — alternative: lucid dreaming therapy or prazosin (medication)."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Apple Watch detects nightmare events via HR spike + movement + sudden awakening pattern",
+              "Track WASO and REM continuity as objective outcome measures",
+              "If nightmare frequency not decreasing after 4 weeks: suggest therapist referral",
+              "Voice journaling option: user records dream orally → AI transcribes and aids rescripting"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "hrv-biofeedback-protocols",
+      "name": "HRV Biofeedback Protocols",
+      "description": "Structured protocols for using real-time HRV data to train autonomic regulation. These are the most directly AI-personalizable interventions in the library.",
+      "interventions": [
+        {
+          "id": "resonance-frequency-training",
+          "name": "Resonance Frequency Training",
+          "aliases": ["HRV Biofeedback Phase 1", "Autonomic Tuning"],
+          "targetMarkers": ["heartRateVariabilitySDNN", "restingHeartRate", "heartRate"],
+          "primaryMarker": "heartRateVariabilitySDNN",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Lehrer et al., 2000", "Gevirtz, 2013"],
+          "biologicalMechanism": "Each individual has a specific breathing frequency (typically 0.08–0.12 Hz, 4.5–7 breaths/min) at which heart rate oscillations synchronize with breathing. At this 'resonance frequency,' HRV amplitude is maximized because the baroreflex delay (~5 seconds) and the respiratory sinus arrhythmia phase align to create constructive interference. Training at this frequency produces a 2–5× increase in HRV amplitude within a single session and cumulative autonomic flexibility gains over weeks.",
+          "instructions": {
+            "setup": [
+              "Connect: Ensure Apple Watch is transmitting HRV data to the app.",
+              "Session length: 30 minutes for the initial assessment.",
+              "Environment: quiet room, comfortable seated position."
+            ],
+            "phases": [
+              {
+                "phase": 1,
+                "name": "Resonance Frequency Assessment",
+                "steps": [
+                  "Breathe at 6.5 breaths/min for 90 seconds (4.6 seconds in, 4.6 seconds out).",
+                  "Rest and breathe naturally for 60 seconds.",
+                  "Breathe at 6.0 breaths/min for 90 seconds (5 seconds in, 5 seconds out).",
+                  "Rest for 60 seconds.",
+                  "Breathe at 5.5 breaths/min for 90 seconds (5.5 seconds in, 5.5 seconds out).",
+                  "Rest for 60 seconds.",
+                  "Breathe at 5.0 breaths/min for 90 seconds (6 seconds in, 6 seconds out).",
+                  "Rest for 60 seconds.",
+                  "Breathe at 4.5 breaths/min for 90 seconds (6.7 seconds in, 6.7 seconds out).",
+                  "AI selects the rate with the highest HRV amplitude as the resonance frequency."
+                ]
+              },
+              {
+                "phase": 2,
+                "name": "Daily Training",
+                "steps": [
+                  "Begin each session with 2 minutes of natural breathing to establish baseline HRV.",
+                  "Follow the AI-designed pacer at your resonance frequency.",
+                  "Try to maximize the oscillation of your heart rate with each breath.",
+                  "Use the real-time HRV waveform display as biofeedback.",
+                  "Continue for the prescribed session length."
+                ]
+              }
+            ],
+            "duration": {
+              "assessment": "Single 30-minute session (Phase 1, one-time or quarterly re-assessment)",
+              "training": "20 minutes daily (Phase 2)",
+              "maintenance": "10 minutes, 3×/week after 8 weeks of daily training",
+              "optimalTimes": ["Same time daily (consistency controls for circadian HRV variation)"]
+            }
+          },
+          "precautions": [
+            "Some users may not have a clear resonance frequency — use standard 6 bpm as default.",
+            "If HRV amplitude decreases during training, reduce session length by 5 min.",
+            "Hydrate before sessions (dehydration reduces HRV amplitude).",
+            "Avoid caffeine 2 hours before training."
+          ],
+          "aiPersonalization": {
+            "resonanceFrequencyDetection": "Algorithm: compute HRV amplitude (SDNN or peak-valley difference) at each tested frequency via 90-second windows. Interpolate to find frequency with maximum amplitude. Store as 'user.resonanceFrequencyHz'.",
+            "adaptationRules": [
+              "Re-assess resonance frequency every 4 weeks (may shift with autonomic improvement)",
+              "If baseline HRV has increased > 10 ms over 4 weeks: reduce training to 15 min/day",
+              "If training session HRV amplitude is declining: check for distractions, sleep debt, or caffeine",
+              "Use RMSSD (if available via ECG) in addition to SDNN for finer-grained feedback"
+            ]
+          }
+        },
+        {
+          "id": "nighttime-hrv-biofeedback",
+          "name": "Nighttime HRV Biofeedback",
+          "aliases": ["Pre-Bed Autonomic Reset", "Evening Coherent Breathing"],
+          "targetMarkers": ["heartRateVariabilitySDNN", "overnightHrvDelta", "wakeAfterSleepOnset", "sleepDeepPercent"],
+          "primaryMarker": "overnightHrvDelta",
+          "evidenceLevel": "emerging",
+          "evidenceSources": ["NeuroPath research synthesis", "Lehrer et al., 2020"],
+          "biologicalMechanism": "Evening HRV biofeedback primes the autonomic nervous system for the overnight recovery period. A session before bed increases vagal tone, which then carries into the first sleep cycle. Higher pre-bed HRV predicts deeper slow-wave sleep (N3) and better overnight HRV recovery (the delta between evening and morning HRV). This creates a positive feedback loop: better sleep → higher next-day HRV → more effective next session.",
+          "instructions": {
+            "setup": [
+              "Perform 30–60 minutes before target bedtime.",
+              "Use dim lighting (red/amber if possible).",
+              "Lie down in bed (this position also primes the sleep association)."
+            ],
+            "steps": [
+              "Establish baseline: 2 min of natural breathing while lying down.",
+              "5–10 min of coherent breathing at the user's resonance frequency.",
+              "Optional: add 10-min progressive muscle relaxation after breathing.",
+              "After session: transition directly to sleep without screens or stimulation."
+            ],
+            "duration": {
+              "minimum": "5 minutes",
+              "recommended": "10–15 minutes",
+              "frequency": "Nightly, especially during high-stress periods",
+              "optimalTimes": ["30–45 min before target bedtime"]
+            }
+          },
+          "precautions": [
+            "If HRV drops during nighttime session (paradoxical response): switch to grounding exercise.",
+            "Some trauma survivors find HRV biofeedback performance-pressure triggering — use 'curiosity' framing.",
+            "If user has difficulty falling asleep after the session: shorten to 5 min or move session earlier."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Overnight HRV delta computed from Apple Watch HRV samples: median HRV 0–30 min before bed vs. median HRV in last 30 min of sleep",
+              "Target delta: > 10 ms increase. If < 5 ms: extend pre-bed session to 15 min",
+              "If delta is already > 15 ms: maintain 5-min nightly session",
+              "Correlate with sleep stage data for holistic optimization"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cognitive-behavioral",
+      "name": "Cognitive & Behavioral Interventions",
+      "description": "Cognitive restructuring and behavioral activation techniques that leverage voice and activity biomarkers for in-the-moment support.",
+      "interventions": [
+        {
+          "id": "behavioral-activation",
+          "name": "Behavioral Activation Scheduling",
+          "aliases": ["Activity Scheduling", "Pleasant Event Scheduling"],
+          "targetMarkers": ["stepCount", "activeEnergyBurned", "restingHeartRate", "heartRateVariabilitySDNN"],
+          "primaryMarker": "stepCount",
+          "evidenceLevel": "strong",
+          "evidenceSources": ["Dimidjian et al., 2006", "CBT for depression/anxiety"],
+          "biologicalMechanism": "Trauma-related withdrawal reduces positive reinforcement from the environment, creating a downward spiral of inactivity, low mood, and physiological deconditioning (lower HRV, higher resting HR). Behavioral activation breaks this cycle by scheduling value-aligned activities that increase environmental reward. Physical activity specifically increases brain-derived neurotrophic factor (BDNF), improves cardiovascular fitness (raising HRV), and provides natural exposure therapy for avoidance behaviors.",
+          "instructions": {
+            "setup": [
+              "List 10–15 activities that used to bring pleasure or a sense of accomplishment.",
+              "Categorize by energy required (low, medium, high).",
+              "Rate each on expected difficulty (1–10) and expected reward (1–10)."
+            ],
+            "steps": [
+              "EACH MORNING: Rate your current energy level (1–10) using a voice check-in.",
+              "AI selects 2–3 activities from your list matching your energy level.",
+              "SCHEDULE activities into your calendar with specific times.",
+              "COMPLETE the activity — no minimum, just starting counts.",
+              "POST-ACTIVITY: Rate actual reward (1–10) via voice check-in — note the 'reward prediction error gap.'",
+              "EVENING: Review completion vs. schedule. Adjust tomorrow's plan."
+            ],
+            "duration": {
+              "minimum": "1 small activity per day",
+              "recommended": "2–3 activities per day, totaling 30+ minutes",
+              "frequency": "Daily",
+              "goal": "Increase step count by 1,500 steps/day and active energy by 100 kcal/week"
+            }
+          },
+          "precautions": [
+            "Start with low-energy activities — early success builds momentum.",
+            "If user reports zero pleasurable activities in their list, start with 'curiosity experiments' (try one thing and rate it).",
+            "Avoid over-scheduling — the goal is consistency, not volume."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Apple Watch step count and active energy provide objective compliance data",
+              "If step count < 3,000/day for 3 consecutive days: AI suggests one very-low-effort activity (stand up, walk to kitchen)",
+              "Voice check-in sentiment analysis: detect anhedonia markers (monotone F0, reduced intensity)",
+              "Reward prediction error > 2 (expected reward 3, actual 5): highlight this discrepancy to encourage future engagement"
+            ]
+          }
+        },
+        {
+          "id": "audio-gratitude-journaling",
+          "name": "Audio Gratitude Journaling",
+          "aliases": ["Voice Gratitude Practice", "Evening Reflection"],
+          "targetMarkers": ["voiceHNR", "voiceJitter", "voiceF0"],
+          "primaryMarker": "voiceHNR",
+          "evidenceLevel": "moderate",
+          "evidenceSources": ["Positive psychology (Emmons & McCullough, 2003)", "Voice biomarker research"],
+          "biologicalMechanism": "Deliberately recalling positive experiences shifts attentional bias away from threat detection (a hallmark of trauma). The vocal expression of gratitude engages the social engagement system (ventral vagus), which projects to the laryngeal muscles. As the user speaks about genuinely positive experiences, vocal muscle tension decreases, jitter and shimmer normalize, and harmonics-to-noise ratio increases — all measurable markers of parasympathetic activation.",
+          "instructions": {
+            "setup": [
+              "Choose a consistent time (evening is typically most effective).",
+              "Find a quiet, private space.",
+              "Open the NeuroPath voice journaling interface."
+            ],
+            "steps": [
+              "Think of 1–3 events from today that went well, however small.",
+              "Press record and speak for 2–5 minutes about what happened and why it felt good.",
+              "Be specific: 'This morning, the coffee tasted really good. I noticed I felt calm for 10 minutes.'",
+              "Include sensory details if comfortable: what you saw, heard, felt.",
+              "Optional: mention one thing you're looking forward to tomorrow.",
+              "End with one slow breath before stopping the recording."
+            ],
+            "duration": {
+              "minimum": "2 minutes",
+              "recommended": "3–5 minutes",
+              "frequency": "Daily (evening, preferably before bed)",
+              "goal": "Consistent daily practice; measurable voice marker improvement over 2–4 weeks"
+            }
+          },
+          "precautions": [
+            "If finding things to be grateful for is distressing (common with depression/anhedonia), start with 'neutral' observations.",
+            "Voice recording may feel vulnerable — all processing is on-device; only anonymized feature vectors are transmitted.",
+            "If user reports no positive events, accept neutral events or simply describe the day factually."
+          ],
+          "aiPersonalization": {
+            "adaptationRules": [
+              "Analyze pre/post voice features: target ≥ 10% improvement in HNR within session",
+              "If jitter > 1.5% at start: note elevated stress; suggest 1 min box breathing before journaling",
+              "If user's F0 is monotone across multiple sessions: flag for potential depression screening",
+              "Weekly voice feature trend report: track vocal relaxation progress over time"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

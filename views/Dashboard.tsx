@@ -159,8 +159,31 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
         if (!res.ok) throw new Error('Failed to fetch JSON library');
         return res.json();
       })
-      .then((data: Intervention[]) => {
-        setInterventions(data);
+      .then((data: any) => {
+        if (Array.isArray(data)) {
+          setInterventions(data);
+        } else if (data && Array.isArray(data.categories)) {
+          // Flatten and map the categories interventions array from the researcher's schema
+          const flattened: Intervention[] = [];
+          data.categories.forEach((cat: any) => {
+            if (Array.isArray(cat.interventions)) {
+              cat.interventions.forEach((item: any) => {
+                flattened.push({
+                  id: item.id,
+                  title: item.name || item.title,
+                  type: (cat.id === 'cognitive-behavioral' ? 'cognitive' : cat.id) as any,
+                  duration: typeof item.duration === 'string' ? item.duration : (item.instructions?.duration?.recommended || item.instructions?.duration?.minimum || '5 min'),
+                  description: item.biologicalMechanism || item.description || '',
+                  steps: item.instructions?.steps || item.steps || [],
+                  scienceDescription: item.scienceDescription || `Evidence Level: ${item.evidenceLevel || 'moderate'}. Mechanism: ${item.biologicalMechanism || ''}`
+                });
+              });
+            }
+          });
+          setInterventions(flattened);
+        } else {
+          console.warn('Fetched interventions.json did not match any expected schemas.');
+        }
       })
       .catch(err => {
         console.warn('Using fallback interventions. interventions.json could not be loaded relative to origin:', err);
