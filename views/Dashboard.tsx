@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { UserProfile, NervousSystemState, BiometricLog, Intervention, computeNervousSystemState } from '../types';
+import { AppView, UserProfile, NervousSystemState, BiometricLog, Intervention, computeNervousSystemState } from '../types';
 import { generateNeuroIntervention, generateCoachMessage } from '../geminiService';
 
 interface Props {
   user: UserProfile;
   onReset: () => void;
+  onViewChange: (view: AppView) => void;
 }
 
 // Preset interventions as static fallback if interventions.json cannot be fetched
@@ -130,7 +131,7 @@ const getSimulatedMetricsForState = (state: NervousSystemState, nowTime?: string
   }
 };
 
-const Dashboard: React.FC<Props> = ({ user, onReset }) => {
+const Dashboard: React.FC<Props> = ({ user, onReset, onViewChange }) => {
   // Initialize biometric log representing user's initial baseline state
   const [log, setLog] = useState<BiometricLog>(() => getSimulatedMetricsForState(user.baselineState || 'VENTRAL_VAGAL'));
   const [interventions, setInterventions] = useState<Intervention[]>([]);
@@ -294,13 +295,22 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
           Watch Sync: Active
         </div>
 
-        <button 
-          onClick={onReset}
-          className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white/40 hover:text-white transition-colors"
-          title="Recalibrate profile"
-        >
-          <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
-        </button>
+        <div className="flex items-center gap-1.5">
+          <button 
+            onClick={() => onViewChange('KPI_DASHBOARD')}
+            className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-violet-400/60 hover:text-violet-400 transition-colors"
+            title="KPI Engine Dashboard"
+          >
+            <span className="material-symbols-outlined text-sm">monitoring</span>
+          </button>
+          <button 
+            onClick={onReset}
+            className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white/40 hover:text-white transition-colors"
+            title="Recalibrate profile"
+          >
+            <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
+          </button>
+        </div>
       </header>
 
       {/* PRIVACY-FIRST & TRAUMA-INFORMED BANNER */}
