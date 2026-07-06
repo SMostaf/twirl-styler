@@ -273,7 +273,7 @@ const Dashboard: React.FC<Props> = ({ user, onReset, onViewChange }) => {
   const calmScore = Math.max(10, 100 - Math.max(0, log.heartRate - 60) * 1.5);
   const innerStrokeDashoffset = innerCircumference - (calmScore / 100) * innerCircumference;
 
-  const currentSuggested = getSuggestedProtocol(activeState, interventions);
+  const currentSuggested = getActiveStateSuggestedProtocol();
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white px-5 py-6">
