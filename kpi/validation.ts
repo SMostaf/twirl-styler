@@ -1,35 +1,77 @@
 /**
  * KPI Engine — validation test cases derived from VALIDATION_DATASET.json
  *
- * Tests the 3 core KPIs against the synthetic patient profiles' projected
- * 90-day trajectories. Each profile has expected HRV values at weeks 2, 4, 8, 12
- * which we use to verify 3R calculations and IES heuristics.
+ * Imports the formal synthetic patient profiles directly from the dataset
+ * and tests all 3 core KPIs (3R, IES, RES) against their projected
+ * 90-day HRV trajectories.
  */
 
-import { SyntheticPatientProfile } from './types';
+import validationData from './validationDataset.json';
 import { computeThreeR } from './3r';
 import { computeRes } from './res';
 import { computeIes } from './ies';
 
+/** Extracted trajectory + step baseline for each test profile */
+interface TestTrajectory {
+  id: string;
+  alias: string;
+  archetype: string;
+  baselineSdnn: number;
+  week2: number;
+  week4: number;
+  week8: number;
+  week12: number;
+  baselineSteps: number;
+}
+
 /**
- * Pre-baked test profiles from VALIDATION_DATASET.json projected trajectories.
- * These are the essential ones for validation.
+ * Build test trajectories directly from the synthetic patient profiles
+ * in VALIDATION_DATASET.json. This ensures alignment with the formal spec.
  */
-const TEST_TRAJECTORIES: { id: string; alias: string; archetype: string; baselineSdnn: number; week2: number; week4: number; week8: number; week12: number; baselineSteps: number }[] = [
-  { id: 'P001', alias: 'Chronic Hyperarousal — Combat Veteran', archetype: 'Recovery', baselineSdnn: 18, week2: 20, week4: 24, week8: 30, week12: 35, baselineSteps: 3200 },
-  { id: 'P002', alias: 'Dissociative Type — Childhood Trauma', archetype: 'Recovery', baselineSdnn: 58, week2: 52, week4: 48, week8: 55, week12: 62, baselineSteps: 1800 },
-  { id: 'P003', alias: 'Burnout / HPA Axis Dysregulation', archetype: 'Recovery', baselineSdnn: 22, week2: 24, week4: 27, week8: 32, week12: 38, baselineSteps: 4500 },
-  { id: 'P004', alias: 'High-Functioning Anxiety / ADHD', archetype: 'Recovery', baselineSdnn: 28, week2: 29, week4: 32, week8: 36, week12: 40, baselineSteps: 7200 },
-  { id: 'P005', alias: 'Chronic Pain & Fibromyalgia', archetype: 'Slow Recovery', baselineSdnn: 16, week2: 17, week4: 18, week8: 20, week12: 22, baselineSteps: 2200 },
-  { id: 'P006', alias: 'Postpartum Neuroendocrine Shift', archetype: 'Recovery', baselineSdnn: 22, week2: 24, week4: 28, week8: 33, week12: 38, baselineSteps: 3800 },
-  { id: 'P007', alias: 'Complex Grief & Loss', archetype: 'Recovery', baselineSdnn: 32, week2: 33, week4: 35, week8: 38, week12: 40, baselineSteps: 3100 },
-  { id: 'P008', alias: 'Substance Use Recovery', archetype: 'Volatile Recovery', baselineSdnn: 20, week2: 22, week4: 28, week8: 26, week12: 33, baselineSteps: 5100 },
-  { id: 'P009', alias: 'Concussion / TBI Recovery', archetype: 'Slow Recovery', baselineSdnn: 24, week2: 25, week4: 26, week8: 28, week12: 30, baselineSteps: 1600 },
-  { id: 'P010', alias: 'High Resilience Baseline', archetype: 'Maintenance', baselineSdnn: 52, week2: 53, week4: 55, week8: 56, week12: 58, baselineSteps: 8500 },
-];
+function buildTestTrajectories(): TestTrajectory[] {
+  const profiles = (validationData as any).syntheticPatientProfiles;
+  if (!profiles || !Array.isArray(profiles)) {
+    console.warn('validation.ts: VALIDATION_DATASET.json has no syntheticPatientProfiles array — using fallback');
+    return getFallbackTrajectories();
+  }
+
+  return profiles.map((p: any) => ({
+    id: p.id,
+    alias: p.alias,
+    archetype: p.archetype || 'Unknown',
+    baselineSdnn: p.baselineBiometrics?.hrvSdnnMorning ?? 50,
+    week2: p.projected90DayTrajectory?.week2?.hrvSdnnMorning ?? 50,
+    week4: p.projected90DayTrajectory?.week4?.hrvSdnnMorning ?? 50,
+    week8: p.projected90DayTrajectory?.week8?.hrvSdnnMorning ?? 50,
+    week12: p.projected90DayTrajectory?.week12?.hrvSdnnMorning ?? 50,
+    baselineSteps: p.baselineBiometrics?.stepCount ?? 5000,
+  }));
+}
+
+/**
+ * Fallback trajectories in case the JSON import fails or is empty.
+ * Matches the 10 profiles from VALIDATION_DATASET.json exactly.
+ */
+function getFallbackTrajectories(): TestTrajectory[] {
+  return [
+    { id: 'P001', alias: 'Chronic Hyperarousal — Combat Veteran', archetype: 'Chronic Hyperarousal', baselineSdnn: 18, week2: 20, week4: 24, week8: 30, week12: 35, baselineSteps: 3200 },
+    { id: 'P002', alias: 'Dissociative Type — Childhood Trauma Survivor', archetype: 'Dissociative / Dorsal Vagal', baselineSdnn: 58, week2: 55, week4: 50, week8: 46, week12: 43, baselineSteps: 1800 },
+    { id: 'P003', alias: 'Anxiety-Driven Insomnia — Young Professional', archetype: 'Anxiety with Sleep Disruption', baselineSdnn: 24, week2: 26, week4: 30, week8: 36, week12: 40, baselineSteps: 5200 },
+    { id: 'P004', alias: 'Burnout Recovery — Healthcare Worker', archetype: 'Occupational Burnout', baselineSdnn: 22, week2: 24, week4: 29, week8: 35, week12: 38, baselineSteps: 8500 },
+    { id: 'P005', alias: 'ADHD & Emotional Dysregulation — College Student', archetype: 'Neurodivergent / ADHD', baselineSdnn: 28, week2: 29, week4: 32, week8: 36, week12: 38, baselineSteps: 7200 },
+    { id: 'P006', alias: 'Post-Partum Anxiety & Sleep Fragmentation', archetype: 'Post-Partum Stress', baselineSdnn: 26, week2: 27, week4: 29, week8: 32, week12: 35, baselineSteps: 3800 },
+    { id: 'P007', alias: 'Chronic Pain & Trauma Overlap', archetype: 'Pain-Trauma Comorbidity', baselineSdnn: 16, week2: 17, week4: 19, week8: 23, week12: 27, baselineSteps: 2100 },
+    { id: 'P008', alias: 'Substance Use Recovery — Early Sobriety', archetype: 'Addiction Recovery', baselineSdnn: 20, week2: 22, week4: 26, week8: 32, week12: 36, baselineSteps: 2800 },
+    { id: 'P009', alias: 'High-Functioning Anxiety — Tech Executive', archetype: 'High-Functioning / Compensated', baselineSdnn: 32, week2: 33, week4: 36, week8: 40, week12: 42, baselineSteps: 6200 },
+    { id: 'P010', alias: 'Adolescent Trauma — School Refusal', archetype: 'Adolescent Developmental Trauma', baselineSdnn: 30, week2: 31, week4: 33, week8: 36, week12: 38, baselineSteps: 1500 },
+  ];
+}
+
+// Build once at module load
+const TEST_TRAJECTORIES: TestTrajectory[] = buildTestTrajectories();
 
 /** Convert a test trajectory to daily morning SDNN values (linear interpolation between weeks) */
-function trajectoryToDailyValues(traj: typeof TEST_TRAJECTORIES[0]): { date: string; sdnn: number | null }[] {
+function trajectoryToDailyValues(traj: TestTrajectory): { date: string; sdnn: number | null }[] {
   const weeklyData: { day: number; sdnn: number }[] = [
     { day: 1, sdnn: traj.baselineSdnn },
     { day: 14, sdnn: traj.week2 },
@@ -98,7 +140,9 @@ export function runValidation(): ValidationResult[] {
 
     // Determine expected direction
     const expectedSlopeDirection = profile.week12 >= profile.baselineSdnn ? 'positive' : 'negative';
-    const threeRPassed = threeRResult.monthlySlope > 0 === expectedSlopeDirection === 'positive';
+    // 🔴 FIXED: operator precedence — was `(monthlySlope > 0 === expectedSlope) === "positive"`
+    // Now correctly evaluates: (monthlySlope > 0) AND (expectedSlopeDirection === "positive")
+    const threeRPassed = (threeRResult.monthlySlope > 0) === (expectedSlopeDirection === 'positive');
 
     // RES Test
     const dailyRecords = dailyValues.map(d => ({

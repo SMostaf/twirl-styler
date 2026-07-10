@@ -1,0 +1,999 @@
+{
+  "meta": {
+    "name": "NeuroPath Synthetic Validation Dataset & KPI Algorithms",
+    "version": "1.0.0",
+    "description": "Synthetic patient profiles and formal KPI algorithms for engineering the NeuroPath analytics engine. Each profile represents a distinct trauma/regulation archetype with 90-day projected recovery trajectories.",
+    "lastUpdated": "2026-06-27",
+    "sourceDocuments": [
+      "/home/team/shared/RESEARCH.md",
+      "/home/team/shared/INTERVENTIONS.json"
+    ],
+    "totalProfiles": 10,
+    "totalKPIDefinitions": 6
+  },
+  "syntheticPatientProfiles": [
+    {
+      "id": "P001",
+      "alias": "Chronic Hyperarousal — Combat Veteran",
+      "archetype": "Chronic Hyperarousal",
+      "demographics": {
+        "age": 34,
+        "gender": "Male",
+        "condition": "PTSD (combat-related), diagnosis 6 years ago",
+        "medication": "SSRI (sertraline 100mg), prazosin as needed for nightmares"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 18,
+        "hrvSdnnNight": 22,
+        "restingHeartRate": 78,
+        "respiratoryRate": 18,
+        "sleepOnsetLatency": 52,
+        "wakeAfterSleepOnset": 68,
+        "totalSleepTime": 5.2,
+        "deepSleepPercent": 11,
+        "remSleepPercent": 18,
+        "overnightHrvDelta": 2,
+        "wristTemperatureAmplitude": 0.15,
+        "stepCount": 3200,
+        "voiceF0Mean": 142,
+        "voiceF0Variance": 12,
+        "voiceJitter": 1.8,
+        "voiceShimmer": 6.2,
+        "voiceHnr": 8.5,
+        "speechRate": 175,
+        "pauseRatio": 0.18,
+        "sleepRegularityIndex": 42,
+        "sleepEfficiency": 72,
+        "restingHrNadir": 68,
+        "morningHrvSurge": 3,
+        "activeEnergyBurned": 180,
+        "environmentalAudioExposure": 55
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Hyperarousal",
+        "symptomProfile": [
+          "Chronic hypervigilance",
+          "Startle response exaggerated",
+          "Nightmares (3-4×/week)",
+          "Irritability / anger outbursts",
+          "Difficulty concentrating"
+        ],
+        "polyvagalState": "Sympathetic dominance — elevated SNS, suppressed PNS",
+        "clinicalSeverity": "Severe (PCL-5 score: 62)",
+        "treatmentHistory": "2 years of CBT, partial response; currently in PE therapy"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Coherent breathing (20 min AM + PM) + Trauma-sensitive yoga (3×/week) + Sleep consolidation + Fixed wake time",
+        "week2": {
+          "hrvSdnnMorning": 20,
+          "restingHeartRate": 76,
+          "sleepOnsetLatency": 45,
+          "deepSleepPercent": 12,
+          "voiceJitter": 1.7,
+          "regulationRecoveryRate": 11.1
+        },
+        "week4": {
+          "hrvSdnnMorning": 24,
+          "restingHeartRate": 73,
+          "sleepOnsetLatency": 38,
+          "deepSleepPercent": 14,
+          "voiceJitter": 1.5,
+          "regulationRecoveryRate": 33.3
+        },
+        "week8": {
+          "hrvSdnnMorning": 30,
+          "restingHeartRate": 69,
+          "sleepOnsetLatency": 28,
+          "deepSleepPercent": 17,
+          "voiceJitter": 1.2,
+          "regulationRecoveryRate": 66.7
+        },
+        "week12": {
+          "hrvSdnnMorning": 35,
+          "restingHeartRate": 66,
+          "sleepOnsetLatency": 22,
+          "deepSleepPercent": 19,
+          "voiceJitter": 1.0,
+          "regulationRecoveryRate": 94.4
+        },
+        "statusAt90Days": "Partial recovery — clinically meaningful HRV improvement but not yet normalized (target >40 ms). Maintaining protocol adherence critical."
+      }
+    },
+    {
+      "id": "P002",
+      "alias": "Dissociative Type — Childhood Trauma Survivor",
+      "archetype": "Dissociative / Dorsal Vagal",
+      "demographics": {
+        "age": 28,
+        "gender": "Female",
+        "condition": "Complex PTSD (childhood emotional abuse), dissociative subtype",
+        "medication": "None (medication-naive, in talk therapy)"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 58,
+        "hrvSdnnNight": 42,
+        "restingHeartRate": 56,
+        "respiratoryRate": 11,
+        "sleepOnsetLatency": 15,
+        "wakeAfterSleepOnset": 22,
+        "totalSleepTime": 9.8,
+        "deepSleepPercent": 8,
+        "remSleepPercent": 28,
+        "overnightHrvDelta": -5,
+        "wristTemperatureAmplitude": 0.08,
+        "stepCount": 1800,
+        "voiceF0Mean": 175,
+        "voiceF0Variance": 8,
+        "voiceJitter": 2.1,
+        "voiceShimmer": 7.5,
+        "voiceHnr": 7.2,
+        "speechRate": 95,
+        "pauseRatio": 0.42,
+        "sleepRegularityIndex": 35,
+        "sleepEfficiency": 78,
+        "restingHrNadir": 50,
+        "morningHrvSurge": -2,
+        "activeEnergyBurned": 95,
+        "environmentalAudioExposure": 35
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Dissociative / Dorsal Vagal",
+        "symptomProfile": [
+          "Depersonalization / derealization",
+          "Emotional numbness",
+          "Chronic fatigue",
+          "Social withdrawal",
+          "Reduced pain sensitivity",
+          "Poor interoceptive awareness (alexithymia)"
+        ],
+        "polyvagalState": "Dorsal vagal dominance — 'shutdown' state, paradoxical high HRV with low engagement",
+        "clinicalSeverity": "Moderate-severe (DES-II score: 38, PCL-5: 48)",
+        "treatmentHistory": "3 years of psychodynamic therapy; current somatic experiencing therapy"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Body scan meditation (15 min AM) + 5-4-3-2-1 grounding (as needed) + Behavioral activation (graduated step increase) + Fixed wake time + Audio gratitude journaling (evening)",
+        "week2": {
+          "hrvSdnnMorning": 55,
+          "voiceF0Variance": 10,
+          "stepCount": 2200,
+          "deepSleepPercent": 10,
+          "pauseRatio": 0.38,
+          "regulationRecoveryRate": 14.3
+        },
+        "week4": {
+          "hrvSdnnMorning": 50,
+          "voiceF0Variance": 15,
+          "stepCount": 3100,
+          "deepSleepPercent": 13,
+          "pauseRatio": 0.32,
+          "regulationRecoveryRate": 32.1
+        },
+        "week8": {
+          "hrvSdnnMorning": 46,
+          "voiceF0Variance": 22,
+          "stepCount": 4500,
+          "deepSleepPercent": 16,
+          "pauseRatio": 0.26,
+          "regulationRecoveryRate": 57.1
+        },
+        "week12": {
+          "hrvSdnnMorning": 43,
+          "voiceF0Variance": 28,
+          "stepCount": 5800,
+          "deepSleepPercent": 18,
+          "pauseRatio": 0.22,
+          "regulationRecoveryRate": 78.6
+        },
+        "statusAt90Days": "Marked improvement in engagement markers (activity, voice variance, pause ratio). HRV normalizing downward from dissociation baseline toward healthy range (35-45 ms). Interoceptive awareness improving — alexithymia scores reduced by 40%."
+      }
+    },
+    {
+      "id": "P003",
+      "alias": "Anxiety-Driven Insomnia — Young Professional",
+      "archetype": "Anxiety with Sleep Disruption",
+      "demographics": {
+        "age": 26,
+        "gender": "Female",
+        "condition": "Generalized Anxiety Disorder (GAD), insomnia comorbid",
+        "medication": "Benzodiazepine (lorazepam 0.5mg PRN, 2-3×/week)"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 24,
+        "hrvSdnnNight": 28,
+        "restingHeartRate": 72,
+        "respiratoryRate": 16,
+        "sleepOnsetLatency": 48,
+        "wakeAfterSleepOnset": 35,
+        "totalSleepTime": 5.8,
+        "deepSleepPercent": 13,
+        "remSleepPercent": 22,
+        "overnightHrvDelta": 4,
+        "wristTemperatureAmplitude": 0.12,
+        "stepCount": 5200,
+        "voiceF0Mean": 198,
+        "voiceF0Variance": 18,
+        "voiceJitter": 1.5,
+        "voiceShimmer": 5.8,
+        "voiceHnr": 10.2,
+        "speechRate": 168,
+        "pauseRatio": 0.15,
+        "sleepRegularityIndex": 55,
+        "sleepEfficiency": 68,
+        "restingHrNadir": 62,
+        "morningHrvSurge": 5,
+        "activeEnergyBurned": 320,
+        "environmentalAudioExposure": 48
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Hyperarousal (circadian-focused)",
+        "symptomProfile": [
+          "Racing thoughts at bedtime",
+          "Catastrophizing about sleep",
+          "Daytime fatigue / brain fog",
+          "Muscle tension (neck, shoulders)",
+          "Irritability when sleep-deprived"
+        ],
+        "polyvagalState": "Mixed: sympathetic activation at night (sleep anticipatory anxiety), mild hyperarousal during day",
+        "clinicalSeverity": "Moderate (GAD-7: 14, ISI: 19)",
+        "treatmentHistory": "6 sessions of CBT-I (partial adherence); no prior voice or HRV biofeedback"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Nighttime HRV biofeedback (15 min pre-bed) + Stimulus control therapy + Blue light management + Extended exhale (4-7-8) at bedtime + Sleep consolidation",
+        "week2": {
+          "hrvSdnnMorning": 26,
+          "sleepOnsetLatency": 40,
+          "deepSleepPercent": 14,
+          "voiceF0Mean": 192,
+          "overnightHrvDelta": 6,
+          "regulationRecoveryRate": 8.3
+        },
+        "week4": {
+          "hrvSdnnMorning": 30,
+          "sleepOnsetLatency": 32,
+          "deepSleepPercent": 16,
+          "voiceF0Mean": 185,
+          "overnightHrvDelta": 9,
+          "regulationRecoveryRate": 25.0
+        },
+        "week8": {
+          "hrvSdnnMorning": 36,
+          "sleepOnsetLatency": 24,
+          "deepSleepPercent": 18,
+          "voiceF0Mean": 180,
+          "overnightHrvDelta": 12,
+          "regulationRecoveryRate": 50.0
+        },
+        "week12": {
+          "hrvSdnnMorning": 40,
+          "sleepOnsetLatency": 18,
+          "deepSleepPercent": 21,
+          "voiceF0Mean": 178,
+          "overnightHrvDelta": 14,
+          "regulationRecoveryRate": 66.7
+        },
+        "statusAt90Days": "Full recovery in sleep metrics (SOL <20 min, efficiency >90%). HRV normalized. No longer using PRN benzodiazepine. Voice markers indicate reduced tension."
+      }
+    },
+    {
+      "id": "P004",
+      "alias": "Burnout Recovery — Healthcare Worker",
+      "archetype": "Occupational Burnout",
+      "demographics": {
+        "age": 42,
+        "gender": "Female",
+        "condition": "Occupational burnout (ICU nurse, post-COVID), adjustment disorder",
+        "medication": "None (using OTC melatonin for sleep)"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 22,
+        "hrvSdnnNight": 26,
+        "restingHeartRate": 74,
+        "respiratoryRate": 17,
+        "sleepOnsetLatency": 35,
+        "wakeAfterSleepOnset": 42,
+        "totalSleepTime": 6.1,
+        "deepSleepPercent": 10,
+        "remSleepPercent": 20,
+        "overnightHrvDelta": 3,
+        "wristTemperatureAmplitude": 0.10,
+        "stepCount": 8500,
+        "voiceF0Mean": 192,
+        "voiceF0Variance": 14,
+        "voiceJitter": 1.6,
+        "voiceShimmer": 6.0,
+        "voiceHnr": 9.0,
+        "speechRate": 160,
+        "pauseRatio": 0.20,
+        "sleepRegularityIndex": 48,
+        "sleepEfficiency": 74,
+        "restingHrNadir": 64,
+        "morningHrvSurge": 4,
+        "activeEnergyBurned": 480,
+        "environmentalAudioExposure": 62
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Hyperarousal (exhaustion stage)",
+        "symptomProfile": [
+          "Emotional exhaustion",
+          "Reduced sense of accomplishment",
+          "Cynicism / detachment",
+          "Physical fatigue despite high step count",
+          "Poor recovery (HRV doesn't improve with rest)"
+        ],
+        "polyvagalState": "Sympathetic exhaustion — high sympathetic tone but depleted resources",
+        "clinicalSeverity": "Moderate-severe (MBI: high EE 32, low PA 18, high CY 14)",
+        "treatmentHistory": "1 month medical leave; no prior biofeedback"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Coherent breathing (10 min AM) + Progressive muscle relaxation (PM) + Sleep consolidation + Fixed wake time + Behavioral activation reduction (deliberate rest) + Mindfulness-based stress reduction",
+        "week2": {
+          "hrvSdnnMorning": 24,
+          "restingHeartRate": 72,
+          "deepSleepPercent": 12,
+          "voiceJitter": 1.5,
+          "regulationRecoveryRate": 8.7
+        },
+        "week4": {
+          "hrvSdnnMorning": 29,
+          "restingHeartRate": 69,
+          "deepSleepPercent": 14,
+          "voiceJitter": 1.3,
+          "regulationRecoveryRate": 30.4
+        },
+        "week8": {
+          "hrvSdnnMorning": 35,
+          "restingHeartRate": 66,
+          "deepSleepPercent": 17,
+          "voiceJitter": 1.1,
+          "regulationRecoveryRate": 56.5
+        },
+        "week12": {
+          "hrvSdnnMorning": 38,
+          "restingHeartRate": 64,
+          "deepSleepPercent": 19,
+          "voiceJitter": 0.9,
+          "regulationRecoveryRate": 69.6
+        },
+        "statusAt90Days": "Good recovery. HRV approaching normal range. Sleep architecture repaired (deep sleep >18%). Energy returning — resting HR dropped 10 bpm. Voice markers show reduced tension."
+      }
+    },
+    {
+      "id": "P005",
+      "alias": "ADHD & Emotional Dysregulation — College Student",
+      "archetype": "Neurodivergent / ADHD",
+      "demographics": {
+        "age": 20,
+        "gender": "Male",
+        "condition": "ADHD (combined type), emotional dysregulation, mild anxiety",
+        "medication": "Stimulant (methylphenidate ER 36mg AM)"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 28,
+        "hrvSdnnNight": 32,
+        "restingHeartRate": 68,
+        "respiratoryRate": 15,
+        "sleepOnsetLatency": 38,
+        "wakeAfterSleepOnset": 28,
+        "totalSleepTime": 6.5,
+        "deepSleepPercent": 14,
+        "remSleepPercent": 21,
+        "overnightHrvDelta": 5,
+        "wristTemperatureAmplitude": 0.18,
+        "stepCount": 7200,
+        "voiceF0Mean": 120,
+        "voiceF0Variance": 30,
+        "voiceJitter": 1.3,
+        "voiceShimmer": 5.0,
+        "voiceHnr": 11.5,
+        "speechRate": 185,
+        "pauseRatio": 0.12,
+        "sleepRegularityIndex": 38,
+        "sleepEfficiency": 76,
+        "restingHrNadir": 58,
+        "morningHrvSurge": 6,
+        "activeEnergyBurned": 410,
+        "environmentalAudioExposure": 50
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Mixed dysregulation",
+        "symptomProfile": [
+          "Emotional reactivity / mood swings",
+          "Rejection sensitivity",
+          "Impulsivity",
+          "Poor sleep schedule (weekend shift)",
+          "Hyperfocus followed by burnout cycles"
+        ],
+        "polyvagalState": "Rapid state-switching between sympathetic (hyperfocus) and ventral vagal (social engagement). Difficulty staying in regulated state.",
+        "clinicalSeverity": "Moderate (ASRS: 18, SDQ emotional dysregulation subscale: high)",
+        "treatmentHistory": "ADHD coaching, currently trialing stimulant medication"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Box breathing (as needed for emotional regulation) + Progressive muscle relaxation (PM) + Fixed wake time (critical for ADHD) + Blue light management + Morning body scan (5 min)",
+        "week2": {
+          "hrvSdnnMorning": 29,
+          "sleepRegularityIndex": 45,
+          "voiceF0Variance": 28,
+          "speechRate": 178,
+          "regulationRecoveryRate": 5.0
+        },
+        "week4": {
+          "hrvSdnnMorning": 32,
+          "sleepRegularityIndex": 55,
+          "voiceF0Variance": 24,
+          "speechRate": 170,
+          "regulationRecoveryRate": 20.0
+        },
+        "week8": {
+          "hrvSdnnMorning": 36,
+          "sleepRegularityIndex": 65,
+          "voiceF0Variance": 20,
+          "speechRate": 162,
+          "regulationRecoveryRate": 40.0
+        },
+        "week12": {
+          "hrvSdnnMorning": 38,
+          "sleepRegularityIndex": 72,
+          "voiceF0Variance": 18,
+          "speechRate": 158,
+          "regulationRecoveryRate": 50.0
+        },
+        "statusAt90Days": "Improvement in regulation capacity. Speech rate reduced to near-normal. Sleep regularity significantly improved. Emotional reactivity episodes reduced by ~40%. HRV still below optimal but trending positively."
+      }
+    },
+    {
+      "id": "P006",
+      "alias": "Post-Partum Anxiety & Sleep Fragmentation",
+      "archetype": "Post-Partum Stress",
+      "demographics": {
+        "age": 31,
+        "gender": "Female",
+        "condition": "Post-partum anxiety, sleep fragmentation due to infant care",
+        "medication": "None (breastfeeding — medication limited)"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 26,
+        "hrvSdnnNight": 24,
+        "restingHeartRate": 76,
+        "respiratoryRate": 17,
+        "sleepOnsetLatency": 12,
+        "wakeAfterSleepOnset": 85,
+        "totalSleepTime": 4.8,
+        "deepSleepPercent": 9,
+        "remSleepPercent": 16,
+        "overnightHrvDelta": -2,
+        "wristTemperatureAmplitude": 0.14,
+        "stepCount": 3800,
+        "voiceF0Mean": 205,
+        "voiceF0Variance": 20,
+        "voiceJitter": 1.4,
+        "voiceShimmer": 5.5,
+        "voiceHnr": 9.8,
+        "speechRate": 155,
+        "pauseRatio": 0.22,
+        "sleepRegularityIndex": 30,
+        "sleepEfficiency": 55,
+        "restingHrNadir": 66,
+        "morningHrvSurge": 1,
+        "activeEnergyBurned": 220,
+        "environmentalAudioExposure": 40
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Hyperarousal with sleep deprivation",
+        "symptomProfile": [
+          "Intrusive worries about infant safety",
+          "Difficulty relaxing even when infant sleeps",
+          "Irritability",
+          "Poor concentration",
+          "Guilt about not being 'present'"
+        ],
+        "polyvagalState": "Chronic hypervigilance — unable to downshift from sympathetic despite sleep opportunity",
+        "clinicalSeverity": "Moderate (EPDS: 14, GAD-7: 12)",
+        "treatmentHistory": "Peer support group; no formal therapy (time constraints)"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Extended exhale (4-7-8, 3-5 min when infant sleeps) + Body scan (5 min, when possible) + Sleep consolidation (align with infant sleep windows) + Audio gratitude journaling (voice check-in, 2 min) + Support partner engagement for sleep shifts",
+        "week2": {
+          "hrvSdnnMorning": 27,
+          "wakeAfterSleepOnset": 78,
+          "deepSleepPercent": 10,
+          "voiceF0Mean": 200,
+          "regulationRecoveryRate": 4.3
+        },
+        "week4": {
+          "hrvSdnnMorning": 29,
+          "wakeAfterSleepOnset": 68,
+          "deepSleepPercent": 12,
+          "voiceF0Mean": 195,
+          "regulationRecoveryRate": 13.0
+        },
+        "week8": {
+          "hrvSdnnMorning": 32,
+          "wakeAfterSleepOnset": 55,
+          "deepSleepPercent": 14,
+          "voiceF0Mean": 190,
+          "regulationRecoveryRate": 26.1
+        },
+        "week12": {
+          "hrvSdnnMorning": 35,
+          "wakeAfterSleepOnset": 45,
+          "deepSleepPercent": 16,
+          "voiceF0Mean": 188,
+          "regulationRecoveryRate": 39.1
+        },
+        "statusAt90Days": "Moderate improvement. HRV and sleep metrics improving but constrained by infant care demands. Voice markers show reduced anxiety (F0 decreasing). WASO improving as infant sleep consolidates. Realistic expectation: partial recovery until infant sleep matures."
+      }
+    },
+    {
+      "id": "P007",
+      "alias": "Chronic Pain & Trauma Overlap",
+      "archetype": "Pain-Trauma Comorbidity",
+      "demographics": {
+        "age": 45,
+        "gender": "Male",
+        "condition": "Fibromyalgia, PTSD (MVA 3 years ago), chronic pain",
+        "medication": "SNRI (duloxetine 60mg), gabapentin 300mg TID, PRN NSAIDs"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 16,
+        "hrvSdnnNight": 18,
+        "restingHeartRate": 82,
+        "respiratoryRate": 20,
+        "sleepOnsetLatency": 42,
+        "wakeAfterSleepOnset": 55,
+        "totalSleepTime": 5.0,
+        "deepSleepPercent": 6,
+        "remSleepPercent": 17,
+        "overnightHrvDelta": 1,
+        "wristTemperatureAmplitude": 0.05,
+        "stepCount": 2100,
+        "voiceF0Mean": 115,
+        "voiceF0Variance": 10,
+        "voiceJitter": 2.2,
+        "voiceShimmer": 8.0,
+        "voiceHnr": 6.5,
+        "speechRate": 130,
+        "pauseRatio": 0.35,
+        "sleepRegularityIndex": 32,
+        "sleepEfficiency": 58,
+        "restingHrNadir": 72,
+        "morningHrvSurge": 0,
+        "activeEnergyBurned": 130,
+        "environmentalAudioExposure": 44
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Severe hyperarousal with pain amplification",
+        "symptomProfile": [
+          "Widespread pain (WPI 14/19)",
+          "Fatigue (moderate-severe)",
+          "Non-restorative sleep",
+          "Cognitive fog ('fibro fog')",
+          "Hypervigilance to body sensations"
+        ],
+        "polyvagalState": "Severe dysregulation — lowest HRV in cohort, minimal autonomic flexibility. Pain maintains sympathetic activation; sympathetic activation amplifies pain (positive feedback loop).",
+        "clinicalSeverity": "Severe (PCL-5: 58, WPI: 14, SSS: 10, PHQ-9: 18)",
+        "treatmentHistory": "Pain management program; 1 year of CBT; aquatic therapy; minimal response"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Trauma-sensitive gentle yoga (15 min, 4×/week, modified for pain) + Coherent breathing (5 min AM, 10 min PM) + Sleep consolidation + Fixed wake time + HRV biofeedback (resonance frequency training, 10 min, 5×/week) + Behavioral activation (pain-contingent, graduated)",
+        "week2": {
+          "hrvSdnnMorning": 17,
+          "restingHeartRate": 81,
+          "deepSleepPercent": 7,
+          "voiceHnr": 6.8,
+          "regulationRecoveryRate": 6.2
+        },
+        "week4": {
+          "hrvSdnnMorning": 19,
+          "restingHeartRate": 79,
+          "deepSleepPercent": 9,
+          "voiceHnr": 7.3,
+          "regulationRecoveryRate": 18.8
+        },
+        "week8": {
+          "hrvSdnnMorning": 23,
+          "restingHeartRate": 75,
+          "deepSleepPercent": 11,
+          "voiceHnr": 8.0,
+          "regulationRecoveryRate": 43.8
+        },
+        "week12": {
+          "hrvSdnnMorning": 27,
+          "restingHeartRate": 72,
+          "deepSleepPercent": 13,
+          "voiceHnr": 8.5,
+          "regulationRecoveryRate": 68.8
+        },
+        "statusAt90Days": "Slower recovery trajectory due to pain-HRV feedback loop. However, HRV improving (16→27 ms), pain scores reduced by 25%. Voice HNR improving indicating reduced vocal strain. Deep sleep still low but trending up. Long-term prognosis good with continued protocol adherence."
+      }
+    },
+    {
+      "id": "P008",
+      "alias": "Substance Use Recovery — Early Sobriety",
+      "archetype": "Addiction Recovery",
+      "demographics": {
+        "age": 38,
+        "gender": "Male",
+        "condition": "Alcohol use disorder (in recovery, 4 months sober), PTSD (childhood)",
+        "medication": "Naltrexone 50mg daily, vitamins (B1, folate)"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 20,
+        "hrvSdnnNight": 24,
+        "restingHeartRate": 80,
+        "respiratoryRate": 19,
+        "sleepOnsetLatency": 55,
+        "wakeAfterSleepOnset": 50,
+        "totalSleepTime": 5.5,
+        "deepSleepPercent": 8,
+        "remSleepPercent": 30,
+        "overnightHrvDelta": 2,
+        "wristTemperatureAmplitude": 0.09,
+        "stepCount": 2800,
+        "voiceF0Mean": 130,
+        "voiceF0Variance": 11,
+        "voiceJitter": 1.9,
+        "voiceShimmer": 7.0,
+        "voiceHnr": 7.8,
+        "speechRate": 145,
+        "pauseRatio": 0.30,
+        "sleepRegularityIndex": 40,
+        "sleepEfficiency": 60,
+        "restingHrNadir": 70,
+        "morningHrvSurge": 2,
+        "activeEnergyBurned": 160,
+        "environmentalAudioExposure": 52
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Hyperarousal with REM rebound",
+        "symptomProfile": [
+          "Cravings (cue-reactive)",
+          "Anxiety / agitation",
+          "Vivid dreams / nightmares (REM rebound from alcohol cessation)",
+          "High impulsivity",
+          "Emotional lability"
+        ],
+        "polyvagalState": "Sympathetic dominant with REM-related fragmentation. Alcohol had been used as 'chemical vagal activator' — now withdrawn, ANS is raw and unregulated.",
+        "clinicalSeverity": "Moderate-severe (PCL-5: 52, AUDIT: formerly 28, now 0, CIWA: 2)",
+        "treatmentHistory": "28-day inpatient detox + IOP; currently in 12-step program; 4 months sober"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Box breathing (acute craving management) + HRV biofeedback (resonance frequency training, 20 min daily) + Sleep consolidation + Stimulus control + Fixed wake time + Behavioral activation (structured daily routine) + Audio gratitude journaling",
+        "week2": {
+          "hrvSdnnMorning": 22,
+          "restingHeartRate": 78,
+          "deepSleepPercent": 9,
+          "remSleepPercent": 28,
+          "regulationRecoveryRate": 10.0
+        },
+        "week4": {
+          "hrvSdnnMorning": 26,
+          "restingHeartRate": 75,
+          "deepSleepPercent": 11,
+          "remSleepPercent": 26,
+          "regulationRecoveryRate": 30.0
+        },
+        "week8": {
+          "hrvSdnnMorning": 32,
+          "restingHeartRate": 71,
+          "deepSleepPercent": 14,
+          "remSleepPercent": 24,
+          "regulationRecoveryRate": 60.0
+        },
+        "week12": {
+          "hrvSdnnMorning": 36,
+          "restingHeartRate": 68,
+          "deepSleepPercent": 16,
+          "remSleepPercent": 23,
+          "regulationRecoveryRate": 80.0
+        },
+        "statusAt90Days": "Strong recovery. HRV nearly doubled (20→36 ms). REM sleep normalizing (30%→23%). Cravings reduced by 65% (self-report). Sleep architecture largely repaired. Relapse prevention anchored by HRV biofeedback — user reports 'seeing the data helps me not drink.' Voice markers recovering."
+      }
+    },
+    {
+      "id": "P009",
+      "alias": "High-Functioning Anxiety — Tech Executive",
+      "archetype": "High-Functioning / Compensated",
+      "demographics": {
+        "age": 52,
+        "gender": "Male",
+        "condition": "High-functioning generalized anxiety, perfectionism, burnout risk",
+        "medication": "Beta-blocker (propranolol 10mg PRN for presentations)"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 32,
+        "hrvSdnnNight": 38,
+        "restingHeartRate": 64,
+        "respiratoryRate": 14,
+        "sleepOnsetLatency": 22,
+        "wakeAfterSleepOnset": 18,
+        "totalSleepTime": 6.8,
+        "deepSleepPercent": 17,
+        "remSleepPercent": 20,
+        "overnightHrvDelta": 7,
+        "wristTemperatureAmplitude": 0.22,
+        "stepCount": 6200,
+        "voiceF0Mean": 112,
+        "voiceF0Variance": 15,
+        "voiceJitter": 1.0,
+        "voiceShimmer": 4.0,
+        "voiceHnr": 13.0,
+        "speechRate": 172,
+        "pauseRatio": 0.14,
+        "sleepRegularityIndex": 62,
+        "sleepEfficiency": 85,
+        "restingHrNadir": 56,
+        "morningHrvSurge": 8,
+        "activeEnergyBurned": 380,
+        "environmentalAudioExposure": 45
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Compensated stress (preclinical)",
+        "symptomProfile": [
+          "Achievement-driven stress",
+          "Difficulty delegating",
+          "Chest tightness / shallow breathing under pressure",
+          "Uses alcohol to 'unwind' (3-4 drinks/week)",
+          "Insight: knows stress is unhealthy but feels impossible to change"
+        ],
+        "polyvagalState": "Generally well-regulated at baseline but easily tipped into sympathetic during work stress. Good autonomic recovery suggests resilience if intervention is preventive.",
+        "clinicalSeverity": "Mild-moderate (GAD-7: 9, PHQ-9: 6, Perceived Stress Scale: 22)",
+        "treatmentHistory": "Executive coaching, occasional meditation app use (inconsistent)"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "Slow-paced breathing (5 min, 2×/day, at transition points) + Box breathing (before high-stakes meetings) + Fixed wake time + Blue light management + Audio gratitude journaling (evening, 3 min) + Optical intervention timing based on HRV dip detection",
+        "week2": {
+          "hrvSdnnMorning": 33,
+          "restingHeartRate": 63,
+          "speechRate": 168,
+          "voiceF0Variance": 17,
+          "regulationRecoveryRate": 8.3
+        },
+        "week4": {
+          "hrvSdnnMorning": 36,
+          "restingHeartRate": 62,
+          "speechRate": 162,
+          "voiceF0Variance": 20,
+          "regulationRecoveryRate": 25.0
+        },
+        "week8": {
+          "hrvSdnnMorning": 40,
+          "restingHeartRate": 61,
+          "speechRate": 155,
+          "voiceF0Variance": 22,
+          "regulationRecoveryRate": 41.7
+        },
+        "week12": {
+          "hrvSdnnMorning": 42,
+          "restingHeartRate": 60,
+          "speechRate": 150,
+          "voiceF0Variance": 24,
+          "regulationRecoveryRate": 50.0
+        },
+        "statusAt90Days": "Preventive success. HRV optimized (32→42 ms). Speech rate normalized. Reports feeling 'more patient' and 'less reactive.' Voice biomarkers show increased dynamic range — emotional expressiveness improving. Well positioned to maintain."
+      }
+    },
+    {
+      "id": "P010",
+      "alias": "Adolescent Trauma — School Refusal",
+      "archetype": "Adolescent Developmental Trauma",
+      "demographics": {
+        "age": 16,
+        "gender": "Non-binary (assigned female at birth)",
+        "condition": "Developmental trauma (bullying, parental divorce), school refusal, social anxiety",
+        "medication": "None (in family therapy)"
+      },
+      "baselineBiometrics": {
+        "hrvSdnnMorning": 30,
+        "hrvSdnnNight": 34,
+        "restingHeartRate": 70,
+        "respiratoryRate": 16,
+        "sleepOnsetLatency": 40,
+        "wakeAfterSleepOnset": 20,
+        "totalSleepTime": 7.2,
+        "deepSleepPercent": 15,
+        "remSleepPercent": 22,
+        "overnightHrvDelta": 4,
+        "wristTemperatureAmplitude": 0.16,
+        "stepCount": 1500,
+        "voiceF0Mean": 190,
+        "voiceF0Variance": 22,
+        "voiceJitter": 1.1,
+        "voiceShimmer": 4.5,
+        "voiceHnr": 11.0,
+        "speechRate": 140,
+        "pauseRatio": 0.28,
+        "sleepRegularityIndex": 45,
+        "sleepEfficiency": 78,
+        "restingHrNadir": 60,
+        "morningHrvSurge": 5,
+        "activeEnergyBurned": 90,
+        "environmentalAudioExposure": 38
+      },
+      "traumaPresentation": {
+        "primaryPhase": "Mixed: avoidance (dorsal) + anticipatory anxiety (sympathetic)",
+        "symptomProfile": [
+          "School refusal (missed 40% of days in past term)",
+          "Social withdrawal from peers",
+          "Morning stomach aches / somatic complaints",
+          "Avoidance of phone calls / voice communication",
+          "Sleep procrastination (stays up on phone)"
+        ],
+        "polyvagalState": "Mixed dorsal (shutdown at school trigger) and sympathetic (anticipatory anxiety the night before). Ventral vagal engagement strong with safe people (family, close friends) but collapses in social threat contexts.",
+        "clinicalSeverity": "Moderate (SCARED: 28, CGAS: 55)",
+        "treatmentHistory": "Family therapy (6 sessions); school counselor; no prior wearable or voice intervention"
+      },
+      "projected90DayTrajectory": {
+        "interventionProtocol": "5-4-3-2-1 grounding (before school) + Box breathing (morning anxiety) + Behavioral activation (graduated school re-entry with step goals) + Fixed wake time (parent-supported) + Audio gratitude journaling (optional, non-judgmental prompts) + Gamified step goal rewards",
+        "week2": {
+          "hrvSdnnMorning": 31,
+          "stepCount": 1900,
+          "pauseRatio": 0.26,
+          "sleepOnsetLatency": 36,
+          "voiceShimmer": 4.3,
+          "regulationRecoveryRate": 5.0
+        },
+        "week4": {
+          "hrvSdnnMorning": 33,
+          "stepCount": 2800,
+          "pauseRatio": 0.23,
+          "sleepOnsetLatency": 30,
+          "voiceShimmer": 4.0,
+          "regulationRecoveryRate": 15.0
+        },
+        "week8": {
+          "hrvSdnnMorning": 36,
+          "stepCount": 4200,
+          "pauseRatio": 0.20,
+          "sleepOnsetLatency": 24,
+          "voiceShimmer": 3.6,
+          "regulationRecoveryRate": 30.0
+        },
+        "week12": {
+          "hrvSdnnMorning": 38,
+          "stepCount": 5500,
+          "pauseRatio": 0.18,
+          "sleepOnsetLatency": 20,
+          "voiceShimmer": 3.4,
+          "regulationRecoveryRate": 40.0
+        },
+        "statusAt90Days": "Meaningful improvement. School attendance up from 60% to 85%. Activity levels normalized (1,500→5,500 steps). Voice shimmer decreasing (reduced vocal tension). Parent-report: 'much more willing to talk about feelings.' HRV improving, approaching age-appropriate norms. Protocol gamification was key for compliance."
+      }
+    }
+  ],
+  "kpiAlgorithms": {
+    "meta": {
+      "description": "Formal algorithmic definitions for NeuroPath's three business KPIs, plus three supporting metrics. Each includes: formula, window, aggregation method, minimum clinically significant change, and validation criteria.",
+      "dataSources": {
+        "appleWatch": "HealthKit HKQuantityTypeIdentifier.heartRateVariabilitySDNN, HKQuantityTypeIdentifier.restingHeartRate, HKCategoryTypeIdentifier.sleepAnalysis, HKQuantityTypeIdentifier.stepCount, HKQuantityTypeIdentifier.appleSleepingWristTemperature",
+        "voiceProcessing": "On-device Meyda + custom DSP feature extraction (see RESEARCH.md Section 10)",
+        "interventionLogs": "App-side tracking of intervention type, start/end timestamps, user completion status"
+      }
+    },
+    "kpi1": {
+      "id": "KPI-REG-RECOVERY",
+      "name": "Regulation Recovery Rate (3R)",
+      "businessKpi": "Average improvement in physiological markers (e.g., Heart Rate Variability) among active users over 90 days",
+      "definition": "The rate of change in morning HRV (SDNN) over a rolling 90-day window, measured as the slope of the linear regression of daily morning SDNN values.",
+      "formula": {
+        "primaryMetric": "3R = slope(linear_regression(daily_morning_SDNN, days)) over 90-day window",
+        "unit": "ms / month (normalized from ms/day slope × 30)",
+        "interpretation": {
+          "strongResponse": "> 5 ms/month increase",
+          "moderateResponse": "3-5 ms/month increase",
+          "minimalResponse": "1-3 ms/month increase",
+          "nonResponse": "< 1 ms/month increase",
+          "deterioration": "Negative slope (< 0 ms/month)"
+        }
+      },
+      "algorithm": {
+        "step1": "QUERY: Collect all HKQuantityTypeIdentifier.heartRateVariabilitySDNN samples from HealthKit for the user, filtered to samples taken between 05:00-09:00 local time (morning window)",
+        "step2": "AGGREGATE: For each calendar day, compute median SDNN of all morning samples. If fewer than 2 samples exist for a day, mark day as missing.",
+        "step3": "IMPUTE: For missing days (up to 7 consecutive), use linear interpolation between nearest valid neighbors. If > 7 consecutive days missing, truncate the window.",
+        "step4": "OUTLIER: Remove values > 3 standard deviations from the rolling 14-day mean. Replace with clipped value at 3σ boundary.",
+        "step5": "REGRESS: Fit ordinary least squares linear regression: SDNN = β₀ + β₁ × days. The slope β₁ is the raw daily rate of change.",
+        "step6": "NORMALIZE: 3R = β₁ × 30 (convert ms/day to ms/month)",
+        "step7": "SIGNIFICANCE: Report p-value of β₁ coefficient. Flag as significant if p < 0.05."
+      },
+      "minimumClinicallySignificantChange": "3R > 1.67 ms/month (equivalent to +5 ms over 90 days, per RESEARCH.md Section 7)",
+      "validationCriteria": {
+        "testPass": "3R for P001 (combat veteran) should be ~3.5 ms/month (from 18→35 ms over 12 weeks ≈ +17 ms / 12 weeks × 4 = +5.7 ms/month)",
+        "testBaseline": "P007 (fibromyalgia) should show 3R ≈ 2.7 ms/month (from 16→27 ms over 12 weeks ≈ +11 ms / 12 weeks × 4 = +3.7 ms/month)",
+        "testFloor": "A user with all SDNN values within ±1 ms should yield 3R ≈ 0 (no significant trend)"
+      }
+    },
+    "kpi2": {
+      "id": "KPI-INTERVENTION-EFFICACY",
+      "name": "Intervention Efficacy Score (IES)",
+      "businessKpi": "Percentage of suggested interventions that lead to a measurable shift back to a regulated state",
+      "definition": "The proportion of completed intervention sessions where pre-to-post biometrics show a clinically meaningful shift toward parasympathetic regulation.",
+      "formula": {
+        "primaryMetric": "IES = (count of sessions with ΔSDNN ≥ +5 ms) / (total completed sessions) × 100",
+        "unit": "Percentage (%)",
+        "interpretation": {
+          "excellent": "> 60%",
+          "good": "40-60%",
+          "moderate": "25-40%",
+          "poor": "< 25%"
+        }
+      },
+      "algorithm": {
+        "step1": "DETECT: Identify intervention sessions from app logs (type, start_time, end_time, completion_status = 'completed').",
+        "step2": "PRE: Collect the median SDNN value in the 10-minute window immediately preceding the intervention start.",
+        "step3": "POST: Collect the median SDNN value in the 10-minute window immediately following the intervention end.",
+        "step4": "COMPUTE: ΔSDNN = POST_median - PRE_median",
+        "step5": "CLASSIFY: If ΔSDNN ≥ +5 ms (the minimum clinically significant change from RESEARCH.md), mark session as 'positive_shift'. If ΔSDNN < -5 ms, mark as 'negative_shift'. Otherwise 'neutral'.",
+        "step6": "AGGREGATE: IES = (count positive_shift) / (total completed) × 100 over a rolling 30-day window.",
+        "step7": "BY_TYPE: Also compute IES_breathwork, IES_somatic, IES_sleep by filtering to intervention type.",
+        "step8": "VOICE_AUGMENT: If voice biomarker data is available (F0, jitter, HNR), compute a multi-modal shift score: ΔMulti = 0.6 × z(ΔSDNN) + 0.2 × z(ΔHNR) + 0.1 × z(-Δjitter) + 0.1 × z(-ΔspeechRate). Positive ΔMulti ≥ 0.5 indicates multi-modal shift."
+      },
+      "minimumClinicallySignificantChange": "IES improvement > 10 percentage points over a 30-day rolling window indicates protocol effectiveness",
+      "validationCriteria": {
+        "testPass": "P003 (insomnia) doing nightly HRV biofeedback: pre-session SDNN ≈ 24, post-session SDNN ≈ 32 → Δ = +8 ms → positive_shift ✓",
+        "testEdge": "P002 (dissociative) doing body scan: pre-SDNN 58, post-SDNN 56 → Δ = -2 → neutral. This is correct — dorsal vagal type shouldn't be expected to show HRV increase from meditation in same way.",
+        "testVoice": "P004 (burnout) doing coherent breathing: pre-HNR 9.0, post-HNR 10.5 → ΔHNR = +1.5 dB. Combined with ΔSDNN = +6 ms → ΔMulti likely positive"
+      }
+    },
+    "kpi3": {
+      "id": "KPI-RETENTION",
+      "name": "Retention & Engagement Score (RES)",
+      "businessKpi": "Monthly active users (MAU) and churn rate for both individual and clinician tiers",
+      "definition": "Two-component metric: (1) Active usage ratio — days with ≥1 biometric data upload / total days in period. (2) Churn prediction — probability of user disengaging based on biometric trend and usage patterns.",
+      "formula": {
+        "componentA": "RES_active = days_with_data_upload / total_days_in_period",
+        "componentB": "RES_churnRisk = sigmoid( β₀ + β₁×(HRV_trend_14d) + β₂×(session_completion_rate) + β₃×(days_since_last_session) + β₄×(step_count_trend) )",
+        "interpretation": {
+          "highEngagement": "RES_active > 0.80 and RES_churnRisk < 0.20",
+          "mediumEngagement": "RES_active 0.50-0.80 or RES_churnRisk 0.20-0.40",
+          "lowEngagement": "RES_active < 0.50 or RES_churnRisk > 0.40",
+          "churnWarning": "RES_churnRisk > 0.50 — trigger retention intervention"
+        }
+      },
+      "algorithm": {
+        "step1": "ACTIVE: For each calendar day, check if user has ANY HealthKit data pushed (HRV, steps, sleep, heart rate). Count days with data vs total days in rolling 30-day window.",
+        "step2": "COMPLETION: Compute session completion rate = (sessions completed) / (sessions started) over rolling 14-day window.",
+        "step3": "HRV_TREND: Compute 14-day linear slope of morning SDNN (same algorithm as KPI-REG-RECOVERY but 14-day window).",
+        "step4": "RECENCY: days_since_last_session = current_date - max(completed_session_end_date).",
+        "step5": "STEP_TREND: Compute 14-day linear slope of daily step count.",
+        "step6": "CHURN_RISK: Apply logistic regression with coefficients calibrated on historical data. Initial recommended coefficients: β₀ = 0.5, β₁ = -0.15 (positive HRV trend → lower churn risk), β₂ = -0.02 (higher completion → lower risk), β₃ = 0.05 (more days since session → higher risk), β₄ = -0.01 (increasing activity → lower risk).",
+        "step7": "THRESHOLD: If RES_churnRisk > 0.50, trigger retention protocol (personalized nudge, clinician check-in if B2B, adjusted intervention difficulty)."
+      },
+      "minimumClinicallySignificantChange": "A 15% improvement in RES_active or a 0.15 decrease in RES_churnRisk over 30 days",
+      "validationCriteria": {
+        "testPass": "P005 (ADHD student) with step count 7,200, HRV trend +0.3 ms/day, completion rate 60%, 2 days since session → RES_churnRisk ≈ 0.35 (medium engagement)",
+        "testWarning": "P010 (adolescent) with HRV trend flat, completion rate 30%, 7 days since session → RES_churnRisk ≈ 0.65 (churn warning — trigger retention)",
+        "testHigh": "P009 (executive) with HRV trend +0.4 ms/day, completion rate 85%, 0 days since session → RES_churnRisk ≈ 0.12 (high engagement)"
+      }
+    },
+    "supportingMetrics": [
+      {
+        "id": "MTR-SLEEP-QUALITY-INDEX",
+        "name": "Sleep Quality Index (SQI)",
+        "description": "Composite score combining multiple sleep markers into a single 0-100 index for dashboard display.",
+        "formula": "SQI = 0.30 × z(sleep_efficiency) + 0.25 × z(deep_sleep_pct) + 0.15 × z(-sleep_onset_latency) + 0.15 × z(-WASO) + 0.15 × z(sleep_regularity_index), normalized to 0-100",
+        "updateFrequency": "Daily",
+        "minimumSignificantChange": "±8 points on 0-100 scale"
+      },
+      {
+        "id": "MTR-AUTONOMIC-BALANCE",
+        "name": "Autonomic Balance Score (ABS)",
+        "description": "Single-score indicator of autonomic nervous system state, combining HRV, resting HR, and respiratory rate.",
+        "formula": "ABS = 0.50 × z(SDNN) + 0.30 × z(-restingHR) + 0.20 × z(-respiratoryRate), normalized to 0-100. Higher = more parasympathetic / regulated.",
+        "updateFrequency": "Daily (morning values)",
+        "minimumSignificantChange": "±10 points on 0-100 scale",
+        "polyvagalZones": {
+          "ventralVagal": "ABS > 65 — social engagement, calm, flexible",
+          "sympathetic": "ABS 35-65 — stress response, active coping",
+          "dorsalVagal": "ABS < 35 — shutdown, dissociation, immobilization"
+        }
+      },
+      {
+        "id": "MTR-VOICE-RECOVERY",
+        "name": "Voice Recovery Score (VRS)",
+        "description": "Composite voice biomarker score indicating vocal relaxation and parasympathetic activation.",
+        "formula": "VRS = 0.35 × z(HNR) + 0.25 × z(-jitter) + 0.20 × z(-shimmer) + 0.10 × z(F0_variance) + 0.10 × z(-speech_rate), normalized to 0-100",
+        "updateFrequency": "Per voice check-in session",
+        "minimumSignificantChange": "±12 points on 0-100 scale"
+      }
+    ]
+  }
+}
