@@ -1,6 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useClerk } from '@clerk/clerk-react';
 import { AppView, UserProfile, NervousSystemState, BiometricLog, Intervention, computeNervousSystemState } from '../types';
 import { generateNeuroIntervention, generateCoachMessage } from '../geminiService';
+
+/** Sign-out button shown when Clerk is configured */
+function SignOutButton() {
+  const clerk = useClerk();
+  // Only render if Clerk is actually initialized (publishable key present)
+  if (!clerk || !clerk.client) return null;
+  return (
+    <button 
+      onClick={() => clerk.signOut()}
+      className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-rose-400/40 hover:text-rose-400 hover:border-rose-900/50 transition-colors"
+      title="Sign out"
+    >
+      <span className="material-symbols-outlined text-sm">logout</span>
+    </button>
+  );
+}
 
 interface Props {
   user: UserProfile;
@@ -310,6 +327,7 @@ const Dashboard: React.FC<Props> = ({ user, onReset, onViewChange }) => {
           >
             <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
           </button>
+          <SignOutButton />
         </div>
       </header>
 
