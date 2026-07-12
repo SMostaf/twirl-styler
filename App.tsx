@@ -4,6 +4,8 @@ import OnboardingSymptoms from './views/OnboardingSymptoms';
 import OnboardingDevices from './views/OnboardingDevices';
 import OnboardingProfile from './views/OnboardingProfile';
 import Dashboard from './views/Dashboard';
+import KpiDashboard from './views/KpiDashboard';
+import { AuthWrapper, SignInPage, SignUpPage } from './auth';
 
 const App: React.FC = () => {
   const [view, setView] = useState<AppView>('ONBOARDING_SYMPTOMS');
@@ -88,17 +90,31 @@ const App: React.FC = () => {
           <Dashboard 
             user={user}
             onReset={handleReset}
+            onViewChange={setView}
           />
         );
+      case 'KPI_DASHBOARD':
+        return (
+          <KpiDashboard 
+            onBack={() => setView('DASHBOARD')}
+            onViewChange={setView}
+          />
+        );
+      case 'SIGN_IN':
+        return <SignInPage />;
+      case 'SIGN_UP':
+        return <SignUpPage />;
       default:
         return <div>View not found</div>;
     }
   };
 
   return (
-    <div className="min-h-screen max-w-md mx-auto bg-black text-white relative flex flex-col overflow-x-hidden border-x border-white/5">
-      {renderView()}
-    </div>
+    <AuthWrapper>
+      <div className={`min-h-screen bg-black text-white relative flex flex-col overflow-x-hidden ${view === 'KPI_DASHBOARD' ? '' : 'max-w-md mx-auto border-x border-white/5'}`}>
+        {renderView()}
+      </div>
+    </AuthWrapper>
   );
 };
 

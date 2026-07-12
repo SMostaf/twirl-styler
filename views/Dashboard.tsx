@@ -1,10 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { UserProfile, NervousSystemState, BiometricLog, Intervention, computeNervousSystemState } from '../types';
+import { useClerk } from '@clerk/clerk-react';
+import { AppView, UserProfile, NervousSystemState, BiometricLog, Intervention, computeNervousSystemState } from '../types';
 import { generateNeuroIntervention, generateCoachMessage } from '../geminiService';
+
+/** Sign-out button shown when Clerk is configured */
+function SignOutButton() {
+  const clerk = useClerk();
+  // Only render if Clerk is actually initialized (publishable key present)
+  if (!clerk || !clerk.client) return null;
+  return (
+    <button 
+      onClick={() => clerk.signOut()}
+      className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-rose-400/40 hover:text-rose-400 hover:border-rose-900/50 transition-colors"
+      title="Sign out"
+    >
+      <span className="material-symbols-outlined text-sm">logout</span>
+    </button>
+  );
+}
 
 interface Props {
   user: UserProfile;
   onReset: () => void;
+  onViewChange: (view: AppView) => void;
 }
 
 // Preset interventions as static fallback if interventions.json cannot be fetched
@@ -130,7 +148,7 @@ const getSimulatedMetricsForState = (state: NervousSystemState, nowTime?: string
   }
 };
 
-const Dashboard: React.FC<Props> = ({ user, onReset }) => {
+const Dashboard: React.FC<Props> = ({ user, onReset, onViewChange }) => {
   // Initialize biometric log representing user's initial baseline state
   const [log, setLog] = useState<BiometricLog>(() => getSimulatedMetricsForState(user.baselineState || 'VENTRAL_VAGAL'));
   const [interventions, setInterventions] = useState<Intervention[]>([]);
@@ -272,7 +290,7 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
   const calmScore = Math.max(10, 100 - Math.max(0, log.heartRate - 60) * 1.5);
   const innerStrokeDashoffset = innerCircumference - (calmScore / 100) * innerCircumference;
 
-  const currentSuggested = getSuggestedProtocol(activeState, interventions);
+  const currentSuggested = getActiveStateSuggestedProtocol();
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white px-5 py-6">
@@ -294,13 +312,23 @@ const Dashboard: React.FC<Props> = ({ user, onReset }) => {
           Watch Sync: Active
         </div>
 
-        <button 
-          onClick={onReset}
-          className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white/40 hover:text-white transition-colors"
-          title="Recalibrate profile"
-        >
-          <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
-        </button>
+        <div className="flex items-center gap-1.5">
+          <button 
+            onClick={() => onViewChange('KPI_DASHBOARD')}
+            className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-violet-400/60 hover:text-violet-400 transition-colors"
+            title="KPI Engine Dashboard"
+          >
+            <span className="material-symbols-outlined text-sm">monitoring</span>
+          </button>
+          <button 
+            onClick={onReset}
+            className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white/40 hover:text-white transition-colors"
+            title="Recalibrate profile"
+          >
+            <span className="material-symbols-outlined text-sm">settings_backup_restore</span>
+          </button>
+          <SignOutButton />
+        </div>
       </header>
 
       {/* PRIVACY-FIRST & TRAUMA-INFORMED BANNER */}
