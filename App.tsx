@@ -5,6 +5,7 @@ import OnboardingDevices from './views/OnboardingDevices';
 import OnboardingProfile from './views/OnboardingProfile';
 import Dashboard from './views/Dashboard';
 import KpiDashboard from './views/KpiDashboard';
+import BusinessDashboard from './views/BusinessDashboard';
 import { AuthWrapper, SignInPage, SignUpPage } from './auth';
 
 const App: React.FC = () => {
@@ -100,6 +101,13 @@ const App: React.FC = () => {
             onViewChange={setView}
           />
         );
+      case 'BUSINESS_DASHBOARD':
+        return (
+          <BusinessDashboard
+            onBack={() => setView('DASHBOARD')}
+            onViewChange={setView}
+          />
+        );
       case 'SIGN_IN':
         return <SignInPage />;
       case 'SIGN_UP':
@@ -111,7 +119,7 @@ const App: React.FC = () => {
 
   return (
     <AuthWrapper>
-      <div className={`min-h-screen bg-black text-white relative flex flex-col overflow-x-hidden ${view === 'KPI_DASHBOARD' ? '' : 'max-w-md mx-auto border-x border-white/5'}`}>
+      <div className={`min-h-screen bg-black text-white relative flex flex-col overflow-x-hidden ${view === 'KPI_DASHBOARD' || view === 'BUSINESS_DASHBOARD' ? '' : 'max-w-md mx-auto border-x border-white/5'}`}>
         {renderView()}
       </div>
     </AuthWrapper>

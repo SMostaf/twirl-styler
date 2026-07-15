@@ -321,6 +321,13 @@ const Dashboard: React.FC<Props> = ({ user, onReset, onViewChange }) => {
             <span className="material-symbols-outlined text-sm">monitoring</span>
           </button>
           <button 
+            onClick={() => onViewChange('BUSINESS_DASHBOARD')}
+            className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-cyan-400/60 hover:text-cyan-400 transition-colors"
+            title="Business Analytics Dashboard"
+          >
+            <span className="material-symbols-outlined text-sm">bar_chart</span>
+          </button>
+          <button 
             onClick={onReset}
             className="flex items-center justify-center p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-white/40 hover:text-white transition-colors"
             title="Recalibrate profile"
