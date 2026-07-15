@@ -60,7 +60,7 @@ const OnboardingDevices: React.FC<Props> = ({ selected, onToggle, onNext, onBack
         <button onClick={onBack} className="flex items-center text-white/40 hover:text-white transition-colors">
           <span className="material-symbols-outlined font-light text-xl">arrow_back</span>
         </button>
-        <h1 className="font-display text-lg tracking-[0.2em] uppercase text-violet-400 font-semibold">NEUROPATH</h1>
+        <h1 className="font-display text-lg tracking-[0.2em] uppercase text-violet-600 font-semibold">NEUROPATH</h1>
         <button onClick={onNext} className="text-white/40 text-xs tracking-widest uppercase hover:text-white transition-colors">Skip</button>
       </header>
 
@@ -82,18 +82,18 @@ const OnboardingDevices: React.FC<Props> = ({ selected, onToggle, onNext, onBack
               className={`p-4 rounded-xl cursor-pointer border transition-all duration-300 ${
                 isSelected 
                   ? 'bg-violet-950/20 border-violet-500/50 text-white scale-[1.01] ring-1 ring-violet-500/20' 
-                  : 'bg-zinc-950/40 border-zinc-900 text-white/70 hover:border-zinc-800'
+                  : 'bg-stone-100/80 border-stone-200 text-white/70 hover:border-stone-300'
               }`}
             >
               <div className="flex items-start gap-4">
-                <div className={`p-2 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center ${isSelected ? 'text-violet-400' : 'text-white/40'}`}>
+                <div className={`p-2 rounded-lg bg-white border border-stone-300 flex items-center justify-center ${isSelected ? 'text-violet-600' : 'text-white/40'}`}>
                   <span className="material-symbols-outlined font-light text-2xl">{device.icon}</span>
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center mb-1">
                     <h3 className="font-semibold text-sm text-white">{device.name}</h3>
                     {isSelected && (
-                      <span className="material-symbols-outlined text-violet-400 text-sm font-bold">check_circle</span>
+                      <span className="material-symbols-outlined text-violet-600 text-sm font-bold">check_circle</span>
                     )}
                   </div>
                   <p className="text-xs text-white/50 mb-3 leading-relaxed">{device.description}</p>
@@ -106,7 +106,7 @@ const OnboardingDevices: React.FC<Props> = ({ selected, onToggle, onNext, onBack
                         className={`text-[9px] px-2 py-0.5 rounded-full font-medium tracking-wide ${
                           isSelected 
                             ? 'bg-violet-500/10 text-violet-300 border border-violet-500/20' 
-                            : 'bg-zinc-900 text-white/30 border border-zinc-800'
+                            : 'bg-white text-white/30 border border-stone-300'
                         }`}
                       >
                         • {feature}
@@ -126,8 +126,8 @@ const OnboardingDevices: React.FC<Props> = ({ selected, onToggle, onNext, onBack
           disabled={selected.length === 0}
           className={`w-full h-14 rounded-xl flex items-center justify-center gap-2 font-bold uppercase tracking-[0.25em] text-sm transition-all shadow-xl ${
             selected.length > 0 
-              ? 'bg-violet-600 text-white hover:bg-violet-500 shadow-violet-900/20' 
-              : 'bg-white/5 text-white/20 cursor-not-allowed border border-white/5'
+              ? 'bg-violet-600 text-white hover:bg-violet-600 shadow-violet-900/20' 
+              : 'bg-white/5 text-white/20 cursor-not-allowed border border-stone-200/50'
           }`}
         >
           Initialize Telemetry

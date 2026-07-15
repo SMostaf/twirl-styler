@@ -119,7 +119,7 @@ const App: React.FC = () => {
 
   return (
     <AuthWrapper>
-      <div className={`min-h-screen bg-black text-white relative flex flex-col overflow-x-hidden ${view === 'KPI_DASHBOARD' || view === 'BUSINESS_DASHBOARD' ? '' : 'max-w-md mx-auto border-x border-white/5'}`}>
+      <div className={`min-h-screen bg-stone-50 text-stone-900 relative flex flex-col overflow-x-hidden ${view === 'KPI_DASHBOARD' || view === 'BUSINESS_DASHBOARD' ? '' : 'max-w-md mx-auto border-x border-stone-200/50'}`}>
         {renderView()}
       </div>
     </AuthWrapper>

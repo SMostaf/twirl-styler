@@ -31,8 +31,8 @@ const COLORS = {
 /** Dark card wrapper */
 function Card({ title, children, accent }: { title: string; children: React.ReactNode; accent?: string }) {
   return (
-    <div className={`bg-zinc-900/80 backdrop-blur rounded-2xl border ${accent || 'border-zinc-800'} p-5`}>
-      <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-3">{title}</h3>
+    <div className={`bg-stone-100/80 backdrop-blur rounded-2xl border ${accent || 'border-stone-300'} p-5`}>
+      <h3 className="text-sm font-semibold text-stone-600 uppercase tracking-wider mb-3">{title}</h3>
       {children}
     </div>
   );
@@ -43,13 +43,13 @@ function StatCard({ label, value, unit, color, trend }: {
   label: string; value: string | number; unit?: string; color: string; trend?: 'up' | 'down' | 'neutral';
 }) {
   const trendIcon = trend === 'up' ? '↑' : trend === 'down' ? '↓' : '→';
-  const trendColor = trend === 'up' ? 'text-emerald-400' : trend === 'down' ? 'text-rose-400' : 'text-zinc-500';
+  const trendColor = trend === 'up' ? 'text-emerald-600' : trend === 'down' ? 'text-rose-600' : 'text-stone-500';
   return (
-    <div className="bg-zinc-900/60 border border-zinc-800/80 rounded-xl p-4">
-      <div className="text-xs text-zinc-500 mb-1">{label}</div>
+    <div className="bg-stone-100/60 border border-stone-300/80 rounded-xl p-4">
+      <div className="text-xs text-stone-500 mb-1">{label}</div>
       <div className="flex items-baseline gap-1">
         <span className="text-2xl font-bold" style={{ color }}>{value}</span>
-        {unit && <span className="text-sm text-zinc-500">{unit}</span>}
+        {unit && <span className="text-sm text-stone-500">{unit}</span>}
       </div>
       {trend && <span className={`text-xs ${trendColor} mt-1 block`}>{trendIcon} vs last period</span>}
     </div>
@@ -60,7 +60,7 @@ function StatCard({ label, value, unit, color, trend }: {
 function LineChart({ dates, values, label, color, height = 180 }: {
   dates: string[]; values: number[]; label: string; color: string; height?: number;
 }) {
-  if (!values || values.length === 0) return <div className="text-xs text-zinc-600 py-8 text-center">No data</div>;
+  if (!values || values.length === 0) return <div className="text-xs text-stone-400 py-8 text-center">No data</div>;
 
   const maxVal = Math.max(...values) * 1.15 || 100;
   const minVal = Math.min(...values) * 0.85 > 0 ? Math.min(...values) * 0.85 : 0;
@@ -86,7 +86,7 @@ function LineChart({ dates, values, label, color, height = 180 }: {
 
   return (
     <div className="w-full">
-      <span className="text-xs font-semibold text-zinc-500 mb-2 block">{label}</span>
+      <span className="text-xs font-semibold text-stone-500 mb-2 block">{label}</span>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto overflow-visible">
         {/* Grid */}
         {[0, 0.25, 0.5, 0.75, 1].map((r, i) => {
@@ -132,7 +132,7 @@ function LineChart({ dates, values, label, color, height = 180 }: {
 
 /** Bar chart for cohort retention */
 function CohortBarChart({ cohorts }: { cohorts: CohortRetention[] }) {
-  if (!cohorts || cohorts.length === 0) return <div className="text-xs text-zinc-600 py-8 text-center">No cohort data</div>;
+  if (!cohorts || cohorts.length === 0) return <div className="text-xs text-stone-400 py-8 text-center">No cohort data</div>;
 
   // Show last 8 cohorts
   const recent = cohorts.slice(-8);
@@ -147,7 +147,7 @@ function CohortBarChart({ cohorts }: { cohorts: CohortRetention[] }) {
 
   return (
     <div className="w-full">
-      <span className="text-xs font-semibold text-zinc-500 mb-2 block">Cohort Retention (% of users still active)</span>
+      <span className="text-xs font-semibold text-stone-500 mb-2 block">Cohort Retention (% of users still active)</span>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto overflow-visible">
         {/* Legend */}
         {days.map((d, i) => (
@@ -238,13 +238,13 @@ function AtRiskTable({ users }: { users: BusinessUser[] }) {
     })
     .slice(0, 8);
 
-  if (atRisk.length === 0) return <div className="text-xs text-zinc-600 py-4 text-center">No at-risk users</div>;
+  if (atRisk.length === 0) return <div className="text-xs text-stone-400 py-4 text-center">No at-risk users</div>;
 
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-xs">
         <thead>
-          <tr className="text-zinc-500 border-b border-zinc-800">
+          <tr className="text-stone-500 border-b border-stone-300">
             <th className="text-left py-2 pr-3">User</th>
             <th className="text-right py-2 pr-3">Sessions</th>
             <th className="text-right py-2 pr-3">HRV</th>
@@ -258,17 +258,17 @@ function AtRiskTable({ users }: { users: BusinessUser[] }) {
               : u.signupDate;
             const daysSince = Math.floor((Date.now() - lastActive.getTime()) / (1000 * 60 * 60 * 24));
             return (
-              <tr key={u.id} className="border-b border-zinc-900 hover:bg-zinc-900/50">
+              <tr key={u.id} className="border-b border-stone-200 hover:bg-stone-100/80">
                 <td className="py-2 pr-3">
                   <span className="mr-1">{u.avatar}</span>
-                  <span className="text-zinc-300">{u.name}</span>
+                  <span className="text-stone-700">{u.name}</span>
                 </td>
-                <td className="text-right py-2 pr-3 text-zinc-400">{u.sessionsCompleted}</td>
+                <td className="text-right py-2 pr-3 text-stone-600">{u.sessionsCompleted}</td>
                 <td className="text-right py-2 pr-3">
-                  <span className={u.latestHrv > 30 ? 'text-emerald-400' : 'text-amber-400'}>{u.latestHrv}ms</span>
+                  <span className={u.latestHrv > 30 ? 'text-emerald-600' : 'text-amber-600'}>{u.latestHrv}ms</span>
                 </td>
                 <td className="text-right py-2">
-                  <span className={daysSince > 7 ? 'text-rose-400' : 'text-zinc-400'}>{daysSince}d ago</span>
+                  <span className={daysSince > 7 ? 'text-rose-600' : 'text-stone-600'}>{daysSince}d ago</span>
                 </td>
               </tr>
             );
@@ -293,34 +293,34 @@ const BusinessDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
   const filteredMetrics = dailyMetrics;
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
+    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans">
       {/* Header */}
-      <header className="border-b border-zinc-800 px-6 py-4 flex items-center gap-4">
-        <button onClick={onBack} className="p-2 hover:bg-zinc-800 rounded-lg transition-colors">
-          <span className="material-symbols-outlined text-zinc-400">arrow_back</span>
+      <header className="border-b border-stone-300 px-6 py-4 flex items-center gap-4">
+        <button onClick={onBack} className="p-2 hover:bg-stone-200 rounded-lg transition-colors">
+          <span className="material-symbols-outlined text-stone-600">arrow_back</span>
         </button>
         <div>
-          <h1 className="text-xl font-bold text-white">Business Analytics</h1>
-          <p className="text-xs text-zinc-500 mt-0.5">Growth · Churn · Retention</p>
+          <h1 className="text-xl font-bold text-stone-900">Business Analytics</h1>
+          <p className="text-xs text-stone-500 mt-0.5">Growth · Churn · Retention</p>
         </div>
         <div className="ml-auto flex items-center gap-2">
           {/* Time range selector */}
-          <div className="flex bg-zinc-900 border border-zinc-800 rounded-lg p-0.5">
+          <div className="flex bg-white border border-stone-300 rounded-lg p-0.5">
             {(['7d', '30d', '90d', 'all'] as TimeRange[]).map(r => (
               <button
                 key={r}
                 onClick={() => setTimeRange(r)}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
                   timeRange === r
-                    ? 'bg-violet-600 text-white'
-                    : 'text-zinc-500 hover:text-zinc-300'
+                    ? 'bg-violet-600 text-stone-900'
+                    : 'text-stone-500 hover:text-stone-700'
                 }`}
               >
                 {r === 'all' ? 'All' : r}
               </button>
             ))}
           </div>
-          <button onClick={onBack} className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-xl text-sm transition-colors">
+          <button onClick={onBack} className="px-4 py-2 bg-stone-200 hover:bg-stone-300 rounded-xl text-sm transition-colors">
             Back
           </button>
         </div>
@@ -360,7 +360,7 @@ const BusinessDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
         </div>
 
         {/* Growth Chart */}
-        <Card title="User Growth" accent="border-violet-500/30">
+        <Card title="User Growth" accent="border-violet-300/50">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <LineChart
               dates={filteredMetrics.map(m => m.date)}
@@ -378,7 +378,7 @@ const BusinessDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
         </Card>
 
         {/* Churn & Active Users */}
-        <Card title="Churn & Active Users" accent="border-rose-500/30">
+        <Card title="Churn & Active Users" accent="border-rose-300/50">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <LineChart
               dates={filteredMetrics.map(m => m.date)}
@@ -396,21 +396,21 @@ const BusinessDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
         </Card>
 
         {/* Cohort Retention */}
-        <Card title="Cohort Retention" accent="border-cyan-500/30">
+        <Card title="Cohort Retention" accent="border-cyan-300/50">
           <CohortBarChart cohorts={cohorts} />
         </Card>
 
         {/* At-risk Users */}
-        <Card title="At-Risk Users (Lowest Engagement)" accent="border-amber-500/30">
+        <Card title="At-Risk Users (Lowest Engagement)" accent="border-amber-300/50">
           <AtRiskTable users={users} />
-          <p className="text-xs text-zinc-600 mt-3">
+          <p className="text-xs text-stone-400 mt-3">
             Based on recent activity frequency. Users with fewer than 2 sessions in the past 14 days are flagged.
           </p>
         </Card>
 
         {/* Data source note */}
-        <div className="text-xs text-zinc-700 text-center py-2">
-          Data source: Synthetic seed data (50 users) · Swap to live data by replacing <code className="text-zinc-500 bg-zinc-900 px-1 rounded">generateSyntheticUsers()</code>
+        <div className="text-xs text-stone-300 text-center py-2">
+          Data source: Synthetic seed data (50 users) · Swap to live data by replacing <code className="text-stone-500 bg-white px-1 rounded">generateSyntheticUsers()</code>
         </div>
       </div>
     </div>

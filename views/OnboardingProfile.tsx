@@ -13,19 +13,19 @@ const BASELINE_STATES: { id: NervousSystemState; name: string; desc: string; col
     id: 'VENTRAL_VAGAL',
     name: 'Ventral Vagal (Safe / Regulated)',
     desc: 'You feel calm, socially connected, open, and physically relaxed.',
-    color: 'border-emerald-500/30 text-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/10'
+    color: 'border-emerald-500/30 text-emerald-600 bg-emerald-500/5 hover:bg-emerald-500/10'
   },
   {
     id: 'SYMPATHETIC',
     name: 'Sympathetic (Stressed / Fight-Flight)',
     desc: 'You feel anxious, hyperactive, highly focused, or tense.',
-    color: 'border-rose-500/30 text-rose-400 bg-rose-500/5 hover:bg-rose-500/10'
+    color: 'border-rose-300/50 text-rose-600 bg-rose-500/5 hover:bg-rose-500/10'
   },
   {
     id: 'DORSAL_VAGAL',
     name: 'Dorsal Vagal (Shutdown / Freeze)',
     desc: 'You feel tired, emotionally flat, numb, or unmotivated.',
-    color: 'border-cyan-500/30 text-cyan-400 bg-cyan-500/5 hover:bg-cyan-500/10'
+    color: 'border-cyan-300/50 text-cyan-600 bg-cyan-500/5 hover:bg-cyan-500/10'
   }
 ];
 
@@ -54,7 +54,7 @@ const OnboardingProfile: React.FC<Props> = ({ user, onChange, onNext, onBack }) 
         <button onClick={onBack} className="text-white/40 hover:text-white transition-colors">
           <span className="material-symbols-outlined font-light text-xl">arrow_back</span>
         </button>
-        <h1 className="font-display text-lg tracking-[0.2em] uppercase text-violet-400 font-semibold">NEUROPATH</h1>
+        <h1 className="font-display text-lg tracking-[0.2em] uppercase text-violet-600 font-semibold">NEUROPATH</h1>
         <button onClick={onNext} className="text-white/40 text-xs tracking-widest uppercase hover:text-white transition-colors">Skip</button>
       </header>
 
@@ -78,7 +78,7 @@ const OnboardingProfile: React.FC<Props> = ({ user, onChange, onNext, onBack }) 
                 className={`w-14 h-14 rounded-xl border flex items-center justify-center text-2xl transition-all duration-300 ${
                   user.icon === avatar 
                     ? 'bg-violet-950/30 border-violet-500 scale-110 shadow-lg shadow-violet-500/20' 
-                    : 'bg-zinc-950/40 border-zinc-900 hover:border-zinc-800'
+                    : 'bg-stone-100/80 border-stone-200 hover:border-stone-300'
                 }`}
               >
                 {avatar}
@@ -91,7 +91,7 @@ const OnboardingProfile: React.FC<Props> = ({ user, onChange, onNext, onBack }) 
         <div className="space-y-2">
           <label className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-bold">Full Name</label>
           <input 
-            className="w-full bg-zinc-950/40 border border-zinc-900 rounded-xl py-3 px-4 text-sm text-white placeholder:text-white/20 focus:ring-1 focus:ring-violet-500 outline-none transition-all"
+            className="w-full bg-stone-100/80 border border-stone-200 rounded-xl py-3 px-4 text-sm text-white placeholder:text-stone-400/50 focus:ring-1 focus:ring-violet-500 outline-none transition-all"
             placeholder="Dr. Jordan West"
             value={user.name}
             onChange={e => onChange({ name: e.target.value })}
@@ -111,7 +111,7 @@ const OnboardingProfile: React.FC<Props> = ({ user, onChange, onNext, onBack }) 
                   className={`p-3 rounded-xl cursor-pointer border transition-all duration-300 ${
                     isSelected 
                       ? `${state.color} scale-[1.01] ring-1 ring-violet-500/20` 
-                      : 'bg-zinc-950/40 border-zinc-900 text-white/70 hover:border-zinc-800'
+                      : 'bg-stone-100/80 border-stone-200 text-white/70 hover:border-stone-300'
                   }`}
                 >
                   <h4 className="font-semibold text-xs text-white mb-0.5">{state.name}</h4>
@@ -135,7 +135,7 @@ const OnboardingProfile: React.FC<Props> = ({ user, onChange, onNext, onBack }) 
                   className={`text-[10px] tracking-wider py-2 px-3 rounded-xl border font-medium transition-all ${
                     isSelected 
                       ? 'bg-violet-950/30 border-violet-500 text-violet-300' 
-                      : 'bg-zinc-950/40 border-zinc-900 text-white/40 hover:border-zinc-800'
+                      : 'bg-stone-100/80 border-stone-200 text-white/40 hover:border-stone-300'
                   }`}
                 >
                   {goal.label}
@@ -149,7 +149,7 @@ const OnboardingProfile: React.FC<Props> = ({ user, onChange, onNext, onBack }) 
         <div className="space-y-2">
           <label className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-bold">Your Personal Context (Trauma/Burnout Profile)</label>
           <textarea 
-            className="w-full bg-zinc-950/40 border border-zinc-900 rounded-xl py-3 px-4 text-xs text-white placeholder:text-white/20 focus:ring-1 focus:ring-violet-500 outline-none transition-all resize-none h-24"
+            className="w-full bg-stone-100/80 border border-stone-200 rounded-xl py-3 px-4 text-xs text-white placeholder:text-stone-400/50 focus:ring-1 focus:ring-violet-500 outline-none transition-all resize-none h-24"
             placeholder="Share what is happening in your nervous system. E.g., 'Dealing with executive dysfunction, persistent hyper-vigilance under pressure, and insomnia...'"
             value={user.bio}
             onChange={e => onChange({ bio: e.target.value })}
@@ -163,8 +163,8 @@ const OnboardingProfile: React.FC<Props> = ({ user, onChange, onNext, onBack }) 
           disabled={!user.name || !user.icon || (user.goals || []).length === 0}
           className={`w-full h-14 rounded-xl flex items-center justify-center gap-2 font-bold uppercase tracking-[0.25em] text-sm transition-all shadow-xl ${
             user.name && user.icon && (user.goals || []).length > 0
-              ? 'bg-violet-600 text-white hover:bg-violet-500 shadow-violet-900/20' 
-              : 'bg-white/5 text-white/20 cursor-not-allowed border border-white/5'
+              ? 'bg-violet-600 text-white hover:bg-violet-600 shadow-violet-900/20' 
+              : 'bg-white/5 text-white/20 cursor-not-allowed border border-stone-200/50'
           }`}
         >
           Initialize Twin
