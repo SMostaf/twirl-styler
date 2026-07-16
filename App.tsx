@@ -6,10 +6,11 @@ import OnboardingProfile from './views/OnboardingProfile';
 import Dashboard from './views/Dashboard';
 import KpiDashboard from './views/KpiDashboard';
 import BusinessDashboard from './views/BusinessDashboard';
+import LandingPage from './views/LandingPage';
 import { AuthWrapper, SignInPage, SignUpPage } from './auth';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<AppView>('ONBOARDING_SYMPTOMS');
+  const [view, setView] = useState<AppView>('LANDING');
   const [user, setUser] = useState<UserProfile>({
     name: '',
     icon: '🧠',
@@ -50,6 +51,13 @@ const App: React.FC = () => {
 
   const renderView = () => {
     switch (view) {
+      case 'LANDING':
+        return (
+          <LandingPage
+            onStart={handleNext}
+            onViewChange={setView}
+          />
+        );
       case 'ONBOARDING_SYMPTOMS':
         return (
           <OnboardingSymptoms 
