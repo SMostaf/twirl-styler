@@ -10,10 +10,10 @@ interface Props {
 
 /** Dark-themed card */
 function Card({ title, children, accent }: { title: string; children: React.ReactNode; accent?: string }) {
-  const borderColor = accent || 'border-zinc-800';
+  const borderColor = accent || 'border-stone-300';
   return (
-    <div className={`bg-zinc-900/80 backdrop-blur rounded-2xl border ${borderColor} p-5`}>
-      <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-3">{title}</h3>
+    <div className={`bg-stone-100/80 backdrop-blur rounded-2xl border ${borderColor} p-5`}>
+      <h3 className="text-sm font-semibold text-stone-600 uppercase tracking-wider mb-3">{title}</h3>
       {children}
     </div>
   );
@@ -34,13 +34,13 @@ function Gauge({ label, value, unit, max, interpretation, color }: {
   return (
     <div className="mb-4">
       <div className="flex justify-between items-baseline mb-1">
-        <span className="text-sm text-zinc-300">{label}</span>
-        <span className="text-lg font-bold text-white">{value}{unit}</span>
+        <span className="text-sm text-stone-700">{label}</span>
+        <span className="text-lg font-bold text-stone-900">{value}{unit}</span>
       </div>
-      <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+      <div className="h-2 bg-stone-200 rounded-full overflow-hidden">
         <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, backgroundColor: barColor }} />
       </div>
-      {interpretation && <span className="text-xs text-zinc-500 mt-0.5 block">{interpretation}</span>}
+      {interpretation && <span className="text-xs text-stone-500 mt-0.5 block">{interpretation}</span>}
     </div>
   );
 }
@@ -165,18 +165,18 @@ const KpiDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
   }, [validationResults, demoMode]);
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
+    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans">
       {/* Header */}
-      <header className="border-b border-zinc-800 px-6 py-4 flex items-center gap-4">
-        <button onClick={onBack} className="p-2 hover:bg-zinc-800 rounded-lg transition-colors">
-          <span className="material-symbols-outlined text-zinc-400">arrow_back</span>
+      <header className="border-b border-stone-300 px-6 py-4 flex items-center gap-4">
+        <button onClick={onBack} className="p-2 hover:bg-stone-200 rounded-lg transition-colors">
+          <span className="material-symbols-outlined text-stone-600">arrow_back</span>
         </button>
         <div>
-          <h1 className="text-xl font-bold text-white">KPI Engine Dashboard</h1>
-          <p className="text-xs text-zinc-500 mt-0.5">{validationResults.length} synthetic profiles · {passedCount}/{validationResults.length} passed</p>
+          <h1 className="text-xl font-bold text-stone-900">KPI Engine Dashboard</h1>
+          <p className="text-xs text-stone-500 mt-0.5">{validationResults.length} synthetic profiles · {passedCount}/{validationResults.length} passed</p>
         </div>
         <div className="ml-auto flex gap-2">
-          <button onClick={onBack} className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-xl text-sm transition-colors">Back to Dashboard</button>
+          <button onClick={onBack} className="px-4 py-2 bg-stone-200 hover:bg-stone-300 rounded-xl text-sm transition-colors">Back to Dashboard</button>
         </div>
       </header>
 
@@ -184,27 +184,27 @@ const KpiDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
 
         {/* Top KPI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card title="Regulation Recovery Rate (3R)" accent="border-violet-500/30">
-            <div className="text-3xl font-bold text-violet-400">{avg3R.toFixed(1)} <span className="text-sm text-zinc-500 font-normal">ms/month</span></div>
-            <p className="text-xs text-zinc-500 mt-1">Avg slope across all profiles</p>
+          <Card title="Regulation Recovery Rate (3R)" accent="border-violet-300/50">
+            <div className="text-3xl font-bold text-violet-600">{avg3R.toFixed(1)} <span className="text-sm text-stone-500 font-normal">ms/month</span></div>
+            <p className="text-xs text-stone-500 mt-1">Avg slope across all profiles</p>
             <div className="mt-2 flex gap-2 text-xs">
-              <span className="px-2 py-0.5 bg-violet-900/50 text-violet-300 rounded-full">{validationResults.filter(r => r.threeR.passed).length} passed</span>
+              <span className="px-2 py-0.5 bg-violet-100/80 text-violet-300 rounded-full">{validationResults.filter(r => r.threeR.passed).length} passed</span>
             </div>
           </Card>
 
-          <Card title="Intervention Efficacy Score (IES)" accent="border-cyan-500/30">
-            <div className="text-3xl font-bold text-cyan-400">{avgIES.toFixed(1)} <span className="text-sm text-zinc-500 font-normal">%</span></div>
-            <p className="text-xs text-zinc-500 mt-1">Avg sessions with ΔSDNN ≥ +5ms</p>
+          <Card title="Intervention Efficacy Score (IES)" accent="border-cyan-300/50">
+            <div className="text-3xl font-bold text-cyan-600">{avgIES.toFixed(1)} <span className="text-sm text-stone-500 font-normal">%</span></div>
+            <p className="text-xs text-stone-500 mt-1">Avg sessions with ΔSDNN ≥ +5ms</p>
             <div className="mt-2 flex gap-2 text-xs">
-              <span className="px-2 py-0.5 bg-cyan-900/50 text-cyan-300 rounded-full">{validationResults.filter(r => r.ies.interpretation === 'excellent' || r.ies.interpretation === 'good').length} effective</span>
+              <span className="px-2 py-0.5 bg-cyan-100/80 text-cyan-300 rounded-full">{validationResults.filter(r => r.ies.interpretation === 'excellent' || r.ies.interpretation === 'good').length} effective</span>
             </div>
           </Card>
 
-          <Card title="Churn Risk (RES Component)" accent="border-amber-500/30">
-            <div className="text-3xl font-bold text-amber-400">{(avgCHURN * 100).toFixed(0)}<span className="text-sm text-zinc-500 font-normal">%</span></div>
-            <p className="text-xs text-zinc-500 mt-1">Avg logistic churn probability</p>
+          <Card title="Churn Risk (RES Component)" accent="border-amber-300/50">
+            <div className="text-3xl font-bold text-amber-600">{(avgCHURN * 100).toFixed(0)}<span className="text-sm text-stone-500 font-normal">%</span></div>
+            <p className="text-xs text-stone-500 mt-1">Avg logistic churn probability</p>
             <div className="mt-2 flex gap-2 text-xs">
-              <span className="px-2 py-0.5 bg-amber-900/50 text-amber-300 rounded-full">{validationResults.filter(r => r.res.computedChurnRisk > 0.5).length} at risk</span>
+              <span className="px-2 py-0.5 bg-amber-100/80 text-amber-300 rounded-full">{validationResults.filter(r => r.res.computedChurnRisk > 0.5).length} at risk</span>
             </div>
           </Card>
         </div>
@@ -218,8 +218,8 @@ const KpiDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
                 onClick={() => setDemoMode(m)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                   demoMode === m
-                    ? 'bg-violet-600 text-white'
-                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                    ? 'bg-violet-600 text-stone-900'
+                    : 'bg-stone-200 text-stone-600 hover:bg-stone-300'
                 }`}
               >
                 {m === '3R' ? '3R (ms/mo)' : m === 'IES' ? 'IES (%)' : 'Churn Risk (%)'}
@@ -234,7 +234,7 @@ const KpiDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-zinc-500 border-b border-zinc-800">
+                <tr className="text-stone-500 border-b border-stone-300">
                   <th className="text-left py-2 pr-4">Profile</th>
                   <th className="text-right py-2 pr-4">3R (ms/mo)</th>
                   <th className="text-right py-2 pr-4">IES (%)</th>
@@ -244,18 +244,18 @@ const KpiDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
               </thead>
               <tbody>
                 {validationResults.map(r => (
-                  <tr key={r.profileId} className="border-b border-zinc-900 hover:bg-zinc-900/50">
+                  <tr key={r.profileId} className="border-b border-stone-200 hover:bg-stone-100/80">
                     <td className="py-2 pr-4">
-                      <span className="text-zinc-400 text-xs font-mono">{r.profileId}</span>
-                      <span className="text-zinc-300 ml-2">{r.profileAlias.slice(0, 40)}</span>
+                      <span className="text-stone-600 text-xs font-mono">{r.profileId}</span>
+                      <span className="text-stone-700 ml-2">{r.profileAlias.slice(0, 40)}</span>
                     </td>
                     <td className={`text-right py-2 pr-4 font-mono ${r.threeR.computedMonthlySlope > 3 ? 'text-green-400' : r.threeR.computedMonthlySlope > 0 ? 'text-yellow-400' : 'text-red-400'}`}>
                       {r.threeR.computedMonthlySlope.toFixed(1)}
                     </td>
-                    <td className="text-right py-2 pr-4 font-mono text-cyan-400">
+                    <td className="text-right py-2 pr-4 font-mono text-cyan-600">
                       {r.ies.computed.toFixed(0)}
                     </td>
-                    <td className="text-right py-2 pr-4 font-mono text-amber-400">
+                    <td className="text-right py-2 pr-4 font-mono text-amber-600">
                       {(r.res.computedChurnRisk * 100).toFixed(0)}%
                     </td>
                     <td className="text-center py-2">
@@ -269,27 +269,27 @@ const KpiDashboard: React.FC<Props> = ({ onBack, onViewChange }) => {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-zinc-600 mt-3">{validationSummary()}</p>
+          <p className="text-xs text-stone-400 mt-3">{validationSummary()}</p>
         </Card>
 
         {/* Quick Stats */}
         <Card title="Validation Summary">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center p-3 bg-zinc-900 rounded-xl">
-              <div className="text-2xl font-bold text-violet-400">{validationResults.length}</div>
-              <div className="text-xs text-zinc-500">Profiles Tested</div>
+            <div className="text-center p-3 bg-white rounded-xl">
+              <div className="text-2xl font-bold text-violet-600">{validationResults.length}</div>
+              <div className="text-xs text-stone-500">Profiles Tested</div>
             </div>
-            <div className="text-center p-3 bg-zinc-900 rounded-xl">
+            <div className="text-center p-3 bg-white rounded-xl">
               <div className="text-2xl font-bold text-green-400">{passedCount}</div>
-              <div className="text-xs text-zinc-500">All KPIs Passed</div>
+              <div className="text-xs text-stone-500">All KPIs Passed</div>
             </div>
-            <div className="text-center p-3 bg-zinc-900 rounded-xl">
-              <div className="text-2xl font-bold text-cyan-400">{validationResults.filter(r => r.ies.computed >= 40).length}</div>
-              <div className="text-xs text-zinc-500">IES ≥ 40%</div>
+            <div className="text-center p-3 bg-white rounded-xl">
+              <div className="text-2xl font-bold text-cyan-600">{validationResults.filter(r => r.ies.computed >= 40).length}</div>
+              <div className="text-xs text-stone-500">IES ≥ 40%</div>
             </div>
-            <div className="text-center p-3 bg-zinc-900 rounded-xl">
-              <div className="text-2xl font-bold text-amber-400">{validationResults.filter(r => r.res.computedChurnRisk <= 0.5).length}</div>
-              <div className="text-xs text-zinc-500">Low Churn Risk</div>
+            <div className="text-center p-3 bg-white rounded-xl">
+              <div className="text-2xl font-bold text-amber-600">{validationResults.filter(r => r.res.computedChurnRisk <= 0.5).length}</div>
+              <div className="text-xs text-stone-500">Low Churn Risk</div>
             </div>
           </div>
         </Card>

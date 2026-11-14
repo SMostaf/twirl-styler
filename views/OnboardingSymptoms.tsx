@@ -16,7 +16,7 @@ const SYMPTOM_OPTIONS: SymptomOption[] = [
     description: 'Panic, racing thoughts, fast heart rate, physical restlessness.',
     science: 'Sympathetic nervous system overdrive (Fight or Flight).',
     icon: 'bolt',
-    color: 'from-amber-500/20 to-red-500/20 border-amber-500/30 text-amber-400'
+    color: 'from-amber-500/20 to-red-500/20 border-amber-300/50 text-amber-600'
   },
   {
     id: 'brainfog',
@@ -40,7 +40,7 @@ const SYMPTOM_OPTIONS: SymptomOption[] = [
     description: 'Chronic muscle tightness, hypervigilance, emotional flashbacks.',
     science: 'Trapped somatic memories in fascia & neuromuscular junctions.',
     icon: 'healing',
-    color: 'from-rose-500/20 to-pink-500/20 border-rose-500/30 text-rose-400'
+    color: 'from-rose-500/20 to-pink-500/20 border-rose-300/50 text-rose-600'
   },
   {
     id: 'hypoarousal',
@@ -48,7 +48,7 @@ const SYMPTOM_OPTIONS: SymptomOption[] = [
     description: 'Feeling disconnected, low motivation, emotional flatlining.',
     science: 'Dorsal vagal shutdown of the parasympathetic system.',
     icon: 'severe_cold',
-    color: 'from-cyan-500/20 to-blue-500/20 border-cyan-500/30 text-cyan-400'
+    color: 'from-cyan-500/20 to-blue-500/20 border-cyan-300/50 text-cyan-600'
   }
 ];
 
@@ -63,7 +63,7 @@ const OnboardingSymptoms: React.FC<Props> = ({ selected, onToggle, onNext }) => 
     <div className="flex flex-col h-full min-h-screen px-6 py-8">
       <header className="flex justify-between items-center mb-8">
         <div className="w-8" />
-        <h1 className="font-display text-lg tracking-[0.2em] uppercase text-violet-400 font-semibold">NEUROPATH</h1>
+        <h1 className="font-display text-lg tracking-[0.2em] uppercase text-violet-600 font-semibold">NEUROPATH</h1>
         <button onClick={onNext} className="text-white/40 text-xs tracking-widest uppercase hover:text-white transition-colors">Skip</button>
       </header>
 
@@ -85,22 +85,22 @@ const OnboardingSymptoms: React.FC<Props> = ({ selected, onToggle, onNext }) => 
               className={`p-4 rounded-xl cursor-pointer border transition-all duration-300 bg-gradient-to-r ${
                 isSelected 
                   ? `${option.color} scale-[1.02] ring-1 ring-violet-500` 
-                  : 'bg-zinc-950/40 border-zinc-900 text-white/70 hover:border-zinc-800'
+                  : 'bg-stone-100/80 border-stone-200 text-white/70 hover:border-stone-300'
               }`}
             >
               <div className="flex items-start gap-4">
-                <div className={`p-2 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center ${isSelected ? 'text-violet-400' : 'text-white/40'}`}>
+                <div className={`p-2 rounded-lg bg-white border border-stone-300 flex items-center justify-center ${isSelected ? 'text-violet-600' : 'text-white/40'}`}>
                   <span className="material-symbols-outlined font-light text-2xl">{option.icon}</span>
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center mb-1">
                     <h3 className="font-semibold text-sm text-white">{option.name}</h3>
                     {isSelected && (
-                      <span className="material-symbols-outlined text-violet-400 text-sm font-bold">check_circle</span>
+                      <span className="material-symbols-outlined text-violet-600 text-sm font-bold">check_circle</span>
                     )}
                   </div>
                   <p className="text-xs text-white/50 mb-2 leading-relaxed">{option.description}</p>
-                  <p className="text-[10px] text-violet-400/80 font-mono italic leading-snug">
+                  <p className="text-[10px] text-violet-600/80 font-mono italic leading-snug">
                     <span className="font-bold uppercase text-[9px] tracking-wide not-italic mr-1">BIO-MARKER:</span>
                     {option.science}
                   </p>
@@ -117,8 +117,8 @@ const OnboardingSymptoms: React.FC<Props> = ({ selected, onToggle, onNext }) => 
           disabled={selected.length === 0}
           className={`w-full h-14 rounded-xl flex items-center justify-center gap-2 font-bold uppercase tracking-[0.25em] text-sm transition-all shadow-xl ${
             selected.length > 0 
-              ? 'bg-violet-600 text-white hover:bg-violet-500 shadow-violet-900/20' 
-              : 'bg-white/5 text-white/20 cursor-not-allowed border border-white/5'
+              ? 'bg-violet-600 text-white hover:bg-violet-600 shadow-violet-900/20' 
+              : 'bg-white/5 text-white/20 cursor-not-allowed border border-stone-200/50'
           }`}
         >
           Calibrate System

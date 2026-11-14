@@ -5,10 +5,12 @@ import OnboardingDevices from './views/OnboardingDevices';
 import OnboardingProfile from './views/OnboardingProfile';
 import Dashboard from './views/Dashboard';
 import KpiDashboard from './views/KpiDashboard';
+import BusinessDashboard from './views/BusinessDashboard';
+import LandingPage from './views/LandingPage';
 import { AuthWrapper, SignInPage, SignUpPage } from './auth';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<AppView>('ONBOARDING_SYMPTOMS');
+  const [view, setView] = useState<AppView>('LANDING');
   const [user, setUser] = useState<UserProfile>({
     name: '',
     icon: '🧠',
@@ -49,6 +51,13 @@ const App: React.FC = () => {
 
   const renderView = () => {
     switch (view) {
+      case 'LANDING':
+        return (
+          <LandingPage
+            onStart={handleNext}
+            onViewChange={setView}
+          />
+        );
       case 'ONBOARDING_SYMPTOMS':
         return (
           <OnboardingSymptoms 
@@ -100,6 +109,13 @@ const App: React.FC = () => {
             onViewChange={setView}
           />
         );
+      case 'BUSINESS_DASHBOARD':
+        return (
+          <BusinessDashboard
+            onBack={() => setView('DASHBOARD')}
+            onViewChange={setView}
+          />
+        );
       case 'SIGN_IN':
         return <SignInPage />;
       case 'SIGN_UP':
@@ -111,7 +127,7 @@ const App: React.FC = () => {
 
   return (
     <AuthWrapper>
-      <div className={`min-h-screen bg-black text-white relative flex flex-col overflow-x-hidden ${view === 'KPI_DASHBOARD' ? '' : 'max-w-md mx-auto border-x border-white/5'}`}>
+      <div className={`min-h-screen bg-stone-50 text-stone-900 relative flex flex-col overflow-x-hidden ${view === 'KPI_DASHBOARD' || view === 'BUSINESS_DASHBOARD' ? '' : 'max-w-md mx-auto border-x border-stone-200/50'}`}>
         {renderView()}
       </div>
     </AuthWrapper>
